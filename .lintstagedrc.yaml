@@ -1,0 +1,4 @@
+---
+'*.php':
+  - composer fix
+  - composer analyse

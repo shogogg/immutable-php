@@ -1,0 +1,37 @@
+{
+  "name": "shogogg/immutable-php",
+  "version": "0.0.1",
+  "description": "Immutable Collection and Utilities",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "shogogg",
+      "email": "shogo@studiofly.net"
+    }
+  ],
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Immutable\\": "src/",
+      "Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "analyse": "tools/phpstan/vendor/bin/phpstan analyse -c phpstan.neon",
+    "fix": "@php tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php",
+    "fix:dry-run": "composer fix -- --dry-run --diff --verbose",
+    "post-install-cmd": [
+      "composer install --working-dir=tools/php-cs-fixer",
+      "composer install --working-dir=tools/phpstan"
+    ],
+    "test": "pest"
+  },
+  "require-dev": {
+    "pestphp/pest": "^3.3"
+  }
+}
