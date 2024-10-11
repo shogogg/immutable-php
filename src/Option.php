@@ -31,4 +31,16 @@ abstract class Option implements OptionLike
             default => Some::of($value),
         };
     }
+
+    #[\Override]
+    public function offsetSet(mixed $offset, mixed $value): void
+    {
+        throw new \BadMethodCallException();
+    }
+
+    #[\Override]
+    public function offsetUnset(mixed $offset): void
+    {
+        throw new \BadMethodCallException();
+    }
 }

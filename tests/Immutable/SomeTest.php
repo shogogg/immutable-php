@@ -37,6 +37,21 @@ describe('::of', function (): void {
     ]);
 });
 
+describe('->count', function (): void {
+    it('should return 1', function (mixed $value): void {
+        $actual = Some::of($value)->count();
+        expect($actual)->toBe(1);
+    })->with([
+        [0],
+        [0.0],
+        [17],
+        ['foo'],
+        [[]],
+        [new stdClass()],
+        [null],
+    ]);
+});
+
 describe('->get', function (): void {
     it('should return the value', function (mixed $value): void {
         $actual = Some::of($value)->get();
@@ -52,6 +67,18 @@ describe('->get', function (): void {
     ]);
 });
 
+describe('->getIterator', function (): void {
+    it('should return an ArrayIterator', function (): void {
+        $actual = Some::of(17)->getIterator();
+        expect($actual)->toBeInstanceOf(ArrayIterator::class);
+    });
+
+    it('should return an iterator with the value', function (): void {
+        $actual = Some::of(17)->getIterator();
+        expect(iterator_to_array($actual))->toBe([17]);
+    });
+});
+
 describe('->map', function (): void {
     it('should return a Some instance', function (): void {
         $actual = Some::of(17)->map(fn ($v): int => $v * 2);
@@ -61,6 +88,51 @@ describe('->map', function (): void {
     it('should return a new instance with the mapped value', function (): void {
         $actual = Some::of(17)->map(fn ($v): int => $v * 2);
         expect($actual->get())->toBe(34);
+    });
+});
+
+describe('->offsetExists', function (): void {
+    it('should return true when the offset is 0', function (): void {
+        $actual = Some::of(17)->offsetExists(0);
+        expect($actual)->toBeTrue();
+    });
+
+    it('should return false when the offset is not 0', function (int $offset): void {
+        $actual = Some::of(17)->offsetExists($offset);
+        expect($actual)->toBeFalse();
+    })->with([
+        [-2],
+        [-1],
+        [1],
+        [2],
+    ]);
+});
+
+describe('->offsetGet', function (): void {
+    it('should return the value when the offset is 0', function (): void {
+        $actual = Some::of(17)->offsetGet(0);
+        expect($actual)->toBe(17);
+    });
+
+    it('should throw an OutOfBoundsException when the offset is not 0', function (int $offset): void {
+        expect(fn () => Some::of(17)->offsetGet($offset))->toThrow(OutOfBoundsException::class);
+    })->with([
+        [-2],
+        [-1],
+        [1],
+        [2],
+    ]);
+});
+
+describe('->offsetSet', function (): void {
+    it('should throw a BadMethodCallException', function (): void {
+        expect(fn () => Some::of(17)->offsetSet(0, 0))->toThrow(BadMethodCallException::class);
+    });
+});
+
+describe('->offsetUnset', function (): void {
+    it('should throw a BadMethodCallException', function (): void {
+        expect(fn () => Some::of(17)->offsetSet(0, 0))->toThrow(BadMethodCallException::class);
     });
 });
 

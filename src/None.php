@@ -38,15 +38,39 @@ final class None extends Option
     }
 
     #[\Override]
+    public function count(): int
+    {
+        return 0;
+    }
+
+    #[\Override]
     public function get(): never
     {
         throw new \LogicException('None has no value.');
     }
 
     #[\Override]
+    public function getIterator(): \Traversable
+    {
+        return new \EmptyIterator();
+    }
+
+    #[\Override]
     public function map(\Closure $f): self
     {
         return $this;
+    }
+
+    #[\Override]
+    public function offsetExists(mixed $offset): bool
+    {
+        return false;
+    }
+
+    #[\Override]
+    public function offsetGet(mixed $offset): never
+    {
+        throw new \OutOfBoundsException("Undefined offset: $offset");
     }
 
     #[\Override]

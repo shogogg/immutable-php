@@ -39,6 +39,18 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function count(): int
+    {
+        return 1;
+    }
+
+    #[\Override]
+    public function getIterator(): \Traversable
+    {
+        return new \ArrayIterator([$this->value]);
+    }
+
+    #[\Override]
     public function get(): mixed
     {
         return $this->value;
@@ -59,5 +71,21 @@ final class Some extends Option
     public function toArray(): array
     {
         return [$this->value];
+    }
+
+    #[\Override]
+    public function offsetExists(mixed $offset): bool
+    {
+        return $offset === 0;
+    }
+
+    #[\Override]
+    public function offsetGet(mixed $offset): mixed
+    {
+        if ($offset === 0) {
+            return $this->value;
+        } else {
+            throw new \OutOfBoundsException("Undefined offset: $offset");
+        }
     }
 }

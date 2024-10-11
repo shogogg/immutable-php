@@ -31,9 +31,23 @@ describe('::of', function (): void {
     ]);
 });
 
+describe('->count', function (): void {
+    it('should return 0', function (): void {
+        $actual = None::instance()->count();
+        expect($actual)->toBe(0);
+    });
+});
+
 describe('->get', function (): void {
     it('should throw a LogicException', function (): void {
         expect(fn () => None::of(0)->get())->toThrow(LogicException::class);
+    });
+});
+
+describe('->getIterator', function (): void {
+    it('should return an EmptyIterator', function (): void {
+        $actual = None::instance()->getIterator();
+        expect($actual)->toBeInstanceOf(EmptyIterator::class);
     });
 });
 
@@ -41,6 +55,35 @@ describe('->map', function (): void {
     it('should return a None instance', function (): void {
         $actual = None::of(0)->map(fn (int $value): int => $value * 2);
         expect($actual)->toBeInstanceOf(None::class);
+    });
+});
+
+describe('->offsetExists', function (): void {
+    it('should return false', function (): void {
+        $actual = None::instance()->offsetExists(0);
+        expect($actual)->toBeFalse();
+    })->with([
+        [0],
+        [1],
+        [2],
+    ]);
+});
+
+describe('->offsetGet', function (): void {
+    it('should throw an OutOfBoundsException', function (): void {
+        expect(fn () => None::of(0)->offsetGet(0))->toThrow(OutOfBoundsException::class);
+    });
+});
+
+describe('->offsetSet', function (): void {
+    it('should throw a BadMethodCallException', function (): void {
+        expect(fn () => None::instance()->offsetSet(0, 0))->toThrow(BadMethodCallException::class);
+    });
+});
+
+describe('->offsetUnset', function (): void {
+    it('should throw a BadMethodCallException', function (): void {
+        expect(fn () => None::instance()->offsetSet(0, 0))->toThrow(BadMethodCallException::class);
     });
 });
 

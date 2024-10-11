@@ -14,8 +14,10 @@ namespace Immutable;
  *
  * @template K of int|string
  * @template-covariant T
+ * @extends \ArrayAccess<K, mixed>
+ * @extends \IteratorAggregate<K, T>
  */
-interface CollectionLike
+interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
 {
     /**
      * Builds a new collection by applying a function to all elements of this collection.

@@ -41,6 +41,18 @@ final readonly class Seq implements SeqLike
         return new self($elements);
     }
 
+    #[\Override]
+    public function count(): int
+    {
+        return count($this->elements);
+    }
+
+    #[\Override]
+    public function getIterator(): \Traversable
+    {
+        return new \ArrayIterator($this->elements);
+    }
+
     /**
      * @template U
      * @param \Closure(T, int): U $f
@@ -50,6 +62,34 @@ final readonly class Seq implements SeqLike
     public function map(\Closure $f): self
     {
         return new self(iterator_to_array(SeqHelper::map($this->elements, $f)));
+    }
+
+    #[\Override]
+    public function offsetExists(mixed $offset): bool
+    {
+        return isset($this->elements[$offset]);
+    }
+
+    #[\Override]
+    public function offsetGet(mixed $offset): mixed
+    {
+        if (isset($this->elements[$offset])) {
+            return $this->elements[$offset];
+        } else {
+            throw new \OutOfBoundsException("Undefined offset: $offset");
+        }
+    }
+
+    #[\Override]
+    public function offsetSet(mixed $offset, mixed $value): void
+    {
+        throw new \BadMethodCallException();
+    }
+
+    #[\Override]
+    public function offsetUnset(mixed $offset): void
+    {
+        throw new \BadMethodCallException();
     }
 
     #[\Override]
