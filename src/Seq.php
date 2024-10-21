@@ -115,6 +115,12 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function size(): int
+    {
+        return count($this->elements);
+    }
+
+    #[\Override]
     public function toArray(): array
     {
         return [...$this->elements];

@@ -39,6 +39,13 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function map(\Closure $f);
 
     /**
+     * Returns the size of this collection.
+     *
+     * @return int
+     */
+    public function size(): int;
+
+    /**
      * Converts this collection to an array.
      *
      * @return array<T>

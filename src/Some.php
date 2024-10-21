@@ -90,6 +90,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function size(): int
+    {
+        return 1;
+    }
+
+    #[\Override]
     public function toArray(): array
     {
         return [$this->value];

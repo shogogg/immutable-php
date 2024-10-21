@@ -106,6 +106,13 @@ describe('->offsetUnset', function (): void {
     });
 });
 
+describe('->size', function (): void {
+    it('should return the number of elements', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->size();
+        expect($actual)->toBe(5);
+    });
+});
+
 describe('->toArray', function (): void {
     it('should return the representation of the sequence as an array', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->toArray();

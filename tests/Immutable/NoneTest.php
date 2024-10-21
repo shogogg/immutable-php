@@ -95,6 +95,13 @@ describe('->offsetUnset', function (): void {
     });
 });
 
+describe('->size', function (): void {
+    it('should return 0', function (): void {
+        $actual = None::instance()->size();
+        expect($actual)->toBe(0);
+    });
+});
+
 describe('->toArray', function (): void {
     it('should return an array', function (): void {
         $actual = None::instance()->toArray();

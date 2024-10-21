@@ -80,6 +80,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function size(): int
+    {
+        return 0;
+    }
+
+    #[\Override]
     public function toArray(): array
     {
         return [];

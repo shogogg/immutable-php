@@ -149,6 +149,21 @@ describe('->offsetUnset', function (): void {
     });
 });
 
+describe('->size', function (): void {
+    it('should return 1', function (mixed $value): void {
+        $actual = Some::of($value)->count();
+        expect($actual)->toBe(1);
+    })->with([
+        [0],
+        [0.0],
+        [17],
+        ['foo'],
+        [[]],
+        [new stdClass()],
+        [null],
+    ]);
+});
+
 describe('->toArray', function (): void {
     it('should return an array', function (): void {
         $actual = Some::of('foo')->toArray();
