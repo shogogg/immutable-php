@@ -1,4 +1,9 @@
 <?php
+
+declare(strict_types=1);
+
+use Mockery\MockInterface;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -22,7 +27,7 @@
 | to assert different things. Of course, you may extend the Expectation API at any time.
 |
 */
-//
+
 //expect()->extend('toBeOne', function () {
 //    return $this->toBe(1);
 //});
@@ -37,8 +42,11 @@
 | global functions to help you to reduce the number of lines of code in your test files.
 |
 */
-//
-//function something()
-//{
-//    // ..
-//}
+
+function spyFunction(MockInterface $spy): \Closure
+{
+    return function () use ($spy): void {
+        // @phpstan-ignore argument.type
+        call_user_func_array($spy, func_get_args());
+    };
+}
