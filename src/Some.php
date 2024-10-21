@@ -57,6 +57,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function each(\Closure $f): void
+    {
+        $f($this->value, 0);
+    }
+
+    #[\Override]
     public function getIterator(): \Traversable
     {
         return new \ArrayIterator([$this->value]);

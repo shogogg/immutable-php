@@ -39,6 +39,13 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function drop(int $n): CollectionLike;
 
     /**
+     * Apply `$f` to each element for its side effects.
+     *
+     * @param \Closure(T, K): void $f the function to apply to each element.
+     */
+    public function each(\Closure $f): void;
+
+    /**
      * Builds a new collection by applying a function to all elements of this collection.
      *
      * @template U

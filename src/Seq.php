@@ -85,6 +85,14 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function each(\Closure $f): void
+    {
+        foreach ($this->elements as $index => $value) {
+            $f($value, $index);
+        }
+    }
+
+    #[\Override]
     public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->elements);

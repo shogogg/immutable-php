@@ -89,6 +89,44 @@ describe('->drop', function (): void {
     ]);
 });
 
+describe('->each', function (): void {
+    it('should call the callback once', function (): void {
+        // Arrange
+        $spy = Mockery::spy(function (mixed $x): void {
+            // Nothing to do.
+        });
+        $f = spyFunction($spy);
+
+        // Act
+        Some::of(17)->each($f);
+
+        // Assert
+        $spy->shouldHaveReceived('__invoke')->once();
+    });
+
+    it('should call the callback with the value', function (mixed $value): void {
+        // Arrange
+        $spy = Mockery::spy(function (mixed $x): void {
+            // Nothing to do.
+        });
+        $f = spyFunction($spy);
+
+        // Act
+        Some::of($value)->each($f);
+
+        // Assert
+        $spy->shouldHaveReceived('__invoke')->with($value, 0);
+    })->with([
+        [0],
+        [0.0],
+        [17],
+        ['foo'],
+        [[]],
+        [new stdClass()],
+        [null],
+    ]);
+});
+
 describe('->get', function (): void {
     it('should return the value', function (mixed $value): void {
         $actual = Some::of($value)->get();

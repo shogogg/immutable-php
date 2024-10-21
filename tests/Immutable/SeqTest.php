@@ -79,6 +79,41 @@ describe('->drop', function (): void {
     ]);
 });
 
+describe('->each', function (): void {
+    it('should call the callback for each element', function (): void {
+        // Arrange
+        $spy = Mockery::spy(function (mixed $x): void {
+            // Nothing to do.
+        });
+        $f = spyFunction($spy);
+
+        // Act
+        Seq::of(2, 3, 5, 7, 11)->each($f);
+
+        // Assert
+        $spy->shouldHaveReceived('__invoke')->times(5);
+        $spy->shouldHaveReceived('__invoke')->with(2, 0);
+        $spy->shouldHaveReceived('__invoke')->with(3, 1);
+        $spy->shouldHaveReceived('__invoke')->with(5, 2);
+        $spy->shouldHaveReceived('__invoke')->with(7, 3);
+        $spy->shouldHaveReceived('__invoke')->with(11, 4);
+    });
+
+    it('should not call the callback if the sequence is empty', function (): void {
+        // Arrange
+        $spy = Mockery::spy(function (mixed $x): void {
+            // Nothing to do.
+        });
+        $f = spyFunction($spy);
+
+        // Act
+        Seq::empty()->each($f);
+
+        // Assert
+        $spy->shouldNotHaveReceived('__invoke');
+    });
+});
+
 describe('->getIterator', function (): void {
     it('should return an ArrayIterator', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->getIterator();

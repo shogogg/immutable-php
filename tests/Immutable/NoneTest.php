@@ -64,6 +64,22 @@ describe('->drop', function (): void {
     ]);
 });
 
+describe('->each', function (): void {
+    it('should not call the callback', function (): void {
+        // Arrange
+        $spy = Mockery::spy(function (mixed $x): void {
+            // Nothing to do.
+        });
+        $f = spyFunction($spy);
+
+        // Act
+        None::instance()->each($f);
+
+        // Assert
+        $spy->shouldNotHaveReceived('__invoke');
+    });
+});
+
 describe('->get', function (): void {
     it('should throw a LogicException', function (): void {
         expect(fn () => None::of(0)->get())->toThrow(LogicException::class);
