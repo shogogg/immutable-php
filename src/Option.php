@@ -34,7 +34,6 @@ abstract class Option implements OptionLike
 
     /**
      * {@inheritdoc}
-     *
      * @return \Immutable\Seq<T>
      */
     #[\Override]
@@ -42,7 +41,6 @@ abstract class Option implements OptionLike
 
     /**
      * {@inheritdoc}
-     *
      * @return self<T>
      */
     #[\Override]

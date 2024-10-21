@@ -71,7 +71,6 @@ final readonly class Seq implements SeqLike
 
     /**
      * {@inheritdoc}
-     *
      * @return self<T>
      */
     #[\Override]
@@ -105,7 +104,6 @@ final readonly class Seq implements SeqLike
 
     /**
      * {@inheritdoc}
-     *
      * @return self<T>
      */
     #[\Override]
@@ -121,6 +119,7 @@ final readonly class Seq implements SeqLike
     }
 
     /**
+     * {@inheritdoc}
      * @template U
      * @param \Closure(T, int): U $f
      * @return self<U>
