@@ -103,6 +103,17 @@ final readonly class Seq implements SeqLike
         return false;
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @return self<T>
+     */
+    #[\Override]
+    public function filter(\Closure $p): Seq
+    {
+        return new self(array_values(array_filter($this->elements, $p, ARRAY_FILTER_USE_BOTH)));
+    }
+
     #[\Override]
     public function getIterator(): \Traversable
     {

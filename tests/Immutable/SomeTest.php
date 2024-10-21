@@ -7,6 +7,7 @@
  */
 declare(strict_types=1);
 
+use Immutable\None;
 use Immutable\Seq;
 use Immutable\Some;
 
@@ -136,6 +137,18 @@ describe('->exists', function (): void {
     it('should return false when the predicate returns false', function (): void {
         $actual = Some::of(17)->exists(fn (int $x): bool => $x !== 17);
         expect($actual)->toBeFalse();
+    });
+});
+
+describe('->filter', function (): void {
+    it('should return a Some instance when the predicate returns true', function (): void {
+        $actual = Some::of(17)->filter(fn (int $x): bool => $x === 17);
+        expect($actual)->toBeInstanceOf(Some::class);
+    });
+
+    it('should return a None instance when the predicate returns false', function (): void {
+        $actual = Some::of(17)->filter(fn (int $x): bool => $x !== 17);
+        expect($actual)->toBeInstanceOf(None::class);
     });
 });
 

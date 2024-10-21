@@ -87,6 +87,13 @@ describe('->exists', function (): void {
     });
 });
 
+describe('->filter', function (): void {
+    it('should return a None instance', function (): void {
+        $actual = None::of(0)->filter(fn (int $value): bool => $value > 0);
+        expect($actual)->toBeInstanceOf(None::class);
+    });
+});
+
 describe('->get', function (): void {
     it('should throw a LogicException', function (): void {
         expect(fn () => None::of(0)->get())->toThrow(LogicException::class);

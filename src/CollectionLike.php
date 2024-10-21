@@ -56,6 +56,16 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function exists(\Closure $p): bool;
 
     /**
+     * Selects all elements of this collection which satisfy a predicate.
+     *
+     * @param \Closure(T, K): bool $p the predicate used to test elements.
+     *
+     * @return \Immutable\CollectionLike<K, T> a new collection consisting of all elements of this collection
+     *                                         that satisfy the given predicate `$p`.
+     */
+    public function filter(\Closure $p): CollectionLike;
+
+    /**
      * Builds a new collection by applying a function to all elements of this collection.
      *
      * @template U
