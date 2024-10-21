@@ -69,6 +69,21 @@ final readonly class Seq implements SeqLike
         return $count;
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @return self<T>
+     */
+    #[\Override]
+    public function drop(int $n): Seq
+    {
+        return match (true) {
+            $n <= 0 => $this,
+            $n >= $this->size() => self::empty(),
+            default => new self(array_slice($this->elements, $n)),
+        };
+    }
+
     #[\Override]
     public function getIterator(): \Traversable
     {

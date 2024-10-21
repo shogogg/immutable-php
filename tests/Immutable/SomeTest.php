@@ -65,6 +65,30 @@ describe('->countBy', function (): void {
     });
 });
 
+describe('->drop', function (): void {
+    it('should return a Seq instance', function (): void {
+        $actual = Some::of(17)->drop(0);
+        expect($actual)->toBeInstanceOf(Seq::class);
+    });
+
+    it('should return a Seq of the value when the argument less than or equal to 0', function (int $n): void {
+        $actual = Some::of(17)->drop($n);
+        expect($actual->toArray())->toBe([17]);
+    })->with([
+        [-2],
+        [-1],
+        [0],
+    ]);
+
+    it('should return an empty Seq when the argument greater than 0', function (int $n): void {
+        $actual = Some::of(17)->drop($n);
+        expect($actual)->toBeEmpty();
+    })->with([
+        [1],
+        [2],
+    ]);
+});
+
 describe('->get', function (): void {
     it('should return the value', function (mixed $value): void {
         $actual = Some::of($value)->get();

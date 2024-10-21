@@ -50,6 +50,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function drop(int $n): Seq
+    {
+        return Seq::empty();
+    }
+
+    #[\Override]
     public function get(): never
     {
         throw new \LogicException('None has no value.');

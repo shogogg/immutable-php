@@ -28,6 +28,17 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function countBy(\Closure $p): int;
 
     /**
+     * Selects all elements except first `$n` ones.
+     *
+     * @param int $n the number of elements to drop from this collection.
+     *
+     * @return \Immutable\CollectionLike<K, T> a collection consisting of all elements of this collection except the
+     *                                         first n ones, or else the empty collection, if this collection has less
+     *                                         than n elements. If n is negative, don't drop any elements.
+     */
+    public function drop(int $n): CollectionLike;
+
+    /**
      * Builds a new collection by applying a function to all elements of this collection.
      *
      * @template U

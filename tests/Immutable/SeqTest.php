@@ -47,6 +47,38 @@ describe('->countBy', function (): void {
     });
 });
 
+describe('->drop', function (): void {
+    it('should return a Seq instance', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->drop(2);
+        expect($actual)->toBeInstanceOf(Seq::class);
+    });
+
+    it('should return itself if the number is less than or equal to 0', function (): void {
+        $seq = Seq::of(2, 3, 5, 7, 11);
+        $actual = $seq->drop(0);
+        expect($actual)->toBe($seq);
+    });
+
+    it('should return a new instance with the first n elements removed', function (int $n, array $expected): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->drop($n);
+        expect($actual->toArray())->toBe($expected);
+    })->with([
+        [1, [3, 5, 7, 11]],
+        [2, [5, 7, 11]],
+        [3, [7, 11]],
+        [4, [11]],
+    ]);
+
+    it('should return an empty instance if the number is greater than the size', function (int $n): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->drop($n);
+        expect($actual->toArray())->toBe([]);
+    })->with([
+        [5],
+        [6],
+        [7],
+    ]);
+});
+
 describe('->getIterator', function (): void {
     it('should return an ArrayIterator', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->getIterator();

@@ -51,6 +51,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function drop(int $n): Seq
+    {
+        return $n <= 0 ? $this->toSeq() : Seq::empty();
+    }
+
+    #[\Override]
     public function getIterator(): \Traversable
     {
         return new \ArrayIterator([$this->value]);
