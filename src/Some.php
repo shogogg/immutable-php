@@ -63,6 +63,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function exists(\Closure $p): bool
+    {
+        return $p($this->value, 0);
+    }
+
+    #[\Override]
     public function getIterator(): \Traversable
     {
         return new \ArrayIterator([$this->value]);

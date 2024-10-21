@@ -93,6 +93,17 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function exists(\Closure $p): bool
+    {
+        foreach ($this->elements as $index => $value) {
+            if ($p($value, $index)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    #[\Override]
     public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->elements);

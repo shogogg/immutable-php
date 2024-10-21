@@ -46,6 +46,16 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function each(\Closure $f): void;
 
     /**
+     * Tests whether a predicate holds for at least one element of this collection.
+     *
+     * @param \Closure(T, K): bool $p the predicate used to test elements.
+     *
+     * @return bool true if the given predicate `$p` is satisfied by at least one element of this collection,
+     *              otherwise false.
+     */
+    public function exists(\Closure $p): bool;
+
+    /**
      * Builds a new collection by applying a function to all elements of this collection.
      *
      * @template U

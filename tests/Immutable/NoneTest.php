@@ -80,6 +80,13 @@ describe('->each', function (): void {
     });
 });
 
+describe('->exists', function (): void {
+    it('should return false', function (): void {
+        $actual = None::instance()->exists(fn (int $value): bool => $value > 0);
+        expect($actual)->toBeFalse();
+    });
+});
+
 describe('->get', function (): void {
     it('should throw a LogicException', function (): void {
         expect(fn () => None::of(0)->get())->toThrow(LogicException::class);

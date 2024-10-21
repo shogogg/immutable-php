@@ -114,6 +114,18 @@ describe('->each', function (): void {
     });
 });
 
+describe('->exists', function (): void {
+    it('should return true if any element satisfies the predicate', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->exists(fn (int $x): bool => $x % 5 === 0);
+        expect($actual)->toBeTrue();
+    });
+
+    it('should return false if no element satisfies the predicate', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->exists(fn (int $x): bool => $x % 13 === 0);
+        expect($actual)->toBeFalse();
+    });
+});
+
 describe('->getIterator', function (): void {
     it('should return an ArrayIterator', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->getIterator();

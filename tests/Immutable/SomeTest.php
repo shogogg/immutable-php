@@ -127,6 +127,18 @@ describe('->each', function (): void {
     ]);
 });
 
+describe('->exists', function (): void {
+    it('should return true when the predicate returns true', function (): void {
+        $actual = Some::of(17)->exists(fn (int $x): bool => $x === 17);
+        expect($actual)->toBeTrue();
+    });
+
+    it('should return false when the predicate returns false', function (): void {
+        $actual = Some::of(17)->exists(fn (int $x): bool => $x !== 17);
+        expect($actual)->toBeFalse();
+    });
+});
+
 describe('->get', function (): void {
     it('should return the value', function (mixed $value): void {
         $actual = Some::of($value)->get();
