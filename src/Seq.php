@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace Immutable;
 
-use Immutable\Helpers\SeqHelper;
+use Immutable\Companions\SeqCompanion;
 
 /**
  * Sequence.
@@ -73,7 +73,7 @@ final readonly class Seq implements SeqLike
     #[\Override]
     public function map(\Closure $f): self
     {
-        return new self(iterator_to_array(SeqHelper::map($this->elements, $f)));
+        return new self(iterator_to_array(SeqCompanion::map($this->elements, $f)));
     }
 
     #[\Override]

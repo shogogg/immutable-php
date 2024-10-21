@@ -7,12 +7,12 @@
  */
 declare(strict_types=1);
 
-namespace Immutable\Helpers;
+namespace Immutable\Companions;
 
 /**
- * Helper functions for Seq.
+ * Companion object for Seq.
  */
-final readonly class SeqHelper
+final readonly class SeqCompanion
 {
     /**
      * Return a new iterable that applies a function to all elements of the given iterable.
