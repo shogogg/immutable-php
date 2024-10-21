@@ -44,4 +44,11 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
      * @return array<T>
      */
     public function toArray(): array;
+
+    /**
+     * Converts this collection to a sequence.
+     *
+     * @return \Immutable\Seq<T>
+     */
+    public function toSeq(): Seq;
 }

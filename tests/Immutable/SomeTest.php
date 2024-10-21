@@ -7,6 +7,7 @@
  */
 declare(strict_types=1);
 
+use Immutable\Seq;
 use Immutable\Some;
 
 describe('::of', function (): void {
@@ -152,5 +153,17 @@ describe('->toArray', function (): void {
     it('should return an array', function (): void {
         $actual = Some::of('foo')->toArray();
         expect($actual)->toBe(['foo']);
+    });
+});
+
+describe('->toSeq', function (): void {
+    it('should return a Seq instance', function (): void {
+        $actual = Some::of('foo')->toSeq();
+        expect($actual)->toBeInstanceOf(Seq::class);
+    });
+
+    it('should return a Seq instance with the value', function (): void {
+        $actual = Some::of('foo')->toSeq();
+        expect($actual->toArray())->toBe(['foo']);
     });
 });

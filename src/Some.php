@@ -74,12 +74,6 @@ final class Some extends Option
     }
 
     #[\Override]
-    public function toArray(): array
-    {
-        return [$this->value];
-    }
-
-    #[\Override]
     public function offsetExists(mixed $offset): bool
     {
         return $offset === 0;
@@ -93,5 +87,17 @@ final class Some extends Option
         } else {
             throw new \OutOfBoundsException("Undefined offset: $offset");
         }
+    }
+
+    #[\Override]
+    public function toArray(): array
+    {
+        return [$this->value];
+    }
+
+    #[\Override]
+    public function toSeq(): Seq
+    {
+        return Seq::of($this->value);
     }
 }

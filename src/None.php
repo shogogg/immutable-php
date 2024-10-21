@@ -84,4 +84,10 @@ final class None extends Option
     {
         return [];
     }
+
+    #[\Override]
+    public function toSeq(): Seq
+    {
+        return Seq::empty();
+    }
 }

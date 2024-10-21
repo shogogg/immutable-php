@@ -119,4 +119,10 @@ final readonly class Seq implements SeqLike
     {
         return [...$this->elements];
     }
+
+    #[\Override]
+    public function toSeq(): Seq
+    {
+        return $this;
+    }
 }

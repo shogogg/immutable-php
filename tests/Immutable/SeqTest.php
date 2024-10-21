@@ -112,3 +112,11 @@ describe('->toArray', function (): void {
         expect($actual)->toBe([2, 3, 5, 7, 11]);
     });
 });
+
+describe('->toSeq', function (): void {
+    it('should return itself', function (): void {
+        $seq = Seq::of(2, 3, 5, 7, 11);
+        $actual = $seq->toSeq();
+        expect($actual)->toBe($seq);
+    });
+});

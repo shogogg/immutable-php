@@ -8,6 +8,7 @@
 declare(strict_types=1);
 
 use Immutable\None;
+use Immutable\Seq;
 
 describe('::instance', function (): void {
     it('should return the None instance', function (): void {
@@ -95,8 +96,25 @@ describe('->offsetUnset', function (): void {
 });
 
 describe('->toArray', function (): void {
+    it('should return an array', function (): void {
+        $actual = None::instance()->toArray();
+        expect($actual)->toBeArray();
+    });
+
     it('should return an empty array', function (): void {
         $actual = None::instance()->toArray();
-        expect($actual)->toBe([]);
+        expect($actual)->toBeEmpty();
+    });
+});
+
+describe('->toSeq', function (): void {
+    it('should return a Seq instance', function (): void {
+        $actual = None::instance()->toSeq();
+        expect($actual)->toBeInstanceOf(Seq::class);
+    });
+
+    it('should return an empty Seq', function (): void {
+        $actual = None::instance()->toSeq();
+        expect($actual)->toBeEmpty();
     });
 });
