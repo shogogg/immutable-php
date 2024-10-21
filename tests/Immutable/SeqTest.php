@@ -28,6 +28,13 @@ describe('->count', function (): void {
     });
 });
 
+describe('->countBy', function (): void {
+    it('should return the number of elements that satisfy the predicate', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->countBy(fn (int $x): bool => $x % 2 !== 0);
+        expect($actual)->toBe(4);
+    });
+});
+
 describe('->getIterator', function (): void {
     it('should return an ArrayIterator', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->getIterator();

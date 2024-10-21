@@ -45,6 +45,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function countBy(\Closure $p): int
+    {
+        return $p($this->value, 0) ? 1 : 0;
+    }
+
+    #[\Override]
     public function getIterator(): \Traversable
     {
         return new \ArrayIterator([$this->value]);

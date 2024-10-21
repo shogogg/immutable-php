@@ -20,6 +20,14 @@ namespace Immutable;
 interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
 {
     /**
+     * Counts the number of elements in the collection which satisfy a predicate.
+     *
+     * @param \Closure(T, K): bool $p the predicate used to test elements.
+     * @return int the number of elements satisfying the predicate.
+     */
+    public function countBy(\Closure $p): int;
+
+    /**
      * Builds a new collection by applying a function to all elements of this collection.
      *
      * @template U

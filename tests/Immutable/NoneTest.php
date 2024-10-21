@@ -38,6 +38,13 @@ describe('->count', function (): void {
     });
 });
 
+describe('->countBy', function (): void {
+    it('should return 0', function (): void {
+        $actual = None::instance()->countBy(fn (int $value): bool => $value > 0);
+        expect($actual)->toBe(0);
+    });
+});
+
 describe('->get', function (): void {
     it('should throw a LogicException', function (): void {
         expect(fn () => None::of(0)->get())->toThrow(LogicException::class);

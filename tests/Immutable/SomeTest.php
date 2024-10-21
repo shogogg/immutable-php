@@ -52,6 +52,18 @@ describe('->count', function (): void {
     ]);
 });
 
+describe('->countBy', function (): void {
+    it('should return 1 when the predicate returns true', function (): void {
+        $actual = Some::of(17)->countBy(fn (int $value): bool => $value > 0);
+        expect($actual)->toBe(1);
+    });
+
+    it('should return 0 when the predicate returns false', function (): void {
+        $actual = Some::of(17)->countBy(fn (int $value): bool => $value < 0);
+        expect($actual)->toBe(0);
+    });
+});
+
 describe('->get', function (): void {
     it('should return the value', function (mixed $value): void {
         $actual = Some::of($value)->get();

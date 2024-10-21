@@ -48,6 +48,18 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function countBy(\Closure $p): int
+    {
+        $count = 0;
+        foreach ($this->elements as $key => $value) {
+            if ($p($value, $key)) {
+                ++$count;
+            }
+        }
+        return $count;
+    }
+
+    #[\Override]
     public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->elements);

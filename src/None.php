@@ -44,6 +44,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function countBy(\Closure $p): int
+    {
+        return 0;
+    }
+
+    #[\Override]
     public function get(): never
     {
         throw new \LogicException('None has no value.');
