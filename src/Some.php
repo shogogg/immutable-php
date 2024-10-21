@@ -75,6 +75,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function filterNot(\Closure $p): Option
+    {
+        return $p($this->value, 0) ? None::instance() : $this;
+    }
+
+    #[\Override]
     public function getIterator(): \Traversable
     {
         return new \ArrayIterator([$this->value]);

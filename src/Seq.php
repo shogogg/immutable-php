@@ -112,6 +112,17 @@ final readonly class Seq implements SeqLike
         return new self(array_values(array_filter($this->elements, $p, ARRAY_FILTER_USE_BOTH)));
     }
 
+    /**
+     * {@inheritdoc}
+     * @return self<T>
+     */
+    #[\Override]
+    public function filterNot(\Closure $p): Seq
+    {
+        $q = fn (mixed $value, int $index): bool => !$p($value, $index);
+        return new self(array_values(array_filter($this->elements, $q, ARRAY_FILTER_USE_BOTH)));
+    }
+
     #[\Override]
     public function getIterator(): \Traversable
     {

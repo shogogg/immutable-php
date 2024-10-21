@@ -152,6 +152,18 @@ describe('->filter', function (): void {
     });
 });
 
+describe('->filterNot', function (): void {
+    it('should return a None instance when the predicate returns true', function (): void {
+        $actual = Some::of(17)->filterNot(fn (int $x): bool => $x === 17);
+        expect($actual)->toBeInstanceOf(None::class);
+    });
+
+    it('should return a Some instance when the predicate returns false', function (): void {
+        $actual = Some::of(17)->filterNot(fn (int $x): bool => $x !== 17);
+        expect($actual)->toBeInstanceOf(Some::class);
+    });
+});
+
 describe('->get', function (): void {
     it('should return the value', function (mixed $value): void {
         $actual = Some::of($value)->get();

@@ -138,6 +138,18 @@ describe('->filter', function (): void {
     });
 });
 
+describe('->filterNot', function (): void {
+    it('should return a Seq instance', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->filterNot(fn (int $x): bool => $x % 2 !== 0);
+        expect($actual)->toBeInstanceOf(Seq::class);
+    });
+
+    it('should return a new instance with the elements that do not satisfy the predicate', function (): void {
+        $actual = Seq::of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)->filterNot(fn (int $x): bool => $x % 2 !== 0);
+        expect($actual->toArray())->toBe([0, 2, 4, 6, 8]);
+    });
+});
+
 describe('->getIterator', function (): void {
     it('should return an ArrayIterator', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->getIterator();

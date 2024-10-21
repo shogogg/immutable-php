@@ -46,6 +46,13 @@ abstract class Option implements OptionLike
     #[\Override]
     abstract public function filter(\Closure $p): Option;
 
+    /**
+     * {@inheritdoc}
+     * @return self<T>
+     */
+    #[\Override]
+    abstract public function filterNot(\Closure $p): Option;
+
     #[\Override]
     public function offsetSet(mixed $offset, mixed $value): void
     {

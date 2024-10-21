@@ -74,6 +74,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function filterNot(\Closure $p): Option
+    {
+        return $this;
+    }
+
+    #[\Override]
     public function get(): never
     {
         throw new \LogicException('None has no value.');

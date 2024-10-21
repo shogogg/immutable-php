@@ -36,7 +36,7 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
      *                                         first n ones, or else the empty collection, if this collection has less
      *                                         than n elements. If n is negative, don't drop any elements.
      */
-    public function drop(int $n): CollectionLike;
+    public function drop(int $n): self;
 
     /**
      * Apply `$f` to each element for its side effects.
@@ -63,7 +63,17 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
      * @return \Immutable\CollectionLike<K, T> a new collection consisting of all elements of this collection
      *                                         that satisfy the given predicate `$p`.
      */
-    public function filter(\Closure $p): CollectionLike;
+    public function filter(\Closure $p): self;
+
+    /**
+     * Selects all elements of this collection which do not satisfy a predicate.
+     *
+     * @param \Closure(T, K): bool $p the predicate used to test elements.
+     *
+     * @return \Immutable\CollectionLike<K, T> a new collection consisting of all elements of this collection
+     *                                         that do not satisfy the given predicate `$p`.
+     */
+    public function filterNot(\Closure $p): self;
 
     /**
      * Builds a new collection by applying a function to all elements of this collection.
