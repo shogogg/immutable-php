@@ -164,6 +164,18 @@ describe('->filterNot', function (): void {
     });
 });
 
+describe('->find', function (): void {
+    it('should return itself when the predicate returns true', function (): void {
+        $actual = Some::of(17)->find(fn (int $x): bool => $x === 17);
+        expect($actual)->toBeInstanceOf(Some::class);
+    });
+
+    it('should return a None instance when the predicate returns false', function (): void {
+        $actual = Some::of(17)->find(fn (int $x): bool => $x !== 17);
+        expect($actual)->toBeInstanceOf(None::class);
+    });
+});
+
 describe('->get', function (): void {
     it('should return the value', function (mixed $value): void {
         $actual = Some::of($value)->get();

@@ -76,6 +76,16 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function filterNot(\Closure $p): self;
 
     /**
+     * Finds the first element of this collection satisfying a predicate, if any.
+     *
+     * @param \Closure(T, K): bool $p the predicate used to test elements.
+     *
+     * @return \Immutable\Option<T> an Option containing the first element in this collection that satisfies `$p`,
+     *                              or None if none exists.
+     */
+    public function find(\Closure $p): Option;
+
+    /**
      * Builds a new collection by applying a function to all elements of this collection.
      *
      * @template U

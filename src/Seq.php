@@ -124,6 +124,17 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function find(\Closure $p): Option
+    {
+        foreach ($this->elements as $index => $value) {
+            if ($p($value, $index)) {
+                return Some::of($value);
+            }
+        }
+        return None::instance();
+    }
+
+    #[\Override]
     public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->elements);
