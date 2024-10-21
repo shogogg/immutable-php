@@ -9,11 +9,31 @@ declare(strict_types=1);
 
 namespace Immutable\Companions;
 
+use Immutable\Seq;
+
 /**
  * Companion object for Seq.
  */
-final readonly class SeqCompanion
+final class SeqCompanion
 {
+    /** @var Seq<never> */
+    private static Seq $empty;
+
+    /**
+     * Returns an empty sequence.
+     *
+     * @return Seq<never>
+     */
+    public static function empty(): Seq
+    {
+        if (!isset(self::$empty)) {
+            /** @var never[] $elements */
+            $elements = [];
+            self::$empty = Seq::of(...$elements);
+        }
+        return self::$empty;
+    }
+
     /**
      * Return a new iterable that applies a function to all elements of the given iterable.
      *

@@ -21,6 +21,18 @@ describe('::of', function (): void {
     });
 });
 
+describe('::empty', function (): void {
+    it('should return a Seq instance', function (): void {
+        $actual = Seq::empty();
+        expect($actual)->toBeInstanceOf(Seq::class);
+    });
+
+    it('should return an empty instance', function (): void {
+        $actual = Seq::empty();
+        expect($actual->toArray())->toBe([]);
+    });
+});
+
 describe('->count', function (): void {
     it('should return the number of elements', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->count();

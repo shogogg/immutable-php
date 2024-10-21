@@ -29,6 +29,16 @@ final readonly class Seq implements SeqLike
     }
 
     /**
+     * Returns an empty sequence.
+     *
+     * @return self<never>
+     */
+    public static function empty(): self
+    {
+        return SeqCompanion::empty();
+    }
+
+    /**
      * Creates a new instance.
      *
      * @template U
