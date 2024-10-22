@@ -3,5 +3,7 @@ parameters:
 	paths:
 		- src
 		- tests
+	ignoreErrors:
+		- '#Call to an undefined method Pest\\Expectation<.+?>::#'
 includes:
-    - vendor/phpstan/phpstan-mockery/extension.neon
+		- vendor/phpstan/phpstan-mockery/extension.neon

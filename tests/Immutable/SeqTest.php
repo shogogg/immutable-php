@@ -7,10 +7,8 @@
  */
 declare(strict_types=1);
 
-use Immutable\None;
 use Immutable\Option;
 use Immutable\Seq;
-use Immutable\Some;
 
 describe('::of', function (): void {
     it('should return a Seq instance', function (): void {
@@ -27,7 +25,7 @@ describe('::of', function (): void {
 describe('::empty', function (): void {
     it('should return an empty instance', function (): void {
         $actual = Seq::empty();
-        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
+        expect($actual)->toBeEmptySeq();
     });
 });
 
@@ -56,19 +54,19 @@ describe('->drop', function (): void {
         [0],
     ]);
 
-    it('should return a new instance with the first n elements removed', function (int $n, Seq $expected): void {
+    it('should return a new instance with the first n elements removed', function (int $n, array $expected): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->drop($n);
-        expect($actual)->toEqual($expected);
+        expect($actual)->toBeSeq(...$expected);
     })->with([
-        [1, Seq::of(3, 5, 7, 11)],
-        [2, Seq::of(5, 7, 11)],
-        [3, Seq::of(7, 11)],
-        [4, Seq::of(11)],
+        [1, [3, 5, 7, 11]],
+        [2, [5, 7, 11]],
+        [3, [7, 11]],
+        [4, [11]],
     ]);
 
     it('should return an empty instance if the number is greater than or equal to the size', function (int $n): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->drop($n);
-        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
+        expect($actual)->toBeEmptySeq();
     })->with([
         [5],
         [6],
@@ -87,19 +85,19 @@ describe('->dropRight', function (): void {
         [0],
     ]);
 
-    it('should return a new instance with the last n elements removed', function (int $n, Seq $expected): void {
+    it('should return a new instance with the last n elements removed', function (int $n, array $expected): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->dropRight($n);
-        expect($actual)->toEqual($expected);
+        expect($actual)->toBeSeq(...$expected);
     })->with([
-        [1, Seq::of(2, 3, 5, 7)],
-        [2, Seq::of(2, 3, 5)],
-        [3, Seq::of(2, 3)],
-        [4, Seq::of(2)],
+        [1, [2, 3, 5, 7]],
+        [2, [2, 3, 5]],
+        [3, [2, 3]],
+        [4, [2]],
     ]);
 
     it('should return an empty sequence if the number is greater than or equal to the size', function (int $n): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->dropRight($n);
-        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
+        expect($actual)->toBeEmptySeq();
     })->with([
         [5],
         [6],
@@ -157,38 +155,33 @@ describe('->exists', function (): void {
 describe('->filter', function (): void {
     it('should return a new instance with the elements that satisfy the predicate', function (): void {
         $actual = Seq::of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)->filter(fn (int $x): bool => $x % 2 !== 0);
-        expect($actual)->toEqual(Seq::of(1, 3, 5, 7, 9));
+        expect($actual)->toBeSeq(1, 3, 5, 7, 9);
     });
 });
 
 describe('->filterNot', function (): void {
     it('should return a new instance with the elements that do not satisfy the predicate', function (): void {
         $actual = Seq::of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)->filterNot(fn (int $x): bool => $x % 2 !== 0);
-        expect($actual)->toEqual(Seq::of(0, 2, 4, 6, 8));
+        expect($actual)->toBeSeq(0, 2, 4, 6, 8);
     });
 });
 
 describe('->find', function (): void {
-    it('should return a Some instance if the element is found', function (): void {
-        $actual = Seq::of(2, 3, 5, 7, 11)->find(fn (int $x): bool => $x % 2 !== 0);
-        expect($actual)->toBeInstanceOf(Some::class);
-    });
-
     it('should return a Some of the first element that satisfies the predicate', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->find(fn (int $x): bool => $x % 2 !== 0);
-        expect($actual->get())->toBe(3);
+        expect($actual)->toBeSome(3);
     });
 
     it('should return a None instance if the element that satisfies the predicate is not found', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->find(fn (int $x): bool => $x % 13 === 0);
-        expect($actual)->toBeInstanceOf(None::class);
+        expect($actual)->toBeNone();
     });
 });
 
 describe('->flatMap', function (): void {
     it('should return a new instance with the mapped values flattened', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->flatMap(fn (int $x): Seq => Seq::of($x, $x * 2));
-        expect($actual)->toEqual(Seq::of(2, 4, 3, 6, 5, 10, 7, 14, 11, 22));
+        expect($actual)->toBeSeq(2, 4, 3, 6, 5, 10, 7, 14, 11, 22);
     });
 
     it('should throw a LogicException if the callback does not return a Seq instance', function (): void {
@@ -205,7 +198,7 @@ describe('->flatten', function (): void {
             Option::of(11),
         );
         $actual = $seq->flatten();
-        expect($actual)->toEqual(Seq::of(2, 3, 5, 7, 11));
+        expect($actual)->toBeSeq(2, 3, 5, 7, 11);
     });
 
     it('should throw a LogicException if either element is not an iterable', function (): void {
@@ -264,12 +257,12 @@ describe('->head', function (): void {
 describe('->headOption', function (): void {
     it('should return a Some of the first element', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->headOption();
-        expect($actual)->toEqual(Some::of(2));
+        expect($actual)->toBeSome(2);
     });
 
     it('should return a None instance if the sequence is empty', function (): void {
         $actual = Seq::empty()->headOption();
-        expect($actual)->toBeInstanceOf(None::class);
+        expect($actual)->toBeNone();
     });
 });
 
@@ -299,19 +292,19 @@ describe('->last', function (): void {
 describe('->lastOption', function (): void {
     it('should return a Some of the last element', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->lastOption();
-        expect($actual)->toEqual(Some::of(11));
+        expect($actual)->toBeSome(11);
     });
 
     it('should return a None instance if the sequence is empty', function (): void {
         $actual = Seq::empty()->lastOption();
-        expect($actual)->toBeInstanceOf(None::class);
+        expect($actual)->toBeNone();
     });
 });
 
 describe('->map', function (): void {
     it('should return a new instance with the mapped values', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->map(fn ($v): int => $v * 3);
-        expect($actual)->toEqual(Seq::of(6, 9, 15, 21, 33));
+        expect($actual)->toBeSeq(6, 9, 15, 21, 33);
     });
 });
 
@@ -456,23 +449,23 @@ describe('->size', function (): void {
 describe('->take', function (): void {
     it('should return an empty sequence if the number is less than or equal to 0', function (int $n): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->take($n);
-        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
+        expect($actual)->toBeEmptySeq();
     })->with([
         [-2],
         [-1],
         [0],
     ]);
 
-    it('should return a sequence with the first n elements', function (int $n, Seq $expected): void {
+    it('should return a sequence with the first n elements', function (int $n, array $expected): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->take($n);
-        expect($actual)->toEqual($expected);
+        expect($actual)->toBeSeq(...$expected);
     })->with([
-        [1, Seq::of(2)],
-        [2, Seq::of(2, 3)],
-        [3, Seq::of(2, 3, 5)],
-        [4, Seq::of(2, 3, 5, 7)],
-        [5, Seq::of(2, 3, 5, 7, 11)],
-        [6, Seq::of(2, 3, 5, 7, 11)],
+        [1, [2]],
+        [2, [2, 3]],
+        [3, [2, 3, 5]],
+        [4, [2, 3, 5, 7]],
+        [5, [2, 3, 5, 7, 11]],
+        [6, [2, 3, 5, 7, 11]],
     ]);
 });
 

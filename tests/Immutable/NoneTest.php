@@ -8,7 +8,6 @@
 declare(strict_types=1);
 
 use Immutable\None;
-use Immutable\Seq;
 
 describe('::instance', function (): void {
     it('should return the None instance', function (): void {
@@ -49,7 +48,7 @@ describe('->countBy', function (): void {
 describe('->drop', function (): void {
     it('should return an empty Seq even if any number is passed', function (int $n): void {
         $actual = None::instance()->drop($n);
-        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
+        expect($actual)->toBeEmptySeq();
     })->with([
         [-2],
         [-1],
@@ -62,7 +61,7 @@ describe('->drop', function (): void {
 describe('->dropRight', function (): void {
     it('should return an empty Seq even if any number is passed', function (int $n): void {
         $actual = None::instance()->dropRight($n);
-        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
+        expect($actual)->toBeEmptySeq();
     })->with([
         [-2],
         [-1],
@@ -98,35 +97,35 @@ describe('->exists', function (): void {
 describe('->filter', function (): void {
     it('should return a None instance', function (): void {
         $actual = None::instance()->filter(fn (int $x): bool => $x > 0);
-        expect($actual)->toBeInstanceOf(None::class);
+        expect($actual)->toBeNone();
     });
 });
 
 describe('->filterNot', function (): void {
     it('should return a None instance', function (): void {
         $actual = None::instance()->filterNot(fn (int $x): bool => $x > 0);
-        expect($actual)->toBeInstanceOf(None::class);
+        expect($actual)->toBeNone();
     });
 });
 
 describe('->find', function (): void {
     it('should return a None instance', function (): void {
         $actual = None::instance()->find(fn (int $x): bool => $x > 0);
-        expect($actual)->toBeInstanceOf(None::class);
+        expect($actual)->toBeNone();
     });
 });
 
 describe('->flatMap', function (): void {
     it('should return a None instance', function (): void {
         $actual = None::instance()->flatMap(fn (int $x): None => None::instance());
-        expect($actual)->toBeInstanceOf(None::class);
+        expect($actual)->toBeNone();
     });
 });
 
 describe('->flatten', function (): void {
     it('should return a None instance', function (): void {
         $actual = None::instance()->flatten();
-        expect($actual)->toBeInstanceOf(None::class);
+        expect($actual)->toBeNone();
     });
 });
 
@@ -170,7 +169,7 @@ describe('->head', function (): void {
 describe('->headOption', function (): void {
     it('should return a None instance', function (): void {
         $actual = None::instance()->headOption();
-        expect($actual)->toBeInstanceOf(None::class);
+        expect($actual)->toBeNone();
     });
 });
 
@@ -190,14 +189,14 @@ describe('->last', function (): void {
 describe('->lastOption', function (): void {
     it('should return a None instance', function (): void {
         $actual = None::instance()->lastOption();
-        expect($actual)->toBeInstanceOf(None::class);
+        expect($actual)->toBeNone();
     });
 });
 
 describe('->map', function (): void {
     it('should return a None instance', function (): void {
         $actual = None::instance()->map(fn (int $x): int => $x * 2);
-        expect($actual)->toBeInstanceOf(None::class);
+        expect($actual)->toBeNone();
     });
 });
 
@@ -282,7 +281,7 @@ describe('->size', function (): void {
 describe('->take', function (): void {
     it('should return an empty Seq even if any number is passed', function (int $n): void {
         $actual = None::instance()->take($n);
-        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
+        expect($actual)->toBeEmptySeq();
     })->with([
         [-2],
         [-1],
@@ -307,6 +306,6 @@ describe('->toArray', function (): void {
 describe('->toSeq', function (): void {
     it('should return an empty Seq', function (): void {
         $actual = None::instance()->toSeq();
-        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
+        expect($actual)->toBeEmptySeq();
     });
 });

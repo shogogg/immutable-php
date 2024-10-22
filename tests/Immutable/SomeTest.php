@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 use Immutable\None;
 use Immutable\Option;
-use Immutable\Seq;
 use Immutable\Some;
 
 describe('::of', function (): void {
@@ -70,7 +69,7 @@ describe('->countBy', function (): void {
 describe('->drop', function (): void {
     it('should return a Seq of the value if the argument is less than or equal to 0', function (int $n): void {
         $actual = Some::of(17)->drop($n);
-        expect($actual)->toEqual(Seq::of(17));
+        expect($actual)->toBeSeq(17);
     })->with([
         [-2],
         [-1],
@@ -79,7 +78,7 @@ describe('->drop', function (): void {
 
     it('should return an empty Seq if the argument greater than 0', function (int $n): void {
         $actual = Some::of(17)->drop($n);
-        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
+        expect($actual)->toBeEmptySeq();
     })->with([
         [1],
         [2],
@@ -89,7 +88,7 @@ describe('->drop', function (): void {
 describe('->dropRight', function (): void {
     it('should return a Seq of the value if the argument is less than or equal to 0', function (int $n): void {
         $actual = Some::of(17)->dropRight($n);
-        expect($actual)->toEqual(Seq::of(17));
+        expect($actual)->toBeSeq(17);
     })->with([
         [-2],
         [-1],
@@ -98,7 +97,7 @@ describe('->dropRight', function (): void {
 
     it('should return an empty Seq if the argument greater than 0', function (int $n): void {
         $actual = Some::of(17)->dropRight($n);
-        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
+        expect($actual)->toBeEmptySeq();
     })->with([
         [1],
         [2],
@@ -156,26 +155,28 @@ describe('->exists', function (): void {
 });
 
 describe('->filter', function (): void {
-    it('should return a Some instance if the predicate returns true', function (): void {
-        $actual = Some::of(17)->filter(fn (int $x): bool => $x === 17);
-        expect($actual)->toBeInstanceOf(Some::class);
+    it('should return itself if the predicate returns true', function (): void {
+        $option = Some::of(17);
+        $actual = $option->filter(fn (int $x): bool => $x === 17);
+        expect($actual)->toBe($option);
     });
 
-    it('should return a None instance if the predicate returns false', function (): void {
+    it('should return a None if the predicate returns false', function (): void {
         $actual = Some::of(17)->filter(fn (int $x): bool => $x !== 17);
-        expect($actual)->toBeInstanceOf(None::class);
+        expect($actual)->toBeNone();
     });
 });
 
 describe('->filterNot', function (): void {
-    it('should return a None instance if the predicate returns true', function (): void {
+    it('should return a None if the predicate returns true', function (): void {
         $actual = Some::of(17)->filterNot(fn (int $x): bool => $x === 17);
-        expect($actual)->toBeInstanceOf(None::class);
+        expect($actual)->toBeNone();
     });
 
-    it('should return a Some instance if the predicate returns false', function (): void {
-        $actual = Some::of(17)->filterNot(fn (int $x): bool => $x !== 17);
-        expect($actual)->toBeInstanceOf(Some::class);
+    it('should return itself if the predicate returns false', function (): void {
+        $option = Some::of(17);
+        $actual = $option->filterNot(fn (int $x): bool => $x !== 17);
+        expect($actual)->toBe($option);
     });
 });
 
@@ -188,7 +189,7 @@ describe('->find', function (): void {
 
     it('should return a None instance if the predicate returns false', function (): void {
         $actual = Some::of(17)->find(fn (int $x): bool => $x !== 17);
-        expect($actual)->toBeInstanceOf(None::class);
+        expect($actual)->toBeNone();
     });
 });
 
@@ -332,7 +333,7 @@ describe('->lastOption', function (): void {
 describe('->map', function (): void {
     it('should return a new instance with the mapped value', function (): void {
         $actual = Some::of(17)->map(fn ($v): int => $v * 2);
-        expect($actual)->toBeInstanceOf(Some::class)->toEqual(Some::of(34));
+        expect($actual)->toBeSome(34);
     });
 });
 
@@ -486,7 +487,7 @@ describe('->size', function (): void {
 describe('->take', function (): void {
     it('should return an empty Seq if the argument is less than or equal to 0', function (int $n): void {
         $actual = Some::of(17)->take($n);
-        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
+        expect($actual)->toBeEmptySeq();
     })->with([
         [-2],
         [-1],
@@ -495,7 +496,7 @@ describe('->take', function (): void {
 
     it('should return a Seq of the value if the argument greater than 0', function (int $n): void {
         $actual = Some::of(17)->take($n);
-        expect($actual)->toEqual(Seq::of(17));
+        expect($actual)->toBeSeq(17);
     })->with([
         [1],
         [2],
@@ -513,6 +514,6 @@ describe('->toArray', function (): void {
 describe('->toSeq', function (): void {
     it('should return a Seq instance with the value', function (): void {
         $actual = Some::of('foo')->toSeq();
-        expect($actual)->toBeInstanceOf(Seq::class)->toEqual(Seq::of('foo'));
+        expect($actual)->toBeSeq('foo');
     });
 });

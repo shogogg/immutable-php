@@ -13,6 +13,8 @@ use Immutable\Seq;
 
 /**
  * Companion object for Seq.
+ *
+ * @internal
  */
 final class SeqCompanion
 {

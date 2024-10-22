@@ -2,7 +2,11 @@
 
 declare(strict_types=1);
 
+use Immutable\None;
+use Immutable\Seq;
+use Immutable\Some;
 use Mockery\MockInterface;
+use Pest\Expectation;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +32,25 @@ use Mockery\MockInterface;
 |
 */
 
-//expect()->extend('toBeOne', function () {
-//    return $this->toBe(1);
-//});
+expect()->extend('toBeEmptySeq', function (): Expectation {
+    // @phpstan-ignore variable.undefined
+    return $this->toBeInstanceOf(Seq::class)->toBeEmpty();
+});
+
+expect()->extend('toBeNone', function (): Expectation {
+    // @phpstan-ignore variable.undefined
+    return $this->toBeInstanceOf(None::class);
+});
+
+expect()->extend('toBeSeq', function (mixed ...$value): Expectation {
+    // @phpstan-ignore variable.undefined
+    return $this->toEqual(Seq::of(...$value));
+});
+
+expect()->extend('toBeSome', function (mixed $value): Expectation {
+    // @phpstan-ignore variable.undefined
+    return $this->toEqual(Some::of($value));
+});
 
 /*
 |--------------------------------------------------------------------------
