@@ -174,6 +174,15 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function head(): mixed
+    {
+        foreach ($this->elements as $value) {
+            return $value;
+        }
+        throw new \LogicException('There is no value');
+    }
+
+    #[\Override]
     public function isEmpty(): bool
     {
         return empty($this->elements);

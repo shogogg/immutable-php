@@ -128,6 +128,15 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function forAll(\Closure $p): bool;
 
     /**
+     * Selects the first element of this collection.
+     *
+     * @throws \LogicException if this collection is empty.
+     *
+     * @return T the first element of this collection.
+     */
+    public function head(): mixed;
+
+    /**
      * Tests whether this collection is empty.
      *
      * @return bool true if this collection contains no elements, false otherwise.

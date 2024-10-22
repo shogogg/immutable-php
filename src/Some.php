@@ -132,6 +132,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function head(): mixed
+    {
+        return $this->value;
+    }
+
+    #[\Override]
     public function isEmpty(): bool
     {
         return false;

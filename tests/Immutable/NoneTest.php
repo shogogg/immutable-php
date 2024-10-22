@@ -153,6 +153,12 @@ describe('->getIterator', function (): void {
     });
 });
 
+describe('->head', function (): void {
+    it('should throw a LogicException', function (): void {
+        expect(fn () => None::instance()->head())->toThrow(LogicException::class);
+    });
+});
+
 describe('->isEmpty', function (): void {
     it('should return true', function (): void {
         $actual = None::instance()->isEmpty();

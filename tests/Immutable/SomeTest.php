@@ -253,6 +253,21 @@ describe('->getIterator', function (): void {
     });
 });
 
+describe('->head', function (): void {
+    it('should return the value', function (mixed $value): void {
+        $actual = Some::of($value)->head();
+        expect($actual)->toBe($value);
+    })->with([
+        [0],
+        [0.0],
+        [17],
+        ['foo'],
+        [[]],
+        [new stdClass()],
+        [null],
+    ]);
+});
+
 describe('->isEmpty', function (): void {
     it('should return false even if the value is any type', function (mixed $value): void {
         $actual = Some::of($value)->isEmpty();

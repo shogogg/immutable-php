@@ -122,6 +122,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function head(): mixed
+    {
+        throw new \LogicException('There is no value');
+    }
+
+    #[\Override]
     public function isEmpty(): bool
     {
         return true;

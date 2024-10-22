@@ -220,6 +220,17 @@ describe('->getIterator', function (): void {
     });
 });
 
+describe('->head', function (): void {
+    it('should return the first element', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->head();
+        expect($actual)->toBe(2);
+    });
+
+    it('should throw a LogicException if the sequence is empty', function (): void {
+        expect(fn () => Seq::empty()->head())->toThrow(LogicException::class);
+    });
+});
+
 describe('->isEmpty', function (): void {
     it('should return true if the sequence is empty', function (): void {
         $actual = Seq::empty()->isEmpty();
