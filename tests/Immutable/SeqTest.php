@@ -155,6 +155,18 @@ describe('->find', function (): void {
     });
 });
 
+describe('->flatMap', function (): void {
+    it('should return a new instance with the mapped values flattened', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->flatMap(fn (int $x): Seq => Seq::of($x, $x * 2));
+        expect($actual)->toEqual(Seq::of(2, 4, 3, 6, 5, 10, 7, 14, 11, 22));
+    });
+
+    it('should throw a LogicException if the callback does not return a Seq instance', function (): void {
+        // @phpstan-ignore-next-line
+        expect(fn () => Seq::of(2, 3, 5, 7, 11)->flatMap(fn (int $x): int => $x * 2))->toThrow(LogicException::class);
+    });
+});
+
 describe('->flatten', function (): void {
     it('should return a new instance with the elements flattened', function (): void {
         $seq = Seq::of(

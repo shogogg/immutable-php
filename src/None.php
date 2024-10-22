@@ -86,6 +86,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function flatMap(\Closure $f): Option
+    {
+        return $this;
+    }
+
+    #[\Override]
     public function flatten(): Option
     {
         return $this;

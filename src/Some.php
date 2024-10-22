@@ -87,6 +87,17 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function flatMap(\Closure $f): Option
+    {
+        $x = $f($this->value, 0);
+        if ($x instanceof Option) {
+            return $x;
+        } else {
+            throw new \LogicException('Closure should return an iterable');
+        }
+    }
+
+    #[\Override]
     public function flatten(): Option
     {
         if ($this->value instanceof Option) {
@@ -108,13 +119,8 @@ final class Some extends Option
         return $this->value;
     }
 
-    /**
-     * @template U
-     * @param \Closure(T, int): U $f
-     * @return self<U>
-     */
     #[\Override]
-    public function map(\Closure $f): self
+    public function map(\Closure $f): Option
     {
         return self::of($f($this->value, 0));
     }

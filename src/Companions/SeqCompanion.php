@@ -35,7 +35,7 @@ final class SeqCompanion
     }
 
     /**
-     * Return a new iterable that applies a function to all elements of the given iterable.
+     * Returns a new iterable that applies a function to all elements of the given iterable.
      *
      * @template T
      * @template K
@@ -49,6 +49,32 @@ final class SeqCompanion
         return call_user_func(static function () use ($it, $f): iterable {
             foreach ($it as $k => $v) {
                 yield $k => $f($v, $k);
+            }
+        });
+    }
+
+    /**
+     * Returns a new iterable that applies a function to all elements of the given iterable and flattens the result.
+     *
+     * @template T
+     * @template K
+     * @template U
+     * @param iterable<K, T> $it
+     * @param \Closure(T, K): iterable<int, U> $f
+     * @return iterable<K, U>
+     */
+    public static function flatMap(iterable $it, \Closure $f): iterable
+    {
+        return call_user_func(static function () use ($it, $f): iterable {
+            $i = 0;
+            foreach ($it as $k => $v) {
+                $xs = $f($v, $k);
+                if (!is_iterable($xs)) {
+                    throw new \LogicException('Closure should return an iterable');
+                }
+                foreach ($xs as $value) {
+                    yield $i++ => $value;
+                }
             }
         });
     }

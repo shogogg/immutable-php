@@ -108,6 +108,13 @@ describe('->find', function (): void {
     });
 });
 
+describe('->flatMap', function (): void {
+    it('should return a None instance', function (): void {
+        $actual = None::of(0)->flatMap(fn (int $value): None => None::instance());
+        expect($actual)->toBeInstanceOf(None::class);
+    });
+});
+
 describe('->flatten', function (): void {
     it('should return a None instance', function (): void {
         $actual = None::of(0)->flatten();

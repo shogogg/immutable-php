@@ -17,4 +17,49 @@ namespace Immutable;
  */
 interface SeqLike extends CollectionLike
 {
+    /**
+     * {@inheritdoc}
+     * @return \Immutable\Seq<T>
+     */
+    #[\Override]
+    public function drop(int $n): Seq;
+
+    /**
+     * {@inheritdoc}
+     * @return \Immutable\Seq<T>
+     */
+    #[\Override]
+    public function filter(\Closure $p): Seq;
+
+    /**
+     * {@inheritdoc}
+     * @return \Immutable\Seq<T>
+     */
+    #[\Override]
+    public function filterNot(\Closure $p): Seq;
+
+    /**
+     * {@inheritdoc}
+     * @template U
+     * @param \Closure(T, int): iterable<int, U> $f
+     * @return \Immutable\Seq<U>
+     */
+    #[\Override]
+    public function flatMap(\Closure $f): Seq;
+
+    /**
+     * {@inheritdoc}
+     * @return \Immutable\Seq<mixed>
+     */
+    #[\Override]
+    public function flatten(): Seq;
+
+    /**
+     * {@inheritdoc}
+     * @template U
+     * @param \Closure(T, int): U $f
+     * @return \Immutable\Seq<U>
+     */
+    #[\Override]
+    public function map(\Closure $f): Seq;
 }

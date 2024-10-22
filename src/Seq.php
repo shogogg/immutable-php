@@ -51,6 +51,18 @@ final readonly class Seq implements SeqLike
         return new self($elements);
     }
 
+    /**
+     * Creates a new instance from an iterable.
+     *
+     * @template U
+     * @param iterable<int, U> $it
+     * @return self<U>
+     */
+    private static function fromIterable(iterable $it): self
+    {
+        return new self(iterator_to_array($it));
+    }
+
     #[\Override]
     public function count(): int
     {
@@ -69,10 +81,6 @@ final readonly class Seq implements SeqLike
         return $count;
     }
 
-    /**
-     * {@inheritdoc}
-     * @return self<T>
-     */
     #[\Override]
     public function drop(int $n): Seq
     {
@@ -102,20 +110,12 @@ final readonly class Seq implements SeqLike
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     * @return self<T>
-     */
     #[\Override]
     public function filter(\Closure $p): Seq
     {
         return new self(array_values(array_filter($this->elements, $p, ARRAY_FILTER_USE_BOTH)));
     }
 
-    /**
-     * {@inheritdoc}
-     * @return self<T>
-     */
     #[\Override]
     public function filterNot(\Closure $p): Seq
     {
@@ -134,14 +134,16 @@ final readonly class Seq implements SeqLike
         return None::instance();
     }
 
-    /**
-     * {@inheritdoc}
-     * @return \Immutable\Seq<mixed>
-     */
+    #[\Override]
+    public function flatMap(\Closure $f): Seq
+    {
+        return self::fromIterable(SeqCompanion::flatMap($this->elements, $f));
+    }
+
     #[\Override]
     public function flatten(): Seq
     {
-        return new self(iterator_to_array(SeqCompanion::flatten($this->elements)));
+        return self::fromIterable(SeqCompanion::flatten($this->elements));
     }
 
     #[\Override]
@@ -150,16 +152,10 @@ final readonly class Seq implements SeqLike
         return new \ArrayIterator($this->elements);
     }
 
-    /**
-     * {@inheritdoc}
-     * @template U
-     * @param \Closure(T, int): U $f
-     * @return self<U>
-     */
     #[\Override]
     public function map(\Closure $f): self
     {
-        return new self(iterator_to_array(SeqCompanion::map($this->elements, $f)));
+        return self::fromIterable(SeqCompanion::map($this->elements, $f));
     }
 
     #[\Override]

@@ -177,6 +177,21 @@ describe('->find', function (): void {
     });
 });
 
+describe('->flatMap', function (): void {
+    it('should return the Option instance returned by the callback', function (\Closure $f, $expected): void {
+        $actual = Some::of(17)->flatMap($f);
+        expect($actual)->toEqual($expected);
+    })->with([
+        [fn (int $x): Option => Some::of($x * 2), Some::of(34)],
+        [fn (int $x): Option => None::instance(), None::instance()],
+    ]);
+
+    it('should throw a LogicException if the callback does not return an Option instance', function (): void {
+        // @phpstan-ignore argument.type
+        expect(fn () => Some::of(17)->flatMap(fn (int $x): int => $x * 2))->toThrow(LogicException::class);
+    });
+});
+
 describe('->flatten', function (): void {
     it('should return the value if it is an Option instance', function (Option $value): void {
         $actual = Some::of($value)->flatten();

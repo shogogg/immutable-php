@@ -86,6 +86,17 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function find(\Closure $p): Option;
 
     /**
+     * Builds a new collection by applying a function to all elements of this collection and using the elements of the resulting collections.
+     *
+     * @template U
+     *
+     * @param \Closure(T, K): iterable<int, U> $f the function to apply to each element.
+     *
+     * @return self<K, U> a new collection resulting from concatenating all element collections.
+     */
+    public function flatMap(\Closure $f): self;
+
+    /**
      * Converts this collection of traversable collections into a collection formed by the elements of these collections.
      *
      * @return self<K, mixed> a new collection resulting from concatenating all element collections.

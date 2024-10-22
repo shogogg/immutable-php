@@ -29,23 +29,43 @@ interface OptionLike extends CollectionLike
      * {@inheritdoc}
      * @return \Immutable\Seq<T>
      */
+    #[\Override]
     public function drop(int $n): Seq;
 
     /**
      * {@inheritdoc}
      * @return \Immutable\Option<T>
      */
+    #[\Override]
     public function filter(\Closure $p): Option;
 
     /**
      * {@inheritdoc}
      * @return \Immutable\Option<T>
      */
+    #[\Override]
     public function filterNot(\Closure $p): Option;
 
     /**
      * {@inheritdoc}
      * @return \Immutable\Option<mixed>
      */
+    #[\Override]
+    public function flatMap(\Closure $f): Option;
+
+    /**
+     * {@inheritdoc}
+     * @return \Immutable\Option<T>
+     */
+    #[\Override]
     public function flatten(): Option;
+
+    /**
+     * {@inheritdoc}
+     * @template U
+     * @param \Closure(T, int): U $f
+     * @return \Immutable\Option<U>
+     */
+    #[\Override]
+    public function map(\Closure $f): Option;
 }
