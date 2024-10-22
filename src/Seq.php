@@ -134,6 +134,16 @@ final readonly class Seq implements SeqLike
         return None::instance();
     }
 
+    /**
+     * {@inheritdoc}
+     * @return \Immutable\Seq<mixed>
+     */
+    #[\Override]
+    public function flatten(): Seq
+    {
+        return new self(iterator_to_array(SeqCompanion::flatten($this->elements)));
+    }
+
     #[\Override]
     public function getIterator(): \Traversable
     {

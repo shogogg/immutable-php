@@ -52,4 +52,28 @@ final class SeqCompanion
             }
         });
     }
+
+    /**
+     * Returns a flattened iterable.
+     *
+     * @template T
+     * @template U of T[]
+     * @template K
+     * @param iterable<K, U> $it
+     * @return iterable<K, T>
+     */
+    public static function flatten(iterable $it): iterable
+    {
+        return call_user_func(static function () use ($it): iterable {
+            $i = 0;
+            foreach ($it as $v) {
+                if (!is_iterable($v)) {
+                    throw new \LogicException('The value is not iterable');
+                }
+                foreach ($v as $value) {
+                    yield $i++ => $value;
+                }
+            }
+        });
+    }
 }

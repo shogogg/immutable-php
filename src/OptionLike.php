@@ -24,4 +24,28 @@ interface OptionLike extends CollectionLike
      * @return T
      */
     public function get(): mixed;
+
+    /**
+     * {@inheritdoc}
+     * @return \Immutable\Seq<T>
+     */
+    public function drop(int $n): Seq;
+
+    /**
+     * {@inheritdoc}
+     * @return \Immutable\Option<T>
+     */
+    public function filter(\Closure $p): Option;
+
+    /**
+     * {@inheritdoc}
+     * @return \Immutable\Option<T>
+     */
+    public function filterNot(\Closure $p): Option;
+
+    /**
+     * {@inheritdoc}
+     * @return \Immutable\Option<mixed>
+     */
+    public function flatten(): Option;
 }

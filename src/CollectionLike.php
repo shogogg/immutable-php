@@ -32,9 +32,9 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param int $n the number of elements to drop from this collection.
      *
-     * @return \Immutable\CollectionLike<K, T> a collection consisting of all elements of this collection except the
-     *                                         first n ones, or else the empty collection, if this collection has less
-     *                                         than n elements. If n is negative, don't drop any elements.
+     * @return self<K, T> a collection consisting of all elements of this collection except the first n ones,
+     *                    or else the empty collection, if this collection has less than n elements.
+     *                    If n is negative, don't drop any elements.
      */
     public function drop(int $n): self;
 
@@ -60,8 +60,8 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param \Closure(T, K): bool $p the predicate used to test elements.
      *
-     * @return \Immutable\CollectionLike<K, T> a new collection consisting of all elements of this collection
-     *                                         that satisfy the given predicate `$p`.
+     * @return self<K, T> a new collection consisting of all elements of this collection
+     *                    that satisfy the given predicate `$p`.
      */
     public function filter(\Closure $p): self;
 
@@ -70,8 +70,8 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param \Closure(T, K): bool $p the predicate used to test elements.
      *
-     * @return \Immutable\CollectionLike<K, T> a new collection consisting of all elements of this collection
-     *                                         that do not satisfy the given predicate `$p`.
+     * @return self<K, T> a new collection consisting of all elements of this collection
+     *                    that do not satisfy the given predicate `$p`.
      */
     public function filterNot(\Closure $p): self;
 
@@ -86,12 +86,19 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function find(\Closure $p): Option;
 
     /**
+     * Converts this collection of traversable collections into a collection formed by the elements of these collections.
+     *
+     * @return self<K, mixed> a new collection resulting from concatenating all element collections.
+     */
+    public function flatten(): self;
+
+    /**
      * Builds a new collection by applying a function to all elements of this collection.
      *
      * @template U
      * @param \Closure(T, K): U $f the function to apply to each element.
      *
-     * @return \Immutable\CollectionLike<K, U>
+     * @return self<K, U>
      * @noinspection PhpMissingReturnTypeInspection
      */
     public function map(\Closure $f);

@@ -86,6 +86,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function flatten(): Option
+    {
+        return $this;
+    }
+
+    #[\Override]
     public function get(): never
     {
         throw new \LogicException('None has no value.');

@@ -8,6 +8,7 @@
 declare(strict_types=1);
 
 use Immutable\None;
+use Immutable\Option;
 use Immutable\Seq;
 use Immutable\Some;
 
@@ -176,6 +177,21 @@ describe('->find', function (): void {
     });
 });
 
+describe('->flatten', function (): void {
+    it('should return the value if it is an Option instance', function (Option $value): void {
+        $actual = Some::of($value)->flatten();
+        expect($actual)->toBe($value);
+    })->with([
+        [Some::of(17)],
+        [Some::of('foo')],
+        [None::instance()],
+    ]);
+
+    it('should throw a LogicException if the value is not an Option instance', function (): void {
+        expect(fn () => Some::of(17)->flatten())->toThrow(LogicException::class);
+    });
+});
+
 describe('->get', function (): void {
     it('should return the value', function (mixed $value): void {
         $actual = Some::of($value)->get();
@@ -204,14 +220,9 @@ describe('->getIterator', function (): void {
 });
 
 describe('->map', function (): void {
-    it('should return a Some instance', function (): void {
-        $actual = Some::of(17)->map(fn ($v): int => $v * 2);
-        expect($actual)->toBeInstanceOf(Some::class);
-    });
-
     it('should return a new instance with the mapped value', function (): void {
         $actual = Some::of(17)->map(fn ($v): int => $v * 2);
-        expect($actual->get())->toBe(34);
+        expect($actual)->toBeInstanceOf(Some::class)->toEqual(Some::of(34));
     });
 });
 
@@ -283,13 +294,8 @@ describe('->toArray', function (): void {
 });
 
 describe('->toSeq', function (): void {
-    it('should return a Seq instance', function (): void {
-        $actual = Some::of('foo')->toSeq();
-        expect($actual)->toBeInstanceOf(Seq::class);
-    });
-
     it('should return a Seq instance with the value', function (): void {
         $actual = Some::of('foo')->toSeq();
-        expect($actual->toArray())->toBe(['foo']);
+        expect($actual)->toBeInstanceOf(Seq::class)->toEqual(Seq::of('foo'));
     });
 });

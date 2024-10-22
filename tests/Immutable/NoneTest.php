@@ -108,6 +108,13 @@ describe('->find', function (): void {
     });
 });
 
+describe('->flatten', function (): void {
+    it('should return a None instance', function (): void {
+        $actual = None::of(0)->flatten();
+        expect($actual)->toBeInstanceOf(None::class);
+    });
+});
+
 describe('->get', function (): void {
     it('should throw a LogicException', function (): void {
         expect(fn () => None::of(0)->get())->toThrow(LogicException::class);
@@ -177,13 +184,8 @@ describe('->toArray', function (): void {
 });
 
 describe('->toSeq', function (): void {
-    it('should return a Seq instance', function (): void {
-        $actual = None::instance()->toSeq();
-        expect($actual)->toBeInstanceOf(Seq::class);
-    });
-
     it('should return an empty Seq', function (): void {
         $actual = None::instance()->toSeq();
-        expect($actual)->toBeEmpty();
+        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
     });
 });

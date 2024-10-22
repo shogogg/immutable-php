@@ -87,6 +87,16 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function flatten(): Option
+    {
+        if ($this->value instanceof Option) {
+            return $this->value;
+        } else {
+            throw new \LogicException('Element should be an Option');
+        }
+    }
+
+    #[\Override]
     public function getIterator(): \Traversable
     {
         return new \ArrayIterator([$this->value]);

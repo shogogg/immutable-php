@@ -32,27 +32,6 @@ abstract class Option implements OptionLike
         };
     }
 
-    /**
-     * {@inheritdoc}
-     * @return \Immutable\Seq<T>
-     */
-    #[\Override]
-    abstract public function drop(int $n): Seq;
-
-    /**
-     * {@inheritdoc}
-     * @return self<T>
-     */
-    #[\Override]
-    abstract public function filter(\Closure $p): Option;
-
-    /**
-     * {@inheritdoc}
-     * @return self<T>
-     */
-    #[\Override]
-    abstract public function filterNot(\Closure $p): Option;
-
     #[\Override]
     public function offsetSet(mixed $offset, mixed $value): void
     {
