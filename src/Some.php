@@ -174,6 +174,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function maxBy(\Closure $f): mixed
+    {
+        return $this->value;
+    }
+
+    #[\Override]
     public function nonEmpty(): bool
     {
         return true;

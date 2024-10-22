@@ -234,6 +234,24 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function maxBy(\Closure $f): mixed
+    {
+        if ($this->isEmpty()) {
+            throw new \LogicException('empty.max');
+        }
+        $maxValue = null;
+        $maxIndex = null;
+        foreach ($this->elements as $index => $element) {
+            $value = $f($element, $index);
+            if ($maxValue === null || $value > $maxValue) {
+                $maxValue = $value;
+                $maxIndex = $index;
+            }
+        }
+        return $this->elements[$maxIndex];
+    }
+
+    #[\Override]
     public function nonEmpty(): bool
     {
         return !empty($this->elements);

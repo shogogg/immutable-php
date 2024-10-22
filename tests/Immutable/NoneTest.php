@@ -41,7 +41,7 @@ describe('->count', function (): void {
 
 describe('->countBy', function (): void {
     it('should return 0', function (): void {
-        $actual = None::instance()->countBy(fn (int $value): bool => $value > 0);
+        $actual = None::instance()->countBy(fn (int $x): bool => $x > 0);
         expect($actual)->toBe(0);
     });
 });
@@ -82,35 +82,35 @@ describe('->each', function (): void {
 
 describe('->exists', function (): void {
     it('should return false', function (): void {
-        $actual = None::instance()->exists(fn (int $value): bool => $value > 0);
+        $actual = None::instance()->exists(fn (int $x): bool => $x > 0);
         expect($actual)->toBeFalse();
     });
 });
 
 describe('->filter', function (): void {
     it('should return a None instance', function (): void {
-        $actual = None::instance()->filter(fn (int $value): bool => $value > 0);
+        $actual = None::instance()->filter(fn (int $x): bool => $x > 0);
         expect($actual)->toBeInstanceOf(None::class);
     });
 });
 
 describe('->filterNot', function (): void {
     it('should return a None instance', function (): void {
-        $actual = None::instance()->filterNot(fn (int $value): bool => $value > 0);
+        $actual = None::instance()->filterNot(fn (int $x): bool => $x > 0);
         expect($actual)->toBeInstanceOf(None::class);
     });
 });
 
 describe('->find', function (): void {
     it('should return a None instance', function (): void {
-        $actual = None::instance()->find(fn (int $value): bool => $value > 0);
+        $actual = None::instance()->find(fn (int $x): bool => $x > 0);
         expect($actual)->toBeInstanceOf(None::class);
     });
 });
 
 describe('->flatMap', function (): void {
     it('should return a None instance', function (): void {
-        $actual = None::instance()->flatMap(fn (int $value): None => None::instance());
+        $actual = None::instance()->flatMap(fn (int $x): None => None::instance());
         expect($actual)->toBeInstanceOf(None::class);
     });
 });
@@ -134,9 +134,9 @@ describe('->forAll', function (): void {
         $actual = None::instance()->forAll($p);
         expect($actual)->toBeTrue();
     })->with([
-        [fn (int $value): bool => $value > 0],
-        [fn (int $value): bool => $value === 0],
-        [fn (int $value): bool => $value < 0],
+        [fn (int $x): bool => $x > 0],
+        [fn (int $x): bool => $x === 0],
+        [fn (int $x): bool => $x < 0],
     ]);
 });
 
@@ -188,7 +188,7 @@ describe('->lastOption', function (): void {
 
 describe('->map', function (): void {
     it('should return a None instance', function (): void {
-        $actual = None::instance()->map(fn (int $value): int => $value * 2);
+        $actual = None::instance()->map(fn (int $x): int => $x * 2);
         expect($actual)->toBeInstanceOf(None::class);
     });
 });
@@ -196,6 +196,12 @@ describe('->map', function (): void {
 describe('->max', function (): void {
     it('should throw a LogicException', function (): void {
         expect(fn () => None::instance()->max())->toThrow(LogicException::class);
+    });
+});
+
+describe('->maxBy', function (): void {
+    it('should throw a LogicException', function (): void {
+        expect(fn () => None::instance()->maxBy(fn (string $x): int => strlen($x)))->toThrow(LogicException::class);
     });
 });
 

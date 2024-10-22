@@ -189,6 +189,19 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function max(): mixed;
 
     /**
+     * Finds the first element which yields the largest value measured by function `$f`.
+     *
+     * @template U
+     *
+     * @param \Closure(T, K): U $f the measuring function.
+     *
+     * @throws \LogicException if this collection is empty.
+     *
+     * @return T the first element of this collection with the largest value measured by function `$f`.
+     */
+    public function maxBy(\Closure $f): mixed;
+
+    /**
      * Tests whether this collection is not empty.
      *
      * @return bool true if this collection does not contain any elements, false otherwise.

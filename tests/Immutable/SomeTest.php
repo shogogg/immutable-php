@@ -57,12 +57,12 @@ describe('->count', function (): void {
 
 describe('->countBy', function (): void {
     it('should return 1 when the predicate returns true', function (): void {
-        $actual = Some::of(17)->countBy(fn (int $value): bool => $value > 0);
+        $actual = Some::of(17)->countBy(fn (int $x): bool => $x > 0);
         expect($actual)->toBe(1);
     });
 
     it('should return 0 when the predicate returns false', function (): void {
-        $actual = Some::of(17)->countBy(fn (int $value): bool => $value < 0);
+        $actual = Some::of(17)->countBy(fn (int $x): bool => $x < 0);
         expect($actual)->toBe(0);
     });
 });
@@ -217,12 +217,12 @@ describe('->fold', function (): void {
 
 describe('->forAll', function (): void {
     it('should return true when the predicate returns true', function (): void {
-        $actual = Some::of(17)->forAll(fn (int $value): bool => $value > 0);
+        $actual = Some::of(17)->forAll(fn (int $x): bool => $x > 0);
         expect($actual)->toBeTrue();
     });
 
     it('should return false when the predicate returns false', function (): void {
-        $actual = Some::of(17)->forAll(fn (int $value): bool => $value < 0);
+        $actual = Some::of(17)->forAll(fn (int $x): bool => $x < 0);
         expect($actual)->toBeFalse();
     });
 });
@@ -325,6 +325,21 @@ describe('->map', function (): void {
 describe('->max', function (): void {
     it('should return the value', function (mixed $value): void {
         $actual = Some::of($value)->max();
+        expect($actual)->toBe($value);
+    })->with([
+        [0],
+        [0.0],
+        [17],
+        ['foo'],
+        [[]],
+        [new stdClass()],
+        [null],
+    ]);
+});
+
+describe('->maxBy', function (): void {
+    it('should return the value', function (mixed $value): void {
+        $actual = Some::of($value)->maxBy(fn (string $x): int => strlen($x));
         expect($actual)->toBe($value);
     })->with([
         [0],

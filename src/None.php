@@ -164,6 +164,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function maxBy(\Closure $f): never
+    {
+        throw new \LogicException('There is no value');
+    }
+
+    #[\Override]
     public function nonEmpty(): bool
     {
         return false;
