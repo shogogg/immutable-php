@@ -186,6 +186,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function minBy(\Closure $f): mixed
+    {
+        return $this->value;
+    }
+
+    #[\Override]
     public function nonEmpty(): bool
     {
         return true;

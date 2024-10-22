@@ -211,6 +211,12 @@ describe('->min', function (): void {
     });
 });
 
+describe('->minBy', function (): void {
+    it('should throw a LogicException', function (): void {
+        expect(fn () => None::instance()->minBy(fn (string $x): int => strlen($x)))->toThrow(LogicException::class);
+    });
+});
+
 describe('->nonEmpty', function (): void {
     it('should return false', function (): void {
         $actual = None::instance()->nonEmpty();

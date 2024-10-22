@@ -131,7 +131,6 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
      * Selects the first element of this collection.
      *
      * @throws \LogicException if this collection is empty.
-     *
      * @return T the first element of this collection.
      */
     public function head(): mixed;
@@ -154,7 +153,6 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
      * Selects the last element of this collection.
      *
      * @throws \LogicException if this collection is empty.
-     *
      * @return T the last element of this collection.
      */
     public function last(): mixed;
@@ -183,7 +181,6 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
      * Finds the largest element.
      *
      * @throws \LogicException if this collection is empty.
-     *
      * @return T the largest element of this collection.
      */
     public function max(): mixed;
@@ -196,7 +193,6 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
      * @param \Closure(T, K): U $f the measuring function.
      *
      * @throws \LogicException if this collection is empty.
-     *
      * @return T the first element of this collection with the largest value measured by function `$f`.
      */
     public function maxBy(\Closure $f): mixed;
@@ -205,10 +201,21 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
      * Finds the smallest element.
      *
      * @throws \LogicException if this collection is empty.
-     *
      * @return T the smallest element of this collection.
      */
     public function min(): mixed;
+
+    /**
+     * Finds the first element which yields the smallest value measured by function `$f`.
+     *
+     * @template U
+     *
+     * @param \Closure(T, K): U $f the measuring function.
+     *
+     * @throws \LogicException if this collection is empty.
+     * @return T the first element of this collection with the smallest value measured by function `$f`.
+     */
+    public function minBy(\Closure $f): mixed;
 
     /**
      * Tests whether this collection is not empty.

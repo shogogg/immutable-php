@@ -326,6 +326,25 @@ describe('->min', function (): void {
     });
 });
 
+describe('->minBy', function (): void {
+    it('should return the element that the callback returns the minimum value', function (): void {
+        $seq = Seq::of(
+            'PHP',
+            'Ruby',
+            'Python',
+            'JavaScript',
+            'Java',
+            'Scala',
+        );
+        $actual = $seq->minBy(fn (string $x): int => strlen($x));
+        expect($actual)->toBe('PHP');
+    });
+
+    it('should throw a LogicException if the sequence is empty', function (): void {
+        expect(fn () => Seq::empty()->minBy(fn (string $x): int => strlen($x)))->toThrow(LogicException::class);
+    });
+});
+
 describe('->nonEmpty', function (): void {
     it('should return true if the sequence is not empty', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->nonEmpty();

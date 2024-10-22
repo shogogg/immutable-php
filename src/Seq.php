@@ -261,6 +261,24 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function minBy(\Closure $f): mixed
+    {
+        if ($this->isEmpty()) {
+            throw new \LogicException('empty.min');
+        }
+        $minValue = null;
+        $minIndex = null;
+        foreach ($this->elements as $index => $element) {
+            $value = $f($element, $index);
+            if ($minValue === null || $value < $minValue) {
+                $minValue = $value;
+                $minIndex = $index;
+            }
+        }
+        return $this->elements[$minIndex];
+    }
+
+    #[\Override]
     public function nonEmpty(): bool
     {
         return !empty($this->elements);
