@@ -128,6 +128,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function headOption(): Option
+    {
+        return $this;
+    }
+
+    #[\Override]
     public function isEmpty(): bool
     {
         return true;

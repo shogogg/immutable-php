@@ -167,8 +167,9 @@ describe('->filterNot', function (): void {
 
 describe('->find', function (): void {
     it('should return itself when the predicate returns true', function (): void {
-        $actual = Some::of(17)->find(fn (int $x): bool => $x === 17);
-        expect($actual)->toBeInstanceOf(Some::class);
+        $option = Some::of(17);
+        $actual = $option->find(fn (int $x): bool => $x === 17);
+        expect($actual)->toBe($option);
     });
 
     it('should return a None instance when the predicate returns false', function (): void {
@@ -266,6 +267,14 @@ describe('->head', function (): void {
         [new stdClass()],
         [null],
     ]);
+});
+
+describe('->headOption', function (): void {
+    it('should return itself', function (): void {
+        $option = Some::of(17);
+        $actual = $option->headOption();
+        expect($actual)->toBe($option);
+    });
 });
 
 describe('->isEmpty', function (): void {

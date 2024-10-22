@@ -231,6 +231,18 @@ describe('->head', function (): void {
     });
 });
 
+describe('->headOption', function (): void {
+    it('should return a Some of the first element', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->headOption();
+        expect($actual)->toEqual(Some::of(2));
+    });
+
+    it('should return a None instance if the sequence is empty', function (): void {
+        $actual = Seq::empty()->headOption();
+        expect($actual)->toBeInstanceOf(None::class);
+    });
+});
+
 describe('->isEmpty', function (): void {
     it('should return true if the sequence is empty', function (): void {
         $actual = Seq::empty()->isEmpty();

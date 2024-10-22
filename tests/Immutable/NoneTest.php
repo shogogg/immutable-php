@@ -89,35 +89,35 @@ describe('->exists', function (): void {
 
 describe('->filter', function (): void {
     it('should return a None instance', function (): void {
-        $actual = None::of(0)->filter(fn (int $value): bool => $value > 0);
+        $actual = None::instance()->filter(fn (int $value): bool => $value > 0);
         expect($actual)->toBeInstanceOf(None::class);
     });
 });
 
 describe('->filterNot', function (): void {
     it('should return a None instance', function (): void {
-        $actual = None::of(0)->filterNot(fn (int $value): bool => $value > 0);
+        $actual = None::instance()->filterNot(fn (int $value): bool => $value > 0);
         expect($actual)->toBeInstanceOf(None::class);
     });
 });
 
 describe('->find', function (): void {
     it('should return a None instance', function (): void {
-        $actual = None::of(0)->find(fn (int $value): bool => $value > 0);
+        $actual = None::instance()->find(fn (int $value): bool => $value > 0);
         expect($actual)->toBeInstanceOf(None::class);
     });
 });
 
 describe('->flatMap', function (): void {
     it('should return a None instance', function (): void {
-        $actual = None::of(0)->flatMap(fn (int $value): None => None::instance());
+        $actual = None::instance()->flatMap(fn (int $value): None => None::instance());
         expect($actual)->toBeInstanceOf(None::class);
     });
 });
 
 describe('->flatten', function (): void {
     it('should return a None instance', function (): void {
-        $actual = None::of(0)->flatten();
+        $actual = None::instance()->flatten();
         expect($actual)->toBeInstanceOf(None::class);
     });
 });
@@ -142,7 +142,7 @@ describe('->forAll', function (): void {
 
 describe('->get', function (): void {
     it('should throw a LogicException', function (): void {
-        expect(fn () => None::of(0)->get())->toThrow(LogicException::class);
+        expect(fn () => None::instance()->get())->toThrow(LogicException::class);
     });
 });
 
@@ -159,6 +159,13 @@ describe('->head', function (): void {
     });
 });
 
+describe('->headOption', function (): void {
+    it('should return a None instance', function (): void {
+        $actual = None::instance()->headOption();
+        expect($actual)->toBeInstanceOf(None::class);
+    });
+});
+
 describe('->isEmpty', function (): void {
     it('should return true', function (): void {
         $actual = None::instance()->isEmpty();
@@ -168,7 +175,7 @@ describe('->isEmpty', function (): void {
 
 describe('->map', function (): void {
     it('should return a None instance', function (): void {
-        $actual = None::of(0)->map(fn (int $value): int => $value * 2);
+        $actual = None::instance()->map(fn (int $value): int => $value * 2);
         expect($actual)->toBeInstanceOf(None::class);
     });
 });
@@ -193,7 +200,7 @@ describe('->offsetExists', function (): void {
 
 describe('->offsetGet', function (): void {
     it('should throw an OutOfBoundsException', function (): void {
-        expect(fn () => None::of(0)->offsetGet(0))->toThrow(OutOfBoundsException::class);
+        expect(fn () => None::instance()->offsetGet(0))->toThrow(OutOfBoundsException::class);
     });
 });
 

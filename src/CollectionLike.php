@@ -137,6 +137,13 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function head(): mixed;
 
     /**
+     * Optionally selects the first element.
+     *
+     * @return \Immutable\Option<T> the first element of this collection if it is non-empty, None if it is empty.
+     */
+    public function headOption(): Option;
+
+    /**
      * Tests whether this collection is empty.
      *
      * @return bool true if this collection contains no elements, false otherwise.

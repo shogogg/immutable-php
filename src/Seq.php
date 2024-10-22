@@ -183,6 +183,15 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function headOption(): Option
+    {
+        foreach ($this->elements as $value) {
+            return Some::of($value);
+        }
+        return None::instance();
+    }
+
+    #[\Override]
     public function isEmpty(): bool
     {
         return empty($this->elements);
