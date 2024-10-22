@@ -315,6 +315,17 @@ describe('->maxBy', function (): void {
     });
 });
 
+describe('->min', function (): void {
+    it('should return the minimum value', function (): void {
+        $actual = Seq::of(5, 11, 3, 19, 2, 13, 17, 7)->min();
+        expect($actual)->toBe(2);
+    });
+
+    it('should throw a LogicException if the sequence is empty', function (): void {
+        expect(fn () => Seq::empty()->min())->toThrow(LogicException::class);
+    });
+});
+
 describe('->nonEmpty', function (): void {
     it('should return true if the sequence is not empty', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->nonEmpty();

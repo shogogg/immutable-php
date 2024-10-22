@@ -252,6 +252,15 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function min(): mixed
+    {
+        if ($this->isEmpty()) {
+            throw new \LogicException('empty.min');
+        }
+        return min($this->elements);
+    }
+
+    #[\Override]
     public function nonEmpty(): bool
     {
         return !empty($this->elements);

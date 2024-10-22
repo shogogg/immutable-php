@@ -352,6 +352,21 @@ describe('->maxBy', function (): void {
     ]);
 });
 
+describe('->min', function (): void {
+    it('should return the value', function (mixed $value): void {
+        $actual = Some::of($value)->min();
+        expect($actual)->toBe($value);
+    })->with([
+        [0],
+        [0.0],
+        [17],
+        ['foo'],
+        [[]],
+        [new stdClass()],
+        [null],
+    ]);
+});
+
 describe('->nonEmpty', function (): void {
     it('should return true even if the value is any type', function (mixed $value): void {
         $actual = Some::of($value)->nonEmpty();

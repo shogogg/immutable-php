@@ -202,6 +202,15 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function maxBy(\Closure $f): mixed;
 
     /**
+     * Finds the smallest element.
+     *
+     * @throws \LogicException if this collection is empty.
+     *
+     * @return T the smallest element of this collection.
+     */
+    public function min(): mixed;
+
+    /**
      * Tests whether this collection is not empty.
      *
      * @return bool true if this collection does not contain any elements, false otherwise.
