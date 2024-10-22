@@ -148,6 +148,13 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function map(\Closure $f);
 
     /**
+     * Tests whether this collection is not empty.
+     *
+     * @return bool true if this collection does not contain any elements, false otherwise.
+     */
+    public function nonEmpty(): bool;
+
+    /**
      * Returns the size of this collection.
      *
      * @return int

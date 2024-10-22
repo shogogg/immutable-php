@@ -144,6 +144,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function nonEmpty(): bool
+    {
+        return true;
+    }
+
+    #[\Override]
     public function offsetExists(mixed $offset): bool
     {
         return $offset === 0;

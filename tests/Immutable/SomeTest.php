@@ -275,6 +275,21 @@ describe('->map', function (): void {
     });
 });
 
+describe('->nonEmpty', function (): void {
+    it('should return true even if the value is any type', function (mixed $value): void {
+        $actual = Some::of($value)->nonEmpty();
+        expect($actual)->toBeTrue();
+    })->with([
+        [0],
+        [0.0],
+        [17],
+        ['foo'],
+        [[]],
+        [new stdClass()],
+        [null],
+    ]);
+});
+
 describe('->offsetExists', function (): void {
     it('should return true when the offset is 0', function (): void {
         $actual = Some::of(17)->offsetExists(0);

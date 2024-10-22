@@ -239,6 +239,18 @@ describe('->map', function (): void {
     });
 });
 
+describe('->nonEmpty', function (): void {
+    it('should return true if the sequence is not empty', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->nonEmpty();
+        expect($actual)->toBeTrue();
+    });
+
+    it('should return false if the sequence is empty', function (): void {
+        $actual = Seq::empty()->nonEmpty();
+        expect($actual)->toBeFalse();
+    });
+});
+
 describe('->offsetExists', function (): void {
     it('should return true if the index exists', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->offsetExists(3);

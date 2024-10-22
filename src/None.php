@@ -134,6 +134,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function nonEmpty(): bool
+    {
+        return false;
+    }
+
+    #[\Override]
     public function offsetExists(mixed $offset): bool
     {
         return false;

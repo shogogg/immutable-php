@@ -186,6 +186,12 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function nonEmpty(): bool
+    {
+        return !empty($this->elements);
+    }
+
+    #[\Override]
     public function offsetExists(mixed $offset): bool
     {
         return isset($this->elements[$offset]);

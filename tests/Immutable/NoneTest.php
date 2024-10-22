@@ -167,6 +167,13 @@ describe('->map', function (): void {
     });
 });
 
+describe('->nonEmpty', function (): void {
+    it('should return false', function (): void {
+        $actual = None::instance()->nonEmpty();
+        expect($actual)->toBeFalse();
+    });
+});
+
 describe('->offsetExists', function (): void {
     it('should return false', function (): void {
         $actual = None::instance()->offsetExists(0);
