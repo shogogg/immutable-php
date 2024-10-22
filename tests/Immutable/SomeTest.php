@@ -104,6 +104,18 @@ describe('->dropRight', function (): void {
     ]);
 });
 
+describe('->dropWhile', function (): void {
+    it('should return an empty Seq if the predicate returns true', function (): void {
+        $actual = Some::of(17)->dropWhile(fn (int $x): bool => $x > 0);
+        expect($actual)->toBeEmptySeq();
+    });
+
+    it('should return a Seq of the value if the predicate returns false', function (): void {
+        $actual = Some::of(17)->dropWhile(fn (int $x): bool => $x < 0);
+        expect($actual)->toBeSeq(17);
+    });
+});
+
 describe('->each', function (): void {
     it('should call the callback once', function (): void {
         // Arrange

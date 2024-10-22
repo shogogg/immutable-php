@@ -63,6 +63,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function dropWhile(\Closure $p): Seq
+    {
+        return $p($this->value, 0) ? Seq::empty() : $this->toSeq();
+    }
+
+    #[\Override]
     public function each(\Closure $f): void
     {
         $f($this->value, 0);

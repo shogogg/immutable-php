@@ -71,6 +71,17 @@ describe('->dropRight', function (): void {
     ]);
 });
 
+describe('->dropWhile', function (): void {
+    it('should return an empty Seq even if any predicate is given', function (\Closure $p): void {
+        $actual = None::instance()->dropWhile($p);
+        expect($actual)->toBeEmptySeq();
+    })->with([
+        [fn (int $x): bool => $x > 0],
+        [fn (int $x): bool => $x === 0],
+        [fn (int $x): bool => $x < 0],
+    ]);
+});
+
 describe('->each', function (): void {
     it('should not call the callback', function (): void {
         // Arrange

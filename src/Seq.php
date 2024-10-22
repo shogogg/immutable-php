@@ -24,6 +24,7 @@ final readonly class Seq implements SeqLike
      * {@see \Immutable\Seq} constructor.
      *
      * @param T[] $elements
+     * @phpstan-param array<int, T> $elements
      */
     private function __construct(private array $elements)
     {
@@ -100,6 +101,21 @@ final readonly class Seq implements SeqLike
             $n >= $this->size() => self::empty(),
             default => new self(array_slice($this->elements, 0, -$n)),
         };
+    }
+
+    #[\Override]
+    public function dropWhile(\Closure $p): Seq
+    {
+        $offset = null;
+        foreach ($this->elements as $index => $value) {
+            if (!$p($value, $index)) {
+                $offset = $index;
+                break;
+            }
+        }
+        return $offset === null
+            ? self::empty()
+            : new self(array_slice($this->elements, $offset));
     }
 
     #[\Override]

@@ -51,6 +51,15 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function dropRight(int $n): self;
 
     /**
+     * Drops longest prefix of elements that satisfy a predicate.
+     *
+     * @param \Closure(T, K): bool $p the predicate used to test elements.
+     * @return self<K, T> the longest suffix of this iterable collection whose first element does not satisfy
+     *                    the predicate `$p`.
+     */
+    public function dropWhile(\Closure $p): self;
+
+    /**
      * Apply `$f` to each element for its side effects.
      *
      * @param \Closure(T, K): void $f the function to apply to each element.

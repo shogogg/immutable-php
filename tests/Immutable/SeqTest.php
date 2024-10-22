@@ -105,6 +105,24 @@ describe('->dropRight', function (): void {
     ]);
 });
 
+describe('->dropWhile', function (): void {
+    it('should return a new instance with the elements removed until the predicate is satisfied', function (
+        Closure $p,
+        array $expected
+    ): void {
+        $actual = Seq::of(1, 2, 3, 4, 5, 6, 7, 8, 9)->dropWhile($p);
+        expect($actual)->toBeSeq(...$expected);
+    })->with([
+        [fn (int $x): bool => $x % 3 !== 0, [3, 4, 5, 6, 7, 8, 9]],
+        [fn (int $x): bool => $x <= 0, [1, 2, 3, 4, 5, 6, 7, 8, 9]],
+    ]);
+
+    it('should return an empty instance if all elements satisfy the predicate', function (): void {
+        $actual = Seq::of(1, 2, 3, 4, 5, 6, 7, 8, 9)->dropWhile(fn (int $x): bool => $x % 11 !== 0);
+        expect($actual)->toBeEmptySeq();
+    });
+});
+
 describe('->each', function (): void {
     it('should call the callback for each element', function (): void {
         // Arrange

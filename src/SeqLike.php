@@ -36,6 +36,13 @@ interface SeqLike extends CollectionLike
      * @return \Immutable\Seq<T>
      */
     #[\Override]
+    public function dropWhile(\Closure $p): Seq;
+
+    /**
+     * {@inheritdoc}
+     * @return \Immutable\Seq<T>
+     */
+    #[\Override]
     public function filter(\Closure $p): Seq;
 
     /**

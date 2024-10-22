@@ -62,6 +62,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function dropWhile(\Closure $p): Seq
+    {
+        return Seq::empty();
+    }
+
+    #[\Override]
     public function each(\Closure $f): void
     {
         // Nothing to do.
