@@ -29,11 +29,13 @@
       "composer install --working-dir=tools/php-cs-fixer",
       "composer install --working-dir=tools/phpstan"
     ],
-    "test": "pest"
+    "test": "pest",
+    "test:watch": "pest --watch"
   },
   "require-dev": {
     "pestphp/pest": "^3.3",
     "mockery/mockery": "^1.6",
-    "phpstan/phpstan-mockery": "^1.1"
+    "phpstan/phpstan-mockery": "^1.1",
+    "pestphp/pest-plugin-watch": "^3.0"
   }
 }
