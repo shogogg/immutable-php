@@ -292,6 +292,21 @@ describe('->isEmpty', function (): void {
     ]);
 });
 
+describe('->last', function (): void {
+    it('should return the value', function (mixed $value): void {
+        $actual = Some::of($value)->last();
+        expect($actual)->toBe($value);
+    })->with([
+        [0],
+        [0.0],
+        [17],
+        ['foo'],
+        [[]],
+        [new stdClass()],
+        [null],
+    ]);
+});
+
 describe('->map', function (): void {
     it('should return a new instance with the mapped value', function (): void {
         $actual = Some::of(17)->map(fn ($v): int => $v * 2);

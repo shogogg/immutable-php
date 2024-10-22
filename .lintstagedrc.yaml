@@ -2,3 +2,4 @@
 '*.php':
   - composer fix
   - composer analyse
+  - composer test

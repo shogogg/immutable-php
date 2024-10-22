@@ -151,6 +151,15 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function isEmpty(): bool;
 
     /**
+     * Selects the last element of this collection.
+     *
+     * @throws \LogicException if this collection is empty.
+     *
+     * @return T the last element of this collection.
+     */
+    public function last(): mixed;
+
+    /**
      * Builds a new collection by applying a function to all elements of this collection.
      *
      * @template U

@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Immutable;
 
 use Immutable\Companions\SeqCompanion;
+use Immutable\Iterators\ReverseArrayIterator;
 
 /**
  * Sequence.
@@ -195,6 +196,16 @@ final readonly class Seq implements SeqLike
     public function isEmpty(): bool
     {
         return empty($this->elements);
+    }
+
+    #[\Override]
+    public function last(): mixed
+    {
+        $it = ReverseArrayIterator::of($this->elements);
+        foreach ($it as $value) {
+            return $value;
+        }
+        throw new \LogicException('There is no value');
     }
 
     #[\Override]

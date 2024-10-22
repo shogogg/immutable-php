@@ -255,6 +255,17 @@ describe('->isEmpty', function (): void {
     });
 });
 
+describe('->last', function (): void {
+    it('should return the last element', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->last();
+        expect($actual)->toBe(11);
+    });
+
+    it('should throw a LogicException if the sequence is empty', function (): void {
+        expect(fn () => Seq::empty()->last())->toThrow(LogicException::class);
+    });
+});
+
 describe('->map', function (): void {
     it('should return a new instance with the mapped values', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->map(fn ($v): int => $v * 3);

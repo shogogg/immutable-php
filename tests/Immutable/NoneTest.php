@@ -173,6 +173,12 @@ describe('->isEmpty', function (): void {
     });
 });
 
+describe('->last', function (): void {
+    it('should throw a LogicException', function (): void {
+        expect(fn () => None::instance()->last())->toThrow(LogicException::class);
+    });
+});
+
 describe('->map', function (): void {
     it('should return a None instance', function (): void {
         $actual = None::instance()->map(fn (int $value): int => $value * 2);

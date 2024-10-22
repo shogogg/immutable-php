@@ -150,6 +150,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function last(): mixed
+    {
+        return $this->value;
+    }
+
+    #[\Override]
     public function map(\Closure $f): Option
     {
         return self::of($f($this->value, 0));

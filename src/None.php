@@ -140,6 +140,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function last(): mixed
+    {
+        throw new \LogicException('There is no value');
+    }
+
+    #[\Override]
     public function map(\Closure $f): self
     {
         return $this;
