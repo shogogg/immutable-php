@@ -122,7 +122,7 @@ final class None extends Option
     }
 
     #[\Override]
-    public function head(): mixed
+    public function head(): never
     {
         throw new \LogicException('There is no value');
     }
@@ -140,7 +140,7 @@ final class None extends Option
     }
 
     #[\Override]
-    public function last(): mixed
+    public function last(): never
     {
         throw new \LogicException('There is no value');
     }
@@ -155,6 +155,12 @@ final class None extends Option
     public function map(\Closure $f): self
     {
         return $this;
+    }
+
+    #[\Override]
+    public function max(): never
+    {
+        throw new \LogicException('There is no value');
     }
 
     #[\Override]

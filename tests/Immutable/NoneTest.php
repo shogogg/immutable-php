@@ -193,6 +193,12 @@ describe('->map', function (): void {
     });
 });
 
+describe('->max', function (): void {
+    it('should throw a LogicException', function (): void {
+        expect(fn () => None::instance()->max())->toThrow(LogicException::class);
+    });
+});
+
 describe('->nonEmpty', function (): void {
     it('should return false', function (): void {
         $actual = None::instance()->nonEmpty();

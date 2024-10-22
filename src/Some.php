@@ -168,6 +168,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function max(): mixed
+    {
+        return $this->value;
+    }
+
+    #[\Override]
     public function nonEmpty(): bool
     {
         return true;

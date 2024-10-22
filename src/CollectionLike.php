@@ -180,6 +180,15 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function map(\Closure $f);
 
     /**
+     * Finds the largest element.
+     *
+     * @throws \LogicException if this collection is empty.
+     *
+     * @return T the largest element of this collection.
+     */
+    public function max(): mixed;
+
+    /**
      * Tests whether this collection is not empty.
      *
      * @return bool true if this collection does not contain any elements, false otherwise.

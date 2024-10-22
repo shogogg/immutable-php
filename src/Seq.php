@@ -225,6 +225,15 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function max(): mixed
+    {
+        if ($this->isEmpty()) {
+            throw new \LogicException('empty.max');
+        }
+        return max($this->elements);
+    }
+
+    #[\Override]
     public function nonEmpty(): bool
     {
         return !empty($this->elements);
