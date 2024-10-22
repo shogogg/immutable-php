@@ -153,6 +153,13 @@ describe('->getIterator', function (): void {
     });
 });
 
+describe('->isEmpty', function (): void {
+    it('should return true', function (): void {
+        $actual = None::instance()->isEmpty();
+        expect($actual)->toBeTrue();
+    });
+});
+
 describe('->map', function (): void {
     it('should return a None instance', function (): void {
         $actual = None::of(0)->map(fn (int $value): int => $value * 2);

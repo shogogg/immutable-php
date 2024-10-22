@@ -220,6 +220,18 @@ describe('->getIterator', function (): void {
     });
 });
 
+describe('->isEmpty', function (): void {
+    it('should return true if the sequence is empty', function (): void {
+        $actual = Seq::empty()->isEmpty();
+        expect($actual)->toBeTrue();
+    });
+
+    it('should return false if the sequence is not empty', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->isEmpty();
+        expect($actual)->toBeFalse();
+    });
+});
+
 describe('->map', function (): void {
     it('should return a new instance with the mapped values', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->map(fn ($v): int => $v * 3);

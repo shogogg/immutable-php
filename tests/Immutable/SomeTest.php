@@ -253,6 +253,21 @@ describe('->getIterator', function (): void {
     });
 });
 
+describe('->isEmpty', function (): void {
+    it('should return false even if the value is any type', function (mixed $value): void {
+        $actual = Some::of($value)->isEmpty();
+        expect($actual)->toBeFalse();
+    })->with([
+        [0],
+        [0.0],
+        [17],
+        ['foo'],
+        [[]],
+        [new stdClass()],
+        [null],
+    ]);
+});
+
 describe('->map', function (): void {
     it('should return a new instance with the mapped value', function (): void {
         $actual = Some::of(17)->map(fn ($v): int => $v * 2);

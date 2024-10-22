@@ -122,6 +122,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function isEmpty(): bool
+    {
+        return true;
+    }
+
+    #[\Override]
     public function map(\Closure $f): self
     {
         return $this;

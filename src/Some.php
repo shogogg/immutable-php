@@ -132,6 +132,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function isEmpty(): bool
+    {
+        return false;
+    }
+
+    #[\Override]
     public function map(\Closure $f): Option
     {
         return self::of($f($this->value, 0));

@@ -174,6 +174,12 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function isEmpty(): bool
+    {
+        return empty($this->elements);
+    }
+
+    #[\Override]
     public function map(\Closure $f): self
     {
         return self::fromIterable(SeqCompanion::map($this->elements, $f));

@@ -128,6 +128,13 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function forAll(\Closure $p): bool;
 
     /**
+     * Tests whether this collection is empty.
+     *
+     * @return bool true if this collection contains no elements, false otherwise.
+     */
+    public function isEmpty(): bool;
+
+    /**
      * Builds a new collection by applying a function to all elements of this collection.
      *
      * @template U
