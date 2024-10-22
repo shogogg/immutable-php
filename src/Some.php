@@ -57,6 +57,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function dropRight(int $n): Seq
+    {
+        return $n <= 0 ? $this->toSeq() : Seq::empty();
+    }
+
+    #[\Override]
     public function each(\Closure $f): void
     {
         $f($this->value, 0);

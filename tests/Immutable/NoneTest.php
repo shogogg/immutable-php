@@ -59,6 +59,19 @@ describe('->drop', function (): void {
     ]);
 });
 
+describe('->dropRight', function (): void {
+    it('should return an empty Seq even if any number is passed', function (int $n): void {
+        $actual = None::instance()->dropRight($n);
+        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
+    })->with([
+        [-2],
+        [-1],
+        [0],
+        [1],
+        [2],
+    ]);
+});
+
 describe('->each', function (): void {
     it('should not call the callback', function (): void {
         // Arrange

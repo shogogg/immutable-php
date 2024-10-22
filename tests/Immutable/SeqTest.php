@@ -46,16 +46,15 @@ describe('->countBy', function (): void {
 });
 
 describe('->drop', function (): void {
-    it('should return a Seq instance', function (): void {
-        $actual = Seq::of(2, 3, 5, 7, 11)->drop(2);
-        expect($actual)->toBeInstanceOf(Seq::class);
-    });
-
-    it('should return itself if the number is less than or equal to 0', function (): void {
+    it('should return itself if the number is less than or equal to 0', function (int $n): void {
         $seq = Seq::of(2, 3, 5, 7, 11);
-        $actual = $seq->drop(0);
+        $actual = $seq->drop($n);
         expect($actual)->toBe($seq);
-    });
+    })->with([
+        [-2],
+        [-1],
+        [0],
+    ]);
 
     it('should return a new instance with the first n elements removed', function (int $n, Seq $expected): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->drop($n);
@@ -67,9 +66,40 @@ describe('->drop', function (): void {
         [4, Seq::of(11)],
     ]);
 
-    it('should return an empty instance if the number is greater than the size', function (int $n): void {
+    it('should return an empty instance if the number is greater than or equal to the size', function (int $n): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->drop($n);
-        expect($actual)->toBeEmpty();
+        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
+    })->with([
+        [5],
+        [6],
+        [7],
+    ]);
+});
+
+describe('->dropRight', function (): void {
+    it('should return itself if the number is less than or equal to 0', function (int $n): void {
+        $seq = Seq::of(2, 3, 5, 7, 11);
+        $actual = $seq->dropRight($n);
+        expect($actual)->toBe($seq);
+    })->with([
+        [-2],
+        [-1],
+        [0],
+    ]);
+
+    it('should return a new instance with the last n elements removed', function (int $n, Seq $expected): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->dropRight($n);
+        expect($actual)->toEqual($expected);
+    })->with([
+        [1, Seq::of(2, 3, 5, 7)],
+        [2, Seq::of(2, 3, 5)],
+        [3, Seq::of(2, 3)],
+        [4, Seq::of(2)],
+    ]);
+
+    it('should return an empty sequence if the number is greater than or equal to the size', function (int $n): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->dropRight($n);
+        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
     })->with([
         [5],
         [6],

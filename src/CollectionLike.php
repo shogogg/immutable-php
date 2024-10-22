@@ -40,6 +40,17 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function drop(int $n): self;
 
     /**
+     * Selects all elements except last `$n` ones.
+     *
+     * @param int $n the number of elements to drop from this collection.
+     *
+     * @return self<K, T> a collection consisting of all elements of this collection except the last n ones,
+     *                    or else the empty collection, if this collection has less than n elements.
+     *                    If n is negative, don't drop any elements.
+     */
+    public function dropRight(int $n): self;
+
+    /**
      * Apply `$f` to each element for its side effects.
      *
      * @param \Closure(T, K): void $f the function to apply to each element.

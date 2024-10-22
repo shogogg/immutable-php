@@ -93,6 +93,16 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function dropRight(int $n): Seq
+    {
+        return match (true) {
+            $n <= 0 => $this,
+            $n >= $this->size() => self::empty(),
+            default => new self(array_slice($this->elements, 0, -$n)),
+        };
+    }
+
+    #[\Override]
     public function each(\Closure $f): void
     {
         foreach ($this->elements as $index => $value) {

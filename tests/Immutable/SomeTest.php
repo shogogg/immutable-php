@@ -86,6 +86,25 @@ describe('->drop', function (): void {
     ]);
 });
 
+describe('->dropRight', function (): void {
+    it('should return a Seq of the value if the argument is less than or equal to 0', function (int $n): void {
+        $actual = Some::of(17)->dropRight($n);
+        expect($actual)->toEqual(Seq::of(17));
+    })->with([
+        [-2],
+        [-1],
+        [0],
+    ]);
+
+    it('should return an empty Seq if the argument greater than 0', function (int $n): void {
+        $actual = Some::of(17)->dropRight($n);
+        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
+    })->with([
+        [1],
+        [2],
+    ]);
+});
+
 describe('->each', function (): void {
     it('should call the callback once', function (): void {
         // Arrange

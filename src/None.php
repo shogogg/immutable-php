@@ -56,6 +56,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function dropRight(int $n): Seq
+    {
+        return Seq::empty();
+    }
+
+    #[\Override]
     public function each(\Closure $f): void
     {
         // Nothing to do.

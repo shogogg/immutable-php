@@ -34,6 +34,13 @@ interface OptionLike extends CollectionLike
 
     /**
      * {@inheritdoc}
+     * @return \Immutable\Seq<T>
+     */
+    #[\Override]
+    public function dropRight(int $n): Seq;
+
+    /**
+     * {@inheritdoc}
      * @return \Immutable\Option<T>
      */
     #[\Override]
