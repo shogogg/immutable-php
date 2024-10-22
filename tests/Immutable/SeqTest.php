@@ -196,6 +196,18 @@ describe('->fold', function (): void {
     });
 });
 
+describe('->forAll', function (): void {
+    it('should return true if all elements satisfy the predicate', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->forAll(fn (int $x): bool => $x > 0);
+        expect($actual)->toBeTrue();
+    });
+
+    it('should return false if any element does not satisfy the predicate', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->forAll(fn (int $x): bool => $x % 2 === 0);
+        expect($actual)->toBeFalse();
+    });
+});
+
 describe('->getIterator', function (): void {
     it('should return an ArrayIterator', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->getIterator();

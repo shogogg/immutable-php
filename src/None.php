@@ -104,6 +104,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function forAll(\Closure $p): bool
+    {
+        return true;
+    }
+
+    #[\Override]
     public function get(): never
     {
         throw new \LogicException('None has no value.');

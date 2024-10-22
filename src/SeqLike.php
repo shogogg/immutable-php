@@ -42,6 +42,7 @@ interface SeqLike extends CollectionLike
      * {@inheritdoc}
      * @template U
      * @param \Closure(T, int): iterable<int, U> $f
+     * @throws \LogicException if the callback does not return an iterable.
      * @return \Immutable\Seq<U>
      */
     #[\Override]
@@ -49,6 +50,7 @@ interface SeqLike extends CollectionLike
 
     /**
      * {@inheritdoc}
+     * @throws \LogicException if some elements are not iterable.
      * @return \Immutable\Seq<mixed>
      */
     #[\Override]

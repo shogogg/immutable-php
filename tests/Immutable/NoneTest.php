@@ -129,6 +129,17 @@ describe('->fold', function (): void {
     });
 });
 
+describe('->forAll', function (): void {
+    it('should return true even if any predicate is given', function (\Closure $p): void {
+        $actual = None::instance()->forAll($p);
+        expect($actual)->toBeTrue();
+    })->with([
+        [fn (int $value): bool => $value > 0],
+        [fn (int $value): bool => $value === 0],
+        [fn (int $value): bool => $value < 0],
+    ]);
+});
+
 describe('->get', function (): void {
     it('should throw a LogicException', function (): void {
         expect(fn () => None::of(0)->get())->toThrow(LogicException::class);

@@ -114,6 +114,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function forAll(\Closure $p): bool
+    {
+        return $p($this->value, 0);
+    }
+
+    #[\Override]
     public function getIterator(): \Traversable
     {
         return new \ArrayIterator([$this->value]);

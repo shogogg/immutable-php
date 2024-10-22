@@ -214,6 +214,18 @@ describe('->fold', function (): void {
     });
 });
 
+describe('->forAll', function (): void {
+    it('should return true when the predicate returns true', function (): void {
+        $actual = Some::of(17)->forAll(fn (int $value): bool => $value > 0);
+        expect($actual)->toBeTrue();
+    });
+
+    it('should return false when the predicate returns false', function (): void {
+        $actual = Some::of(17)->forAll(fn (int $value): bool => $value < 0);
+        expect($actual)->toBeFalse();
+    });
+});
+
 describe('->get', function (): void {
     it('should return the value', function (mixed $value): void {
         $actual = Some::of($value)->get();

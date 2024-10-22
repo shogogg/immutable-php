@@ -48,6 +48,7 @@ interface OptionLike extends CollectionLike
 
     /**
      * {@inheritdoc}
+     * @throws \LogicException if the callback does not return an Option instance.
      * @return \Immutable\Option<mixed>
      */
     #[\Override]
@@ -55,6 +56,7 @@ interface OptionLike extends CollectionLike
 
     /**
      * {@inheritdoc}
+     * @throws \LogicException if the value is not an Option instance.
      * @return \Immutable\Option<T>
      */
     #[\Override]

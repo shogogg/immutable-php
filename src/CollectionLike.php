@@ -118,6 +118,16 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function fold(mixed $z, \Closure $op): mixed;
 
     /**
+     * Tests whether a predicate holds for all elements of this collection.
+     *
+     * @param \Closure(T, K): bool $p the predicate used to test elements.
+     *
+     * @return bool true if this collection is empty or the given predicate p holds for all elements of this collection,
+     *              otherwise false.
+     */
+    public function forAll(\Closure $p): bool;
+
+    /**
      * Builds a new collection by applying a function to all elements of this collection.
      *
      * @template U
