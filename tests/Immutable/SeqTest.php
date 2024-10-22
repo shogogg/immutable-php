@@ -423,6 +423,29 @@ describe('->size', function (): void {
     });
 });
 
+describe('->take', function (): void {
+    it('should return an empty sequence if the number is less than or equal to 0', function (int $n): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->take($n);
+        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
+    })->with([
+        [-2],
+        [-1],
+        [0],
+    ]);
+
+    it('should return a sequence with the first n elements', function (int $n, Seq $expected): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->take($n);
+        expect($actual)->toEqual($expected);
+    })->with([
+        [1, Seq::of(2)],
+        [2, Seq::of(2, 3)],
+        [3, Seq::of(2, 3, 5)],
+        [4, Seq::of(2, 3, 5, 7)],
+        [5, Seq::of(2, 3, 5, 7, 11)],
+        [6, Seq::of(2, 3, 5, 7, 11)],
+    ]);
+});
+
 describe('->toArray', function (): void {
     it('should return the representation of the sequence as an array', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->toArray();

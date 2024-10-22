@@ -64,4 +64,11 @@ interface SeqLike extends CollectionLike
      */
     #[\Override]
     public function map(\Closure $f): Seq;
+
+    /**
+     * {@inheritdoc}
+     * @return \Immutable\Seq<T>
+     */
+    #[\Override]
+    public function take(int $n): Seq;
 }

@@ -70,4 +70,11 @@ interface OptionLike extends CollectionLike
      */
     #[\Override]
     public function map(\Closure $f): Option;
+
+    /**
+     * {@inheritdoc}
+     * @return \Immutable\Seq<T>
+     */
+    #[\Override]
+    public function take(int $n): Seq;
 }

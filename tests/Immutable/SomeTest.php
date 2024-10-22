@@ -56,35 +56,30 @@ describe('->count', function (): void {
 });
 
 describe('->countBy', function (): void {
-    it('should return 1 when the predicate returns true', function (): void {
+    it('should return 1 if the predicate returns true', function (): void {
         $actual = Some::of(17)->countBy(fn (int $x): bool => $x > 0);
         expect($actual)->toBe(1);
     });
 
-    it('should return 0 when the predicate returns false', function (): void {
+    it('should return 0 if the predicate returns false', function (): void {
         $actual = Some::of(17)->countBy(fn (int $x): bool => $x < 0);
         expect($actual)->toBe(0);
     });
 });
 
 describe('->drop', function (): void {
-    it('should return a Seq instance', function (): void {
-        $actual = Some::of(17)->drop(0);
-        expect($actual)->toBeInstanceOf(Seq::class);
-    });
-
-    it('should return a Seq of the value when the argument less than or equal to 0', function (int $n): void {
+    it('should return a Seq of the value if the argument is less than or equal to 0', function (int $n): void {
         $actual = Some::of(17)->drop($n);
-        expect($actual->toArray())->toBe([17]);
+        expect($actual)->toEqual(Seq::of(17));
     })->with([
         [-2],
         [-1],
         [0],
     ]);
 
-    it('should return an empty Seq when the argument greater than 0', function (int $n): void {
+    it('should return an empty Seq if the argument greater than 0', function (int $n): void {
         $actual = Some::of(17)->drop($n);
-        expect($actual)->toBeEmpty();
+        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
     })->with([
         [1],
         [2],
@@ -130,49 +125,49 @@ describe('->each', function (): void {
 });
 
 describe('->exists', function (): void {
-    it('should return true when the predicate returns true', function (): void {
+    it('should return true if the predicate returns true', function (): void {
         $actual = Some::of(17)->exists(fn (int $x): bool => $x === 17);
         expect($actual)->toBeTrue();
     });
 
-    it('should return false when the predicate returns false', function (): void {
+    it('should return false if the predicate returns false', function (): void {
         $actual = Some::of(17)->exists(fn (int $x): bool => $x !== 17);
         expect($actual)->toBeFalse();
     });
 });
 
 describe('->filter', function (): void {
-    it('should return a Some instance when the predicate returns true', function (): void {
+    it('should return a Some instance if the predicate returns true', function (): void {
         $actual = Some::of(17)->filter(fn (int $x): bool => $x === 17);
         expect($actual)->toBeInstanceOf(Some::class);
     });
 
-    it('should return a None instance when the predicate returns false', function (): void {
+    it('should return a None instance if the predicate returns false', function (): void {
         $actual = Some::of(17)->filter(fn (int $x): bool => $x !== 17);
         expect($actual)->toBeInstanceOf(None::class);
     });
 });
 
 describe('->filterNot', function (): void {
-    it('should return a None instance when the predicate returns true', function (): void {
+    it('should return a None instance if the predicate returns true', function (): void {
         $actual = Some::of(17)->filterNot(fn (int $x): bool => $x === 17);
         expect($actual)->toBeInstanceOf(None::class);
     });
 
-    it('should return a Some instance when the predicate returns false', function (): void {
+    it('should return a Some instance if the predicate returns false', function (): void {
         $actual = Some::of(17)->filterNot(fn (int $x): bool => $x !== 17);
         expect($actual)->toBeInstanceOf(Some::class);
     });
 });
 
 describe('->find', function (): void {
-    it('should return itself when the predicate returns true', function (): void {
+    it('should return itself if the predicate returns true', function (): void {
         $option = Some::of(17);
         $actual = $option->find(fn (int $x): bool => $x === 17);
         expect($actual)->toBe($option);
     });
 
-    it('should return a None instance when the predicate returns false', function (): void {
+    it('should return a None instance if the predicate returns false', function (): void {
         $actual = Some::of(17)->find(fn (int $x): bool => $x !== 17);
         expect($actual)->toBeInstanceOf(None::class);
     });
@@ -216,12 +211,12 @@ describe('->fold', function (): void {
 });
 
 describe('->forAll', function (): void {
-    it('should return true when the predicate returns true', function (): void {
+    it('should return true if the predicate returns true', function (): void {
         $actual = Some::of(17)->forAll(fn (int $x): bool => $x > 0);
         expect($actual)->toBeTrue();
     });
 
-    it('should return false when the predicate returns false', function (): void {
+    it('should return false if the predicate returns false', function (): void {
         $actual = Some::of(17)->forAll(fn (int $x): bool => $x < 0);
         expect($actual)->toBeFalse();
     });
@@ -410,12 +405,12 @@ describe('->nonEmpty', function (): void {
 });
 
 describe('->offsetExists', function (): void {
-    it('should return true when the offset is 0', function (): void {
+    it('should return true if the offset is 0', function (): void {
         $actual = Some::of(17)->offsetExists(0);
         expect($actual)->toBeTrue();
     });
 
-    it('should return false when the offset is not 0', function (int $offset): void {
+    it('should return false if the offset is not 0', function (int $offset): void {
         $actual = Some::of(17)->offsetExists($offset);
         expect($actual)->toBeFalse();
     })->with([
@@ -427,12 +422,12 @@ describe('->offsetExists', function (): void {
 });
 
 describe('->offsetGet', function (): void {
-    it('should return the value when the offset is 0', function (): void {
+    it('should return the value if the offset is 0', function (): void {
         $actual = Some::of(17)->offsetGet(0);
         expect($actual)->toBe(17);
     });
 
-    it('should throw an OutOfBoundsException when the offset is not 0', function (int $offset): void {
+    it('should throw an OutOfBoundsException if the offset is not 0', function (int $offset): void {
         expect(fn () => Some::of(17)->offsetGet($offset))->toThrow(OutOfBoundsException::class);
     })->with([
         [-2],
@@ -466,6 +461,26 @@ describe('->size', function (): void {
         [[]],
         [new stdClass()],
         [null],
+    ]);
+});
+
+describe('->take', function (): void {
+    it('should return an empty Seq if the argument is less than or equal to 0', function (int $n): void {
+        $actual = Some::of(17)->take($n);
+        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
+    })->with([
+        [-2],
+        [-1],
+        [0],
+    ]);
+
+    it('should return a Seq of the value if the argument greater than 0', function (int $n): void {
+        $actual = Some::of(17)->take($n);
+        expect($actual)->toEqual(Seq::of(17));
+    })->with([
+        [1],
+        [2],
+        [3],
     ]);
 });
 

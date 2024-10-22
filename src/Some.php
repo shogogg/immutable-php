@@ -226,6 +226,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function take(int $n): Seq
+    {
+        return $n <= 0 ? Seq::empty() : $this->toSeq();
+    }
+
+    #[\Override]
     public function toArray(): array
     {
         return [$this->value];

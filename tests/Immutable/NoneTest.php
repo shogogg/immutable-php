@@ -47,14 +47,9 @@ describe('->countBy', function (): void {
 });
 
 describe('->drop', function (): void {
-    it('should return a Seq instance', function (): void {
-        $actual = None::instance()->drop(0);
-        expect($actual)->toBeInstanceOf(Seq::class);
-    });
-
     it('should return an empty Seq even if any number is passed', function (int $n): void {
         $actual = None::instance()->drop($n);
-        expect($actual)->toBeEmpty();
+        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
     })->with([
         [-2],
         [-1],
@@ -269,6 +264,19 @@ describe('->size', function (): void {
         $actual = None::instance()->size();
         expect($actual)->toBe(0);
     });
+});
+
+describe('->take', function (): void {
+    it('should return an empty Seq even if any number is passed', function (int $n): void {
+        $actual = None::instance()->take($n);
+        expect($actual)->toBeInstanceOf(Seq::class)->toBeEmpty();
+    })->with([
+        [-2],
+        [-1],
+        [0],
+        [1],
+        [2],
+    ]);
 });
 
 describe('->toArray', function (): void {
