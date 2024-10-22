@@ -23,6 +23,7 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
      * Counts the number of elements in the collection which satisfy a predicate.
      *
      * @param \Closure(T, K): bool $p the predicate used to test elements.
+     *
      * @return int the number of elements satisfying the predicate.
      */
     public function countBy(\Closure $p): int;
@@ -104,12 +105,27 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function flatten(): self;
 
     /**
+     * Folds the elements of this collection using the specified associative binary operator.
+     *
+     * @template U
+     *
+     * @param U $z a neutral element for the fold operation; may be added to the result an arbitrary number of times,
+     *             and must not change the result (e.g., Nil for list concatenation, 0 for addition, or 1 for multiplication).
+     * @param \Closure(U, T, K): U $op a binary operator that must be associative.
+     *
+     * @return U the result of applying the fold operator op between all the elements and z, or z if this collection is empty.
+     */
+    public function fold(mixed $z, \Closure $op): mixed;
+
+    /**
      * Builds a new collection by applying a function to all elements of this collection.
      *
      * @template U
+     *
      * @param \Closure(T, K): U $f the function to apply to each element.
      *
      * @return self<K, U>
+     *
      * @noinspection PhpMissingReturnTypeInspection
      */
     public function map(\Closure $f);

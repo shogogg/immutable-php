@@ -147,6 +147,16 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function fold($z, \Closure $op): mixed
+    {
+        $result = $z;
+        foreach ($this->elements as $index => $value) {
+            $result = $op($result, $value, $index);
+        }
+        return $result;
+    }
+
+    #[\Override]
     public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->elements);

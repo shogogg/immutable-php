@@ -122,6 +122,13 @@ describe('->flatten', function (): void {
     });
 });
 
+describe('->fold', function (): void {
+    it('should return the initial value', function (): void {
+        $actual = None::instance()->fold(17, fn (int $z, int $x): int => $z + $x);
+        expect($actual)->toBe(17);
+    });
+});
+
 describe('->get', function (): void {
     it('should throw a LogicException', function (): void {
         expect(fn () => None::of(0)->get())->toThrow(LogicException::class);

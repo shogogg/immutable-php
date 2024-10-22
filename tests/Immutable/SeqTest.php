@@ -188,6 +188,14 @@ describe('->flatten', function (): void {
     });
 });
 
+describe('->fold', function (): void {
+    it('should return the result of the callback', function (): void {
+        $seq = Seq::of('bar', 'baz', 'qux');
+        $actual = $seq->fold('foo', fn (string $z, string $x): string => "$z $x");
+        expect($actual)->toBe('foo bar baz qux');
+    });
+});
+
 describe('->getIterator', function (): void {
     it('should return an ArrayIterator', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->getIterator();

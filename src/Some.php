@@ -108,6 +108,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function fold($z, \Closure $op): mixed
+    {
+        return $op($z, $this->value, 0);
+    }
+
+    #[\Override]
     public function getIterator(): \Traversable
     {
         return new \ArrayIterator([$this->value]);

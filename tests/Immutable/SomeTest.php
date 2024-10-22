@@ -207,6 +207,13 @@ describe('->flatten', function (): void {
     });
 });
 
+describe('->fold', function (): void {
+    it('should return the result of the callback', function (): void {
+        $actual = Some::of(17)->fold(19, fn (int $z, int $x): int => $z + $x);
+        expect($actual)->toBe(36);
+    });
+});
+
 describe('->get', function (): void {
     it('should return the value', function (mixed $value): void {
         $actual = Some::of($value)->get();

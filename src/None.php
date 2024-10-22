@@ -98,6 +98,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function fold($z, \Closure $op): mixed
+    {
+        return $z;
+    }
+
+    #[\Override]
     public function get(): never
     {
         throw new \LogicException('None has no value.');
