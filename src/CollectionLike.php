@@ -218,6 +218,17 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function minBy(\Closure $f): mixed;
 
     /**
+     * Returns all elements of this collection in a string using a separator string.
+     *
+     * @param string $sep the separator string.
+     *
+     * @return string a string representation of this collection.
+     *                In the resulting string the string representations (w.r.t. the method __toString) of all elements
+     *                of this collection are separated by the string sep.
+     */
+    public function mkString(string $sep = ''): string;
+
+    /**
      * Tests whether this collection is not empty.
      *
      * @return bool true if this collection does not contain any elements, false otherwise.

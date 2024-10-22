@@ -30,7 +30,10 @@
       "composer install --working-dir=tools/phpstan"
     ],
     "test": "pest",
-    "test:watch": "pest --watch"
+    "test:watch": [
+      "Composer\\Config::disableProcessTimeout",
+      "pest --watch"
+    ]
   },
   "require-dev": {
     "pestphp/pest": "^3.3",

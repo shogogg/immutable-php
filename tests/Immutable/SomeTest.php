@@ -382,6 +382,18 @@ describe('->minBy', function (): void {
     ]);
 });
 
+describe('->mkString', function (): void {
+    it('should return a string representation of the value', function (mixed $value): void {
+        $actual = Some::of($value)->mkString(',');
+        expect($actual)->toBe((string)$value);
+    })->with([
+        [0, '0'],
+        [3.14, '3.14'],
+        [17, '17'],
+        ['foo', 'foo'],
+    ]);
+});
+
 describe('->nonEmpty', function (): void {
     it('should return true even if the value is any type', function (mixed $value): void {
         $actual = Some::of($value)->nonEmpty();

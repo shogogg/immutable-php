@@ -345,6 +345,30 @@ describe('->minBy', function (): void {
     });
 });
 
+describe('->mkString', function (): void {
+    it('should return a concatenated string if no separator is specified', function (): void {
+        $actual = Seq::of(1, 3, 5, 7, 9)->mkString();
+        expect($actual)->toBe('13579');
+    });
+
+    it('should return a string joined by the specified separator', function (
+        string $sep,
+        array $values,
+        string $expected
+    ): void {
+        $actual = Seq::of(...$values)->mkString($sep);
+        expect($actual)->toBe($expected);
+    })->with([
+        [' ', ['foo', 'bar', 'baz', 'qux'], 'foo bar baz qux'],
+        [', ', [2, 3, 5, 7, 11], '2, 3, 5, 7, 11'],
+    ]);
+
+    it('should return an empty string if the sequence is empty', function (): void {
+        $actual = Seq::empty()->mkString('-');
+        expect($actual)->toBe('');
+    });
+});
+
 describe('->nonEmpty', function (): void {
     it('should return true if the sequence is not empty', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->nonEmpty();

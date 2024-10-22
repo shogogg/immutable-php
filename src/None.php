@@ -182,6 +182,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function mkString(string $sep = ''): string
+    {
+        return '';
+    }
+
+    #[\Override]
     public function nonEmpty(): bool
     {
         return false;

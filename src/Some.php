@@ -192,6 +192,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function mkString(string $sep = ''): string
+    {
+        return (string)$this->value;
+    }
+
+    #[\Override]
     public function nonEmpty(): bool
     {
         return true;

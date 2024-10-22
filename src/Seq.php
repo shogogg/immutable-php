@@ -279,6 +279,12 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function mkString(string $sep = ''): string
+    {
+        return implode($sep, $this->elements);
+    }
+
+    #[\Override]
     public function nonEmpty(): bool
     {
         return !empty($this->elements);

@@ -217,6 +217,17 @@ describe('->minBy', function (): void {
     });
 });
 
+describe('->mkString', function (): void {
+    it('should return an empty string', function (): void {
+        $actual = None::instance()->mkString();
+        expect($actual)->toBe('');
+    })->with([
+        [''],
+        [','],
+        [' '],
+    ]);
+});
+
 describe('->nonEmpty', function (): void {
     it('should return false', function (): void {
         $actual = None::instance()->nonEmpty();
