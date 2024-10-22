@@ -179,6 +179,13 @@ describe('->last', function (): void {
     });
 });
 
+describe('->lastOption', function (): void {
+    it('should return a None instance', function (): void {
+        $actual = None::instance()->lastOption();
+        expect($actual)->toBeInstanceOf(None::class);
+    });
+});
+
 describe('->map', function (): void {
     it('should return a None instance', function (): void {
         $actual = None::instance()->map(fn (int $value): int => $value * 2);

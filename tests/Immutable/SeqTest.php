@@ -266,6 +266,18 @@ describe('->last', function (): void {
     });
 });
 
+describe('->lastOption', function (): void {
+    it('should return a Some of the last element', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->lastOption();
+        expect($actual)->toEqual(Some::of(11));
+    });
+
+    it('should return a None instance if the sequence is empty', function (): void {
+        $actual = Seq::empty()->lastOption();
+        expect($actual)->toBeInstanceOf(None::class);
+    });
+});
+
 describe('->map', function (): void {
     it('should return a new instance with the mapped values', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->map(fn ($v): int => $v * 3);

@@ -307,6 +307,14 @@ describe('->last', function (): void {
     ]);
 });
 
+describe('->lastOption', function (): void {
+    it('should return itself', function (): void {
+        $option = Some::of(17);
+        $actual = $option->lastOption();
+        expect($actual)->toBe($option);
+    });
+});
+
 describe('->map', function (): void {
     it('should return a new instance with the mapped value', function (): void {
         $actual = Some::of(17)->map(fn ($v): int => $v * 2);

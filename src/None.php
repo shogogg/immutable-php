@@ -146,6 +146,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function lastOption(): Option
+    {
+        return $this;
+    }
+
+    #[\Override]
     public function map(\Closure $f): self
     {
         return $this;

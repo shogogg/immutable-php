@@ -160,6 +160,13 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function last(): mixed;
 
     /**
+     * Optionally selects the last element.
+     *
+     * @return \Immutable\Option<T> the last element of this collection if it is non-empty, None if it is empty.
+     */
+    public function lastOption(): Option;
+
+    /**
      * Builds a new collection by applying a function to all elements of this collection.
      *
      * @template U

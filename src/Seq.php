@@ -209,6 +209,16 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function lastOption(): Option
+    {
+        $it = ReverseArrayIterator::of($this->elements);
+        foreach ($it as $value) {
+            return Some::of($value);
+        }
+        return None::instance();
+    }
+
+    #[\Override]
     public function map(\Closure $f): self
     {
         return self::fromIterable(SeqCompanion::map($this->elements, $f));
