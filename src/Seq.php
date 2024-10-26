@@ -361,6 +361,16 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function takeRight(int $n): Seq
+    {
+        return match (true) {
+            $n <= 0 => self::empty(),
+            $n >= $this->size() => $this,
+            default => new self(array_slice($this->elements, -$n)),
+        };
+    }
+
+    #[\Override]
     public function toArray(): array
     {
         return [...$this->elements];

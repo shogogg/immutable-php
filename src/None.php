@@ -230,6 +230,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function takeRight(int $n): Seq
+    {
+        return Seq::empty();
+    }
+
+    #[\Override]
     public function toArray(): array
     {
         return [];

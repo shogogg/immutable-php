@@ -516,6 +516,26 @@ describe('->take', function (): void {
     ]);
 });
 
+describe('->takeRight', function (): void {
+    it('should return an empty Seq if the argument is less than or equal to 0', function (int $n): void {
+        $actual = Some::of(17)->takeRight($n);
+        expect($actual)->toBeEmptySeq();
+    })->with([
+        [-2],
+        [-1],
+        [0],
+    ]);
+
+    it('should return a Seq of the value if the argument greater than 0', function (int $n): void {
+        $actual = Some::of(17)->takeRight($n);
+        expect($actual)->toBeSeq(17);
+    })->with([
+        [1],
+        [2],
+        [3],
+    ]);
+});
+
 describe('->toArray', function (): void {
     it('should return an array', function (): void {
         $actual = Some::of('foo')->toArray();

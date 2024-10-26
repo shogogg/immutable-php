@@ -302,6 +302,19 @@ describe('->take', function (): void {
     ]);
 });
 
+describe('->takeRight', function (): void {
+    it('should return an empty Seq even if any number is passed', function (int $n): void {
+        $actual = None::instance()->takeRight($n);
+        expect($actual)->toBeEmptySeq();
+    })->with([
+        [-2],
+        [-1],
+        [0],
+        [1],
+        [2],
+    ]);
+});
+
 describe('->toArray', function (): void {
     it('should return an array', function (): void {
         $actual = None::instance()->toArray();

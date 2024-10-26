@@ -274,6 +274,17 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function take(int $n): self;
 
     /**
+     * Selects the last `$n` elements.
+     *
+     * @param int $n the number of elements to take from this collection.
+     *
+     * @return self<K, T> a collection consisting only of the last `$n` elements of this collection,
+     *                    or else the whole collection, if it has less than `$n` elements.
+     *                    If `$n` is negative, returns an empty collection.
+     */
+    public function takeRight(int $n): self;
+
+    /**
      * Converts this collection to an array.
      *
      * @return array<T>

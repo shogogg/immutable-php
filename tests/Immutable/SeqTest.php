@@ -487,6 +487,29 @@ describe('->take', function (): void {
     ]);
 });
 
+describe('->takeRight', function (): void {
+    it('should return an empty sequence if the number is less than or equal to 0', function (int $n): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->takeRight($n);
+        expect($actual)->toBeEmptySeq();
+    })->with([
+        [-2],
+        [-1],
+        [0],
+    ]);
+
+    it('should return a sequence with the last n elements', function (int $n, array $expected): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->takeRight($n);
+        expect($actual)->toBeSeq(...$expected);
+    })->with([
+        [1, [11]],
+        [2, [7, 11]],
+        [3, [5, 7, 11]],
+        [4, [3, 5, 7, 11]],
+        [5, [2, 3, 5, 7, 11]],
+        [6, [2, 3, 5, 7, 11]],
+    ]);
+});
+
 describe('->toArray', function (): void {
     it('should return the representation of the sequence as an array', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->toArray();
