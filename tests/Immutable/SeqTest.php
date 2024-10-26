@@ -284,6 +284,18 @@ describe('->headOption', function (): void {
     });
 });
 
+describe('->indexWhere', function (): void {
+    it('should return the index of the first element that satisfies the predicate', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->indexWhere(fn (int $x): bool => $x % 5 === 0);
+        expect($actual)->toBe(2);
+    });
+
+    it('should return -1 if no element satisfies the predicate', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->indexWhere(fn (int $x): bool => $x % 13 === 0);
+        expect($actual)->toBe(-1);
+    });
+});
+
 describe('->isEmpty', function (): void {
     it('should return true if the sequence is empty', function (): void {
         $actual = Seq::empty()->isEmpty();

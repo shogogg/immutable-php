@@ -71,6 +71,17 @@ interface SeqLike extends CollectionLike
     public function flatten(): Seq;
 
     /**
+     * Finds index of the first element satisfying some predicate after or at some start index.
+     *
+     * @param \Closure(T, int): bool $p the predicate used to test elements.
+     * @param int $from the start index.
+     *
+     * @return int the index `>= $from` of the first element of this collection that satisfies the predicate `$p`,
+     *             or -1, if none exists.
+     */
+    public function indexWhere(\Closure $p, int $from = 0): int;
+
+    /**
      * {@inheritdoc}
      * @template U
      * @param \Closure(T, int): U $f

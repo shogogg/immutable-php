@@ -75,8 +75,8 @@ final readonly class Seq implements SeqLike
     public function countBy(\Closure $p): int
     {
         $count = 0;
-        foreach ($this->elements as $key => $value) {
-            if ($p($value, $key)) {
+        foreach ($this->elements as $index => $value) {
+            if ($p($value, $index)) {
                 ++$count;
             }
         }
@@ -106,14 +106,9 @@ final readonly class Seq implements SeqLike
     #[\Override]
     public function dropWhile(\Closure $p): Seq
     {
-        $offset = null;
-        foreach ($this->elements as $index => $value) {
-            if (!$p($value, $index)) {
-                $offset = $index;
-                break;
-            }
-        }
-        return $offset === null
+        $q = self::invert($p);
+        $offset = $this->indexWhere($q);
+        return $offset === -1
             ? self::empty()
             : new self(array_slice($this->elements, $offset));
     }
@@ -146,7 +141,7 @@ final readonly class Seq implements SeqLike
     #[\Override]
     public function filterNot(\Closure $p): Seq
     {
-        $q = fn (mixed $value, int $index): bool => !$p($value, $index);
+        $q = self::invert($p);
         return new self(array_values(array_filter($this->elements, $q, ARRAY_FILTER_USE_BOTH)));
     }
 
@@ -186,8 +181,9 @@ final readonly class Seq implements SeqLike
     #[\Override]
     public function forAll(\Closure $p): bool
     {
+        $q = self::invert($p);
         foreach ($this->elements as $index => $value) {
-            if (!$p($value, $index)) {
+            if ($q($value, $index)) {
                 return false;
             }
         }
@@ -216,6 +212,18 @@ final readonly class Seq implements SeqLike
             return Some::of($value);
         }
         return None::instance();
+    }
+
+    #[\Override]
+    public function indexWhere(\Closure $p, int $from = 0): int
+    {
+        $from = max($from, 0);
+        foreach (array_slice($this->elements, $from) as $index => $value) {
+            if ($p($value, $index)) {
+                return $index;
+            }
+        }
+        return -1;
     }
 
     #[\Override]
@@ -373,16 +381,11 @@ final readonly class Seq implements SeqLike
     #[\Override]
     public function takeWhile(\Closure $p): Seq
     {
-        $offset = null;
-        foreach ($this->elements as $index => $value) {
-            if (!$p($value, $index)) {
-                break;
-            }
-            $offset = $index;
-        }
-        return $offset === null
+        $q = self::invert($p);
+        $length = $this->indexWhere($q);
+        return $length === -1
             ? $this
-            : new self(array_slice($this->elements, 0, $offset + 1));
+            : new self(array_slice($this->elements, 0, $length));
     }
 
     #[\Override]
@@ -395,5 +398,16 @@ final readonly class Seq implements SeqLike
     public function toSeq(): Seq
     {
         return $this;
+    }
+
+    /**
+     * Returns a new function that returns the logical negation of the given predicate.
+     *
+     * @param \Closure(T, int): bool $p
+     * @return \Closure(T, int): bool
+     */
+    private static function invert(\Closure $p): \Closure
+    {
+        return fn (mixed $value, int $index): bool => !$p($value, $index);
     }
 }
