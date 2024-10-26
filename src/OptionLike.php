@@ -98,4 +98,11 @@ interface OptionLike extends CollectionLike
      */
     #[\Override]
     public function takeRight(int $n): Seq;
+
+    /**
+     * {@inheritdoc}
+     * @return \Immutable\Seq<T>
+     */
+    #[\Override]
+    public function takeWhile(\Closure $p): Seq;
 }

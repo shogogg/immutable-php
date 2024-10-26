@@ -510,6 +510,24 @@ describe('->takeRight', function (): void {
     ]);
 });
 
+describe('->takeWhile', function (): void {
+    it('should return a new instance with the first elements until the predicate returns false', function (
+        Closure $p,
+        array $expected
+    ): void {
+        $actual = Seq::of(1, 2, 3, 4, 5, 6, 7, 8, 9)->takeWhile($p);
+        expect($actual)->toBeSeq(...$expected);
+    })->with([
+        [fn (int $x): bool => $x % 5 !== 0, [1, 2, 3, 4]],
+        [fn (int $x): bool => $x <= 8, [1, 2, 3, 4, 5, 6, 7, 8]],
+    ]);
+
+    it('should return itself if all elements satisfy the predicate', function (): void {
+        $actual = Seq::of(1, 2, 3, 4, 5, 6, 7, 8, 9)->takeWhile(fn (int $x): bool => $x < 10);
+        expect($actual)->toBeSeq(1, 2, 3, 4, 5, 6, 7, 8, 9);
+    });
+});
+
 describe('->toArray', function (): void {
     it('should return the representation of the sequence as an array', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->toArray();

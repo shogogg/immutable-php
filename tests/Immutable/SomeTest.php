@@ -536,6 +536,18 @@ describe('->takeRight', function (): void {
     ]);
 });
 
+describe('->takeWhile', function (): void {
+    it('should return a Seq of the value if the predicate returns true', function (): void {
+        $actual = Some::of(17)->takeWhile(fn (int $x): bool => $x > 0);
+        expect($actual)->toBeSeq(17);
+    });
+
+    it('should return an empty Seq if the predicate returns false', function (): void {
+        $actual = Some::of(17)->takeWhile(fn (int $x): bool => $x < 0);
+        expect($actual)->toBeEmptySeq();
+    });
+});
+
 describe('->toArray', function (): void {
     it('should return an array', function (): void {
         $actual = Some::of('foo')->toArray();

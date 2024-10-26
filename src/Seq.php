@@ -371,6 +371,21 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function takeWhile(\Closure $p): Seq
+    {
+        $offset = null;
+        foreach ($this->elements as $index => $value) {
+            if (!$p($value, $index)) {
+                break;
+            }
+            $offset = $index;
+        }
+        return $offset === null
+            ? $this
+            : new self(array_slice($this->elements, 0, $offset + 1));
+    }
+
+    #[\Override]
     public function toArray(): array
     {
         return [...$this->elements];

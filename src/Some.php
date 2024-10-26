@@ -250,6 +250,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function takeWhile(\Closure $p): Seq
+    {
+        return $p($this->value, 0) ? $this->toSeq() : Seq::empty();
+    }
+
+    #[\Override]
     public function toArray(): array
     {
         return [$this->value];

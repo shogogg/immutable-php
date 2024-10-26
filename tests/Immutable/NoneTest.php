@@ -315,6 +315,17 @@ describe('->takeRight', function (): void {
     ]);
 });
 
+describe('->takeWhile', function (): void {
+    it('should return an empty Seq even if any predicate is given', function (\Closure $p): void {
+        $actual = None::instance()->takeWhile($p);
+        expect($actual)->toBeEmptySeq();
+    })->with([
+        [fn (int $x): bool => $x > 0],
+        [fn (int $x): bool => $x === 0],
+        [fn (int $x): bool => $x < 0],
+    ]);
+});
+
 describe('->toArray', function (): void {
     it('should return an array', function (): void {
         $actual = None::instance()->toArray();

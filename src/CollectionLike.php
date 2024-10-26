@@ -285,6 +285,15 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function takeRight(int $n): self;
 
     /**
+     * Takes longest prefix of elements that satisfy a predicate.
+     *
+     * @param \Closure(T, K): bool $p the predicate used to test elements.
+     *
+     * @return self<K, T> the longest prefix of this collection whose elements all satisfy the predicate `$p`.
+     */
+    public function takeWhile(\Closure $p): self;
+
+    /**
      * Converts this collection to an array.
      *
      * @return array<T>
