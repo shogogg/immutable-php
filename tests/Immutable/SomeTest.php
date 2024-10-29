@@ -295,6 +295,21 @@ describe('->getIterator', function (): void {
     });
 });
 
+describe('->getOrElse', function (): void {
+    it('should return the value', function (mixed $value): void {
+        $actual = Some::of($value)->getOrElse(fn () => 19);
+        expect($actual)->toBe($value);
+    })->with([
+        [0],
+        [0.0],
+        [17],
+        ['foo'],
+        [[]],
+        [new stdClass()],
+        [null],
+    ]);
+});
+
 describe('->head', function (): void {
     it('should return the value', function (mixed $value): void {
         $actual = Some::of($value)->head();

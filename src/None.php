@@ -143,6 +143,12 @@ final readonly class None extends Option
     }
 
     #[\Override]
+    public function getOrElse(\Closure $default): mixed
+    {
+        return $default();
+    }
+
+    #[\Override]
     public function head(): never
     {
         throw new \LogicException('There is no value');

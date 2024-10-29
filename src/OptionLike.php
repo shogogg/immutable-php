@@ -77,6 +77,17 @@ interface OptionLike extends CollectionLike
     public function get(): mixed;
 
     /**
+     * Returns the value if the option is non-empty, otherwise return the result of evaluating `$default`.
+     *
+     * @template U of T
+     *
+     * @param \Closure(): U $default the default value.
+     *
+     * @return U
+     */
+    public function getOrElse(\Closure $default): mixed;
+
+    /**
      * {@inheritdoc}
      * @return \Immutable\Seq<T>
      */

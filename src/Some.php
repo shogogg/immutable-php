@@ -156,6 +156,12 @@ final readonly class Some extends Option
     }
 
     #[\Override]
+    public function getOrElse(\Closure $default): mixed
+    {
+        return $this->value;
+    }
+
+    #[\Override]
     public function head(): mixed
     {
         return $this->value;
