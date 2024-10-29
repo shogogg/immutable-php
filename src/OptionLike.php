@@ -137,6 +137,13 @@ interface OptionLike extends CollectionLike
     public function orElseValue(Option $alternative): Option;
 
     /**
+     * Returns the value if the option is non-empty, otherwise return `null`.
+     *
+     * @return T|null
+     */
+    public function orNull(): mixed;
+
+    /**
      * {@inheritdoc}
      * @return \Immutable\Seq<T>
      */

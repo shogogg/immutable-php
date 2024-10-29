@@ -548,6 +548,21 @@ describe('->orElseValue', function (): void {
     });
 });
 
+describe('->orNull', function (): void {
+    it('should return the value', function (mixed $value): void {
+        $actual = Some::of($value)->orNull();
+        expect($actual)->toBe($value);
+    })->with([
+        [0],
+        [0.0],
+        [17],
+        ['foo'],
+        [[]],
+        [new stdClass()],
+        [null],
+    ]);
+});
+
 describe('->size', function (): void {
     it('should return 1', function (mixed $value): void {
         $actual = Some::of($value)->count();

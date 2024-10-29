@@ -275,6 +275,12 @@ final readonly class Some extends Option
     }
 
     #[\Override]
+    public function orNull(): mixed
+    {
+        return $this->value;
+    }
+
+    #[\Override]
     public function size(): int
     {
         return 1;

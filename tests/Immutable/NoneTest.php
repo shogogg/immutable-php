@@ -332,6 +332,13 @@ describe('->orElseValue', function (): void {
     });
 });
 
+describe('->orNull', function (): void {
+    it('should return null', function (): void {
+        $actual = None::instance()->orNull();
+        expect($actual)->toBeNull();
+    });
+});
+
 describe('->size', function (): void {
     it('should return 0', function (): void {
         $actual = None::instance()->size();

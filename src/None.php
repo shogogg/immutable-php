@@ -258,6 +258,12 @@ final readonly class None extends Option
     }
 
     #[\Override]
+    public function orNull(): null
+    {
+        return null;
+    }
+
+    #[\Override]
     public function size(): int
     {
         return 0;
