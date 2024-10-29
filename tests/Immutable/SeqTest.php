@@ -341,6 +341,28 @@ describe('->last', function (): void {
     });
 });
 
+describe('->lastIndexOf', function (): void {
+    it('should return the index of the last occurrence of the element', function (): void {
+        $actual = Seq::of(1, 2, 3, 4, 5, 1, 2, 3, 4, 5)->lastIndexOf(3);
+        expect($actual)->toBe(7);
+    });
+
+    it('should return the index of the last occurrence of the element before the specified index', function (): void {
+        $actual = Seq::of(1, 2, 3, 4, 5, 1, 2, 3, 4, 5)->lastIndexOf(3, 6);
+        expect($actual)->toBe(2);
+    });
+
+    it('should return -1 if the element does not exist', function (): void {
+        $actual = Seq::of(1, 2, 3, 4, 5, 1, 2, 3, 4, 5)->lastIndexOf(6);
+        expect($actual)->toBe(-1);
+    });
+
+    it('should return -1 if the element does not exist before the specified index', function (): void {
+        $actual = Seq::of(1, 2, 3, 4, 5, 1, 2, 3, 4, 5)->lastIndexOf(5, 3);
+        expect($actual)->toBe(-1);
+    });
+});
+
 describe('->lastOption', function (): void {
     it('should return a Some of the last element', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->lastOption();

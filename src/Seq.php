@@ -250,6 +250,15 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function lastIndexOf(mixed $element, ?int $end = null): int
+    {
+        $length = $end === null ? count($this->elements) : $end + 1;
+        $xs = array_reverse(array_slice($this->elements, 0, $length));
+        $index = array_search($element, $xs, true);
+        return $index === false ? -1 : $length - $index - 1;
+    }
+
+    #[\Override]
     public function lastOption(): Option
     {
         $it = ReverseArrayIterator::of($this->elements);

@@ -74,7 +74,7 @@ interface SeqLike extends CollectionLike
      * Finds index of the first occurrence of some element in this sequence after or at some start index.
      *
      * @template U of T
-     * @param U $element
+     * @param U $element the element value to search for.
      * @param int $from the start index.
      *
      * @return int the index `>= $from` of the first element of this sequence that is equal (as determined by `===`) to
@@ -92,6 +92,15 @@ interface SeqLike extends CollectionLike
      *             or -1, if none exists.
      */
     public function indexWhere(\Closure $p, int $from = 0): int;
+
+    /**
+     * Finds index of the last occurrence of some element in this sequence before or at some end index.
+     *
+     * @template U of T
+     * @param U $element the element value to search for.
+     * @param int|null $end the end index.
+     */
+    public function lastIndexOf(mixed $element, ?int $end = null): int;
 
     /**
      * {@inheritdoc}
