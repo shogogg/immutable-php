@@ -97,6 +97,21 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function distinctBy(\Closure $f): Seq
+    {
+        $keys = [];
+        $values = [];
+        foreach ($this->elements as $index => $value) {
+            $key = $f($value, $index);
+            if (!in_array($key, $keys, true)) {
+                $keys[] = $key;
+                $values[] = $value;
+            }
+        }
+        return new self($values);
+    }
+
+    #[\Override]
     public function drop(int $n): Seq
     {
         return match (true) {

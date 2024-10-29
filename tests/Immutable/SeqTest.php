@@ -67,6 +67,29 @@ describe('->distinct', function (): void {
     });
 });
 
+describe('->distinctBy', function (): void {
+    it('should return a new instance with the duplicates removed as determined by the callback', function (): void {
+        $seq = Seq::of(
+            'PHP',
+            'Go',
+            'Java',
+            'JavaScript',
+            'Kotlin',
+            'Python',
+            'Ruby',
+            'Rust',
+            'Scala',
+        );
+        $actual = $seq->distinctBy(fn (string $x): int => strlen($x));
+        expect($actual)->toBeSeq('PHP', 'Go', 'Java', 'JavaScript', 'Kotlin', 'Scala');
+    });
+
+    it('should return an empty instance if the sequence is empty', function (): void {
+        $actual = Seq::empty()->distinctBy(fn (string $x): int => strlen($x));
+        expect($actual)->toBeEmptySeq();
+    });
+});
+
 describe('->drop', function (): void {
     it('should return itself if the number is less than or equal to 0', function (int $n): void {
         $seq = Seq::of(2, 3, 5, 7, 11);

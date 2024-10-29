@@ -37,6 +37,17 @@ interface SeqLike extends CollectionLike
     public function distinct(): Seq;
 
     /**
+     * Selects all the elements of this sequence ignoring the duplicates as determined by `===` after applying the transforming function `$f`.
+     *
+     * @template U
+     *
+     * @param \Closure(T, int): U $f the transforming function whose result is used to determine the uniqueness of each element.
+     *
+     * @return \Immutable\Seq<T>
+     */
+    public function distinctBy(\Closure $f): Seq;
+
+    /**
      * {@inheritdoc}
      * @return \Immutable\Seq<T>
      */
