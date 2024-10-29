@@ -230,6 +230,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function tail(): never
+    {
+        throw new \LogicException('tail of empty list');
+    }
+
+    #[\Override]
     public function take(int $n): Seq
     {
         return Seq::empty();

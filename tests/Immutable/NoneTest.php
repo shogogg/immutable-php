@@ -295,6 +295,12 @@ describe('->size', function (): void {
     });
 });
 
+describe('->tail', function (): void {
+    it('should throw a LogicException', function (): void {
+        expect(fn () => None::instance()->tail())->toThrow(LogicException::class);
+    });
+});
+
 describe('->take', function (): void {
     it('should return an empty Seq even if any number is passed', function (int $n): void {
         $actual = None::instance()->take($n);

@@ -503,6 +503,13 @@ describe('->size', function (): void {
     ]);
 });
 
+describe('->tail', function (): void {
+    it('should return an empty Seq', function (): void {
+        $actual = Some::of(17)->tail();
+        expect($actual)->toBeEmptySeq();
+    });
+});
+
 describe('->take', function (): void {
     it('should return an empty Seq if the argument is less than or equal to 0', function (int $n): void {
         $actual = Some::of(17)->take($n);

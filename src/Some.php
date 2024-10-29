@@ -250,6 +250,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function tail(): Seq
+    {
+        return Seq::empty();
+    }
+
+    #[\Override]
     public function takeRight(int $n): Seq
     {
         return $n <= 0 ? Seq::empty() : $this->toSeq();

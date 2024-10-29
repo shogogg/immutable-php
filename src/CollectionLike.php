@@ -270,6 +270,13 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function size(): int;
 
     /**
+     * Selects all elements except the first.
+     *
+     * @return self<K, T> a collection consisting of all elements of this collection except the first one.
+     */
+    public function tail(): self;
+
+    /**
      * Selects the first `$n` elements.
      *
      * @param int $n the number of elements to take from this collection.

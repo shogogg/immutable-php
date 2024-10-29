@@ -138,6 +138,13 @@ interface SeqLike extends CollectionLike
      * @return \Immutable\Seq<T>
      */
     #[\Override]
+    public function tail(): Seq;
+
+    /**
+     * {@inheritdoc}
+     * @return \Immutable\Seq<T>
+     */
+    #[\Override]
     public function take(int $n): Seq;
 
     /**

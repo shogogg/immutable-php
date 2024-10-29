@@ -561,6 +561,22 @@ describe('->size', function (): void {
     });
 });
 
+describe('->tail', function (): void {
+    it('should return a new instance with the first element removed', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->tail();
+        expect($actual)->toBeSeq(3, 5, 7, 11);
+    });
+
+    it('should return an empty instance if the sequence has only one element', function (): void {
+        $actual = Seq::of(2)->tail();
+        expect($actual)->toBeEmptySeq();
+    });
+
+    it('should throw a LogicException if the sequence is empty', function (): void {
+        expect(fn () => Seq::empty()->tail())->toThrow(LogicException::class);
+    });
+});
+
 describe('->take', function (): void {
     it('should return an empty sequence if the number is less than or equal to 0', function (int $n): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->take($n);

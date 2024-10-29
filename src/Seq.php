@@ -397,6 +397,15 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function tail(): Seq
+    {
+        if ($this->isEmpty()) {
+            throw new \LogicException('tail of empty list');
+        }
+        return new self(array_slice($this->elements, 1));
+    }
+
+    #[\Override]
     public function take(int $n): Seq
     {
         return match (true) {
