@@ -15,14 +15,14 @@ namespace Immutable;
  * @template-covariant T
  * @extends \Immutable\Option<T>
  */
-final class Some extends Option
+final readonly class Some extends Option
 {
     /**
      * {@see \Immutable\Some} constructor.
      *
      * @param T $value the value
      */
-    private function __construct(private readonly mixed $value)
+    private function __construct(private mixed $value)
     {
     }
 

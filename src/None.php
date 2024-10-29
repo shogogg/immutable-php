@@ -9,15 +9,15 @@ declare(strict_types=1);
 
 namespace Immutable;
 
+use Immutable\Companions\OptionCompanion;
+
 /**
  * Some.
  *
  * @extends \Immutable\Option<never>
  */
-final class None extends Option
+final readonly class None extends Option
 {
-    private static ?self $instance = null;
-
     /**
      * Returns the None instance.
      *
@@ -25,16 +25,13 @@ final class None extends Option
      */
     public static function instance(): self
     {
-        if (self::$instance === null) {
-            self::$instance = new self();
-        }
-        return self::$instance;
+        return OptionCompanion::none();
     }
 
     #[\Override]
     public static function of(mixed $value): Option
     {
-        return self::instance();
+        return OptionCompanion::none();
     }
 
     #[\Override]

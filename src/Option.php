@@ -15,7 +15,7 @@ namespace Immutable;
  * @template-covariant T
  * @implements \Immutable\OptionLike<T>
  */
-abstract class Option implements OptionLike
+abstract readonly class Option implements OptionLike
 {
     /**
      * Creates a new instance.
