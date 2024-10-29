@@ -325,6 +325,13 @@ describe('->orElse', function (): void {
     });
 });
 
+describe('->orElseValue', function (): void {
+    it('should return the alternative Option', function (): void {
+        $actual = None::instance()->orElseValue(Some::of(17));
+        expect($actual)->toBeSome(17);
+    });
+});
+
 describe('->size', function (): void {
     it('should return 0', function (): void {
         $actual = None::instance()->size();

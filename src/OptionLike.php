@@ -126,6 +126,17 @@ interface OptionLike extends CollectionLike
     public function orElse(\Closure $alternative): Option;
 
     /**
+     * Returns this Option if it is non-empty, otherwise return the specified Option.
+     *
+     * @template U
+     *
+     * @param \Immutable\Option<U> $alternative the alternative Option.
+     *
+     * @return \Immutable\Option<T|U>
+     */
+    public function orElseValue(Option $alternative): Option;
+
+    /**
      * {@inheritdoc}
      * @return \Immutable\Seq<T>
      */

@@ -540,6 +540,14 @@ describe('->orElse', function (): void {
     });
 });
 
+describe('->orElseValue', function (): void {
+    it('should return itself', function (): void {
+        $option = Some::of(17);
+        $actual = $option->orElseValue(Some::of(19));
+        expect($actual)->toBe($option);
+    });
+});
+
 describe('->size', function (): void {
     it('should return 1', function (mixed $value): void {
         $actual = Some::of($value)->count();
