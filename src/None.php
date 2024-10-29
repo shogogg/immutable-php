@@ -12,8 +12,9 @@ namespace Immutable;
 use Immutable\Companions\OptionCompanion;
 
 /**
- * Some.
+ * None.
  *
+ * @immutable
  * @extends \Immutable\Option<never>
  */
 final readonly class None extends Option
@@ -146,6 +147,12 @@ final readonly class None extends Option
     public function getOrElse(\Closure $default): mixed
     {
         return $default();
+    }
+
+    #[\Override]
+    public function getOrElseValue(mixed $default): mixed
+    {
+        return $default;
     }
 
     #[\Override]

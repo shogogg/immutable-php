@@ -12,6 +12,7 @@ namespace Immutable;
 /**
  * Option.
  *
+ * @immutable
  * @template-covariant T
  * @implements \Immutable\OptionLike<T>
  */

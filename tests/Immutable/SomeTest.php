@@ -310,6 +310,21 @@ describe('->getOrElse', function (): void {
     ]);
 });
 
+describe('->getOrElseValue', function (): void {
+    it('should return the value', function (mixed $value): void {
+        $actual = Some::of($value)->getOrElseValue(19);
+        expect($actual)->toBe($value);
+    })->with([
+        [0],
+        [0.0],
+        [17],
+        ['foo'],
+        [[]],
+        [new stdClass()],
+        [null],
+    ]);
+});
+
 describe('->head', function (): void {
     it('should return the value', function (mixed $value): void {
         $actual = Some::of($value)->head();

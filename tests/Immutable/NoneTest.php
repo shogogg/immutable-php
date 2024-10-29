@@ -192,6 +192,13 @@ describe('->getOrElse', function (): void {
     });
 });
 
+describe('->getOrElseValue', function (): void {
+    it('should return the default value', function (): void {
+        $actual = None::instance()->getOrElseValue(17);
+        expect($actual)->toBe(17);
+    });
+});
+
 describe('->head', function (): void {
     it('should throw a LogicException', function (): void {
         expect(fn () => None::instance()->head())->toThrow(LogicException::class);

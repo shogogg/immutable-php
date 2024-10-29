@@ -12,6 +12,7 @@ namespace Immutable;
 /**
  * Some.
  *
+ * @immutable
  * @template-covariant T
  * @extends \Immutable\Option<T>
  */
@@ -157,6 +158,12 @@ final readonly class Some extends Option
 
     #[\Override]
     public function getOrElse(\Closure $default): mixed
+    {
+        return $this->value;
+    }
+
+    #[\Override]
+    public function getOrElseValue(mixed $default): mixed
     {
         return $this->value;
     }

@@ -79,13 +79,24 @@ interface OptionLike extends CollectionLike
     /**
      * Returns the value if the option is non-empty, otherwise return the result of evaluating `$default`.
      *
-     * @template U of T
+     * @template U
      *
      * @param \Closure(): U $default the default value.
      *
-     * @return U
+     * @return T|U
      */
     public function getOrElse(\Closure $default): mixed;
+
+    /**
+     * Returns the value if the option is non-empty, otherwise return the specified value.
+     *
+     * @template U
+     *
+     * @param U $default the default value.
+     *
+     * @return T|U
+     */
+    public function getOrElseValue(mixed $default): mixed;
 
     /**
      * {@inheritdoc}

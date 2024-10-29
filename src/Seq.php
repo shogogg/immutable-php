@@ -15,6 +15,7 @@ use Immutable\Iterators\ReverseArrayIterator;
 /**
  * Sequence.
  *
+ * @immutable
  * @template-covariant T
  * @implements \Immutable\SeqLike<T>
  */
