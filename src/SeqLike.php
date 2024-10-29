@@ -30,6 +30,13 @@ interface SeqLike extends CollectionLike
     public function contains(mixed $element): bool;
 
     /**
+     * Selects all the elements of this sequence ignoring the duplicates.
+     *
+     * @return \Immutable\Seq<T>
+     */
+    public function distinct(): Seq;
+
+    /**
      * {@inheritdoc}
      * @return \Immutable\Seq<T>
      */

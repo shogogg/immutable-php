@@ -55,6 +55,18 @@ describe('->countBy', function (): void {
     });
 });
 
+describe('->distinct', function (): void {
+    it('should return a new instance with the duplicates removed', function (): void {
+        $actual = Seq::of('foo', 'bar', 'baz', 'foo', '123', 'bar', 'qux', '456', '123')->distinct();
+        expect($actual)->toBeSeq('foo', 'bar', 'baz', '123', 'qux', '456');
+    });
+
+    it('should return an empty instance if the sequence is empty', function (): void {
+        $actual = Seq::empty()->distinct();
+        expect($actual)->toBeEmptySeq();
+    });
+});
+
 describe('->drop', function (): void {
     it('should return itself if the number is less than or equal to 0', function (int $n): void {
         $seq = Seq::of(2, 3, 5, 7, 11);

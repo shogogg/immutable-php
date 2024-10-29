@@ -91,6 +91,12 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function distinct(): Seq
+    {
+        return new self(array_values(array_unique($this->elements, SORT_REGULAR)));
+    }
+
+    #[\Override]
     public function drop(int $n): Seq
     {
         return match (true) {
