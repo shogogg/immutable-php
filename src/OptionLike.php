@@ -79,7 +79,7 @@ interface OptionLike extends CollectionLike
     /**
      * {@inheritdoc}
      * @template U
-     * @param \Closure(T, int): U $f
+     * @param \Closure(T, int): U $f the function to apply to each element.
      * @return \Immutable\Option<U>
      */
     #[\Override]

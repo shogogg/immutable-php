@@ -363,6 +363,31 @@ describe('->lastIndexOf', function (): void {
     });
 });
 
+describe('->lastIndexWhere', function (): void {
+    it('should return the index of the last element that satisfies the predicate', function (): void {
+        $actual = Seq::of(1, 2, 3, 4, 5, 1, 2, 3, 4, 5)->lastIndexWhere(fn (int $x): bool => $x % 2 === 0);
+        expect($actual)->toBe(8);
+    });
+
+    it(
+        'should return the index of the last element that satisfies the predicate before the specified index',
+        function (): void {
+            $actual = Seq::of(1, 2, 3, 4, 5, 1, 2, 3, 4, 5)->lastIndexWhere(fn (int $x): bool => $x % 2 === 0, 5);
+            expect($actual)->toBe(3);
+        }
+    );
+
+    it('should return -1 if no element satisfies the predicate', function (): void {
+        $actual = Seq::of(1, 2, 3, 4, 5, 1, 2, 3, 4, 5)->lastIndexWhere(fn (int $x): bool => $x % 13 === 0);
+        expect($actual)->toBe(-1);
+    });
+
+    it('should return -1 if no element satisfies the predicate before the specified index', function (): void {
+        $actual = Seq::of(1, 2, 3, 4, 5, 1, 2, 3, 4, 5)->lastIndexWhere(fn (int $x): bool => $x % 5 === 0, 3);
+        expect($actual)->toBe(-1);
+    });
+});
+
 describe('->lastOption', function (): void {
     it('should return a Some of the last element', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->lastOption();

@@ -259,6 +259,19 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function lastIndexWhere(\Closure $p, ?int $end = null): int
+    {
+        $length = $end === null ? count($this->elements) : $end + 1;
+        $xs = array_reverse(array_slice($this->elements, 0, $length));
+        foreach ($xs as $index => $value) {
+            if ($p($value, $index)) {
+                return $length - $index - 1;
+            }
+        }
+        return -1;
+    }
+
+    #[\Override]
     public function lastOption(): Option
     {
         $it = ReverseArrayIterator::of($this->elements);

@@ -55,7 +55,7 @@ interface SeqLike extends CollectionLike
     /**
      * {@inheritdoc}
      * @template U
-     * @param \Closure(T, int): iterable<int, U> $f
+     * @param \Closure(T, int): iterable<int, U> $f the function to apply to each element.
      * @throws \LogicException if the callback does not return an iterable.
      * @return \Immutable\Seq<U>
      */
@@ -97,15 +97,30 @@ interface SeqLike extends CollectionLike
      * Finds index of the last occurrence of some element in this sequence before or at some end index.
      *
      * @template U of T
+     *
      * @param U $element the element value to search for.
      * @param int|null $end the end index.
+     *
+     * @return int the index `<= $end` of the last element of this sequence that is equal (as determined by `===`) to
+     *             `$element`, or -1, if none exists.
      */
     public function lastIndexOf(mixed $element, ?int $end = null): int;
 
     /**
+     * Finds index of last element satisfying some predicate before or at given end index.
+     *
+     * @param \Closure(T, int): bool $p the predicate used to test elements.
+     * @param int|null $end the end index.
+     *
+     * @return int the index `<= $end` of the last element of this sequence that satisfies the predicate `$p`,
+     *             or -1, if none exists.
+     */
+    public function lastIndexWhere(\Closure $p, ?int $end = null): int;
+
+    /**
      * {@inheritdoc}
      * @template U
-     * @param \Closure(T, int): U $f
+     * @param \Closure(T, int): U $f the function to apply to each element.
      * @return \Immutable\Seq<U>
      */
     #[\Override]
