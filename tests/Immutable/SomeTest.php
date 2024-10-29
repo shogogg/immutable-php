@@ -304,6 +304,13 @@ describe('->headOption', function (): void {
     });
 });
 
+describe('->init', function (): void {
+    it('should return an empty Seq', function (): void {
+        $actual = Some::of(17)->init();
+        expect($actual)->toBeEmptySeq();
+    });
+});
+
 describe('->isEmpty', function (): void {
     it('should return false even if the value is any type', function (mixed $value): void {
         $actual = Some::of($value)->isEmpty();

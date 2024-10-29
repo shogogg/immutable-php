@@ -163,6 +163,13 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function headOption(): Option;
 
     /**
+     * Selects all elements except the last.
+     *
+     * @return self<K, T> a collection consisting of all elements of this collection except the last one.
+     */
+    public function init(): self;
+
+    /**
      * Tests whether this collection is empty.
      *
      * @return bool true if this collection contains no elements, false otherwise.

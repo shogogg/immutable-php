@@ -18,14 +18,6 @@ namespace Immutable;
 interface OptionLike extends CollectionLike
 {
     /**
-     * Returns the value, throw exception if empty.
-     *
-     * @throws \LogicException if this Option is empty.
-     * @return T
-     */
-    public function get(): mixed;
-
-    /**
      * {@inheritdoc}
      * @return \Immutable\Seq<T>
      */
@@ -75,6 +67,21 @@ interface OptionLike extends CollectionLike
      */
     #[\Override]
     public function flatten(): Option;
+
+    /**
+     * Returns the value, throw exception if empty.
+     *
+     * @throws \LogicException if this Option is empty.
+     * @return T
+     */
+    public function get(): mixed;
+
+    /**
+     * {@inheritdoc}
+     * @return \Immutable\Seq<T>
+     */
+    #[\Override]
+    public function init(): Seq;
 
     /**
      * {@inheritdoc}

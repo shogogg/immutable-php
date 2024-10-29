@@ -156,6 +156,12 @@ final class Some extends Option
     }
 
     #[\Override]
+    public function init(): Seq
+    {
+        return Seq::empty();
+    }
+
+    #[\Override]
     public function isEmpty(): bool
     {
         return false;

@@ -318,6 +318,22 @@ describe('->indexWhere', function (): void {
     });
 });
 
+describe('->init', function (): void {
+    it('should return a new instance with the last element removed', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->init();
+        expect($actual)->toBeSeq(2, 3, 5, 7);
+    });
+
+    it('should return an empty instance if the sequence has only one element', function (): void {
+        $actual = Seq::of(2)->init();
+        expect($actual)->toBeEmptySeq();
+    });
+
+    it('should throw a LogicException if the sequence is empty', function (): void {
+        expect(fn () => Seq::empty()->init())->toThrow(LogicException::class);
+    });
+});
+
 describe('->isEmpty', function (): void {
     it('should return true if the sequence is empty', function (): void {
         $actual = Seq::empty()->isEmpty();

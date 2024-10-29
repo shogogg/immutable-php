@@ -146,6 +146,12 @@ final class None extends Option
     }
 
     #[\Override]
+    public function init(): never
+    {
+        throw new \LogicException('init of empty list');
+    }
+
+    #[\Override]
     public function isEmpty(): bool
     {
         return true;

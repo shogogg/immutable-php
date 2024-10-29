@@ -94,6 +94,13 @@ interface SeqLike extends CollectionLike
     public function indexWhere(\Closure $p, int $from = 0): int;
 
     /**
+     * {@inheritdoc}
+     * @return \Immutable\Seq<T>
+     */
+    #[\Override]
+    public function init(): Seq;
+
+    /**
      * Finds index of the last occurrence of some element in this sequence before or at some end index.
      *
      * @template U of T

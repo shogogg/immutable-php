@@ -234,6 +234,15 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function init(): Seq
+    {
+        if ($this->isEmpty()) {
+            throw new \LogicException('init of empty list');
+        }
+        return new self(array_slice($this->elements, 0, -1));
+    }
+
+    #[\Override]
     public function isEmpty(): bool
     {
         return empty($this->elements);
