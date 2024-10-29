@@ -249,6 +249,13 @@ describe('->foldLeft', function (): void {
     });
 });
 
+describe('->foldRight', function (): void {
+    it('should return the result of the callback', function (): void {
+        $actual = Some::of(17)->foldRight(19, fn (int $z, int $x): int => $z + $x);
+        expect($actual)->toBe(36);
+    });
+});
+
 describe('->forAll', function (): void {
     it('should return true if the predicate returns true', function (): void {
         $actual = Some::of(17)->forAll(fn (int $x): bool => $x > 0);

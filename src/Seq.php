@@ -191,6 +191,17 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function foldRight($z, \Closure $op): mixed
+    {
+        $result = $z;
+        $it = ReverseArrayIterator::of($this->elements);
+        foreach ($it as $index => $value) {
+            $result = $op($value, $result, $index);
+        }
+        return $result;
+    }
+
+    #[\Override]
     public function forAll(\Closure $p): bool
     {
         $q = self::invert($p);

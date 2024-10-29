@@ -154,6 +154,13 @@ describe('->foldLeft', function (): void {
     });
 });
 
+describe('->foldRight', function (): void {
+    it('should return the initial value', function (): void {
+        $actual = None::instance()->foldRight(17, fn (int $z, int $x): int => $z + $x);
+        expect($actual)->toBe(17);
+    });
+});
+
 describe('->forAll', function (): void {
     it('should return true even if any predicate is given', function (\Closure $p): void {
         $actual = None::instance()->forAll($p);

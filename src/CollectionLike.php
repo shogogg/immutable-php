@@ -138,16 +138,28 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function fold(mixed $z, \Closure $op): mixed;
 
     /**
-     * Applies a binary operator to a start value and all elements of this traversable or iterator, going left to right.
+     * Applies a binary operator to a start value and all elements of this collection, going left to right.
      *
      * @template U
      *
      * @param U $z the start value.
-     * @param \Closure $op the binary operator.
+     * @param \Closure(U, T, K): U $op the binary operator.
      * @return U the result of inserting op between consecutive elements of this collection, going left to right
      *           with the start value z on the left.
      */
     public function foldLeft(mixed $z, \Closure $op): mixed;
+
+    /**
+     * Applies a binary operator to all elements of this collection and a start value, going right to left.
+     *
+     * @template U
+     *
+     * @param U $z the start value.
+     * @param \Closure(T, U, K): U $op the binary operator.
+     * @return U the result of inserting op between consecutive elements of this collection, going right to left
+     *         with the start value z on the right.
+     */
+    public function foldRight(mixed $z, \Closure $op): mixed;
 
     /**
      * Tests whether a predicate holds for all elements of this collection.
