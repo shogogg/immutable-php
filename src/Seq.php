@@ -66,6 +66,12 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function contains(mixed $element): bool
+    {
+        return in_array($element, $this->elements, true);
+    }
+
+    #[\Override]
     public function count(): int
     {
         return count($this->elements);

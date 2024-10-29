@@ -18,6 +18,18 @@ namespace Immutable;
 interface SeqLike extends CollectionLike
 {
     /**
+     * Tests whether this sequence contains a given value as an element.
+     *
+     * @template U of T
+     *
+     * @param U $element the value to test.
+     *
+     * @return bool true if this sequence has an element that is equal (as determined by `===`) to `$element`,
+     *              false otherwise.
+     */
+    public function contains(mixed $element): bool;
+
+    /**
      * {@inheritdoc}
      * @return \Immutable\Seq<T>
      */

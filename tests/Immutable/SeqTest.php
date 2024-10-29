@@ -29,6 +29,18 @@ describe('::empty', function (): void {
     });
 });
 
+describe('->contains', function (): void {
+    it('should return true if the element exists', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->contains(5);
+        expect($actual)->toBeTrue();
+    });
+
+    it('should return false if the element does not exist', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->contains(13);
+        expect($actual)->toBeFalse();
+    });
+});
+
 describe('->count', function (): void {
     it('should return the number of elements', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->count();
