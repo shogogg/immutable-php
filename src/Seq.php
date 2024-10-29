@@ -215,6 +215,13 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function indexOf(mixed $element, int $from = 0): int
+    {
+        $index = array_search($element, array_slice($this->elements, $from), true);
+        return $index === false ? -1 : $index + $from;
+    }
+
+    #[\Override]
     public function indexWhere(\Closure $p, int $from = 0): int
     {
         $from = max($from, 0);

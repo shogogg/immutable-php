@@ -71,12 +71,24 @@ interface SeqLike extends CollectionLike
     public function flatten(): Seq;
 
     /**
+     * Finds index of the first occurrence of some element in this sequence after or at some start index.
+     *
+     * @template U of T
+     * @param U $element
+     * @param int $from the start index.
+     *
+     * @return int the index `>= $from` of the first element of this sequence that is equal (as determined by `===`) to
+     *             `$element`, or -1, if none exists.
+     */
+    public function indexOf(mixed $element, int $from = 0): int;
+
+    /**
      * Finds index of the first element satisfying some predicate after or at some start index.
      *
      * @param \Closure(T, int): bool $p the predicate used to test elements.
      * @param int $from the start index.
      *
-     * @return int the index `>= $from` of the first element of this collection that satisfies the predicate `$p`,
+     * @return int the index `>= $from` of the first element of this sequence that satisfies the predicate `$p`,
      *             or -1, if none exists.
      */
     public function indexWhere(\Closure $p, int $from = 0): int;

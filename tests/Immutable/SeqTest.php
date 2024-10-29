@@ -284,6 +284,28 @@ describe('->headOption', function (): void {
     });
 });
 
+describe('->indexOf', function (): void {
+    it('should return the index of the first occurrence of the element', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->indexOf(5);
+        expect($actual)->toBe(2);
+    });
+
+    it('should return the index of the first occurrence of the element after the specified index', function (): void {
+        $actual = Seq::of(1, 2, 3, 4, 5, 1, 2, 3, 4, 5)->indexOf(3, 5);
+        expect($actual)->toBe(7);
+    });
+
+    it('should return -1 if the element does not exist', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->indexOf(13);
+        expect($actual)->toBe(-1);
+    });
+
+    it('should return -1 if the element does not exist after the specified index', function (): void {
+        $actual = Seq::of(1, 2, 3, 4, 5, 1, 2, 3, 4, 5)->indexOf(3, 8);
+        expect($actual)->toBe(-1);
+    });
+});
+
 describe('->indexWhere', function (): void {
     it('should return the index of the first element that satisfies the predicate', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->indexWhere(fn (int $x): bool => $x % 5 === 0);
