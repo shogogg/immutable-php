@@ -249,6 +249,14 @@ describe('->fold', function (): void {
     });
 });
 
+describe('->foldLeft', function (): void {
+    it('should return the result of the callback', function (): void {
+        $seq = Seq::of('bar', 'baz', 'qux');
+        $actual = $seq->foldLeft('foo', fn (string $z, string $x): string => "$z $x");
+        expect($actual)->toBe('foo bar baz qux');
+    });
+});
+
 describe('->forAll', function (): void {
     it('should return true if all elements satisfy the predicate', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->forAll(fn (int $x): bool => $x > 0);

@@ -126,6 +126,12 @@ final readonly class Some extends Option
     }
 
     #[\Override]
+    public function foldLeft($z, \Closure $op): mixed
+    {
+        return $op($z, $this->value, 0);
+    }
+
+    #[\Override]
     public function forAll(\Closure $p): bool
     {
         return $p($this->value, 0);

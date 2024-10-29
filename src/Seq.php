@@ -177,6 +177,12 @@ final readonly class Seq implements SeqLike
     #[\Override]
     public function fold($z, \Closure $op): mixed
     {
+        return $this->foldLeft($z, $op);
+    }
+
+    #[\Override]
+    public function foldLeft($z, \Closure $op): mixed
+    {
         $result = $z;
         foreach ($this->elements as $index => $value) {
             $result = $op($result, $value, $index);

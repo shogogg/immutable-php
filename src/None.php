@@ -113,6 +113,12 @@ final readonly class None extends Option
     }
 
     #[\Override]
+    public function foldLeft($z, \Closure $op): mixed
+    {
+        return $z;
+    }
+
+    #[\Override]
     public function forAll(\Closure $p): bool
     {
         return true;
