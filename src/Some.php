@@ -263,6 +263,12 @@ final readonly class Some extends Option
     }
 
     #[\Override]
+    public function orElse(\Closure $alternative): Option
+    {
+        return $this;
+    }
+
+    #[\Override]
     public function size(): int
     {
         return 1;

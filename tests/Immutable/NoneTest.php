@@ -8,6 +8,8 @@
 declare(strict_types=1);
 
 use Immutable\None;
+use Immutable\Option;
+use Immutable\Some;
 
 describe('::instance', function (): void {
     it('should return the None instance', function (): void {
@@ -313,6 +315,13 @@ describe('->offsetSet', function (): void {
 describe('->offsetUnset', function (): void {
     it('should throw a BadMethodCallException', function (): void {
         expect(fn () => None::instance()->offsetSet(0, 0))->toThrow(BadMethodCallException::class);
+    });
+});
+
+describe('->orElse', function (): void {
+    it('should return the alternative Option', function (): void {
+        $actual = None::instance()->orElse(fn (): Option => Some::of(17));
+        expect($actual)->toBeSome(17);
     });
 });
 

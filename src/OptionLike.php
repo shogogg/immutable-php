@@ -115,6 +115,17 @@ interface OptionLike extends CollectionLike
     public function map(\Closure $f): Option;
 
     /**
+     * Returns this Option if it is non-empty, otherwise return the result of evaluating `$alternative`.
+     *
+     * @template U
+     *
+     * @param \Closure(): Option<U> $alternative the alternative Option.
+     *
+     * @return \Immutable\Option<T|U>
+     */
+    public function orElse(\Closure $alternative): Option;
+
+    /**
      * {@inheritdoc}
      * @return \Immutable\Seq<T>
      */

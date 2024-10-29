@@ -246,6 +246,12 @@ final readonly class None extends Option
     }
 
     #[\Override]
+    public function orElse(\Closure $alternative): Option
+    {
+        return $alternative();
+    }
+
+    #[\Override]
     public function size(): int
     {
         return 0;

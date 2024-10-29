@@ -532,6 +532,14 @@ describe('->offsetUnset', function (): void {
     });
 });
 
+describe('->orElse', function (): void {
+    it('should return itself', function (): void {
+        $option = Some::of(17);
+        $actual = $option->orElse(fn (): Option => Some::of(19));
+        expect($actual)->toBe($option);
+    });
+});
+
 describe('->size', function (): void {
     it('should return 1', function (mixed $value): void {
         $actual = Some::of($value)->count();
