@@ -353,6 +353,13 @@ describe('->sum', function (): void {
     });
 });
 
+describe('->sumOf', function (): void {
+    it('should return 0', function (): void {
+        $actual = None::instance()->sumOf(fn (): int => 11);
+        expect($actual)->toBe(0);
+    });
+});
+
 describe('->tail', function (): void {
     it('should throw a LogicException', function (): void {
         expect(fn () => None::instance()->tail())->toThrow(LogicException::class);

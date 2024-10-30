@@ -599,6 +599,23 @@ describe('->sum', function (): void {
     });
 });
 
+describe('->sumOf', function (): void {
+    it('should return the sum of the result of the callback if it returns an integer', function (): void {
+        $actual = ArraySeq::of(2, 3, 5, 7, 11)->sumOf(fn (int $x): int => $x * 2);
+        expect($actual)->toBe(56);
+    });
+
+    it('should return the sum of the result of the callback if it returns a float', function (): void {
+        $actual = ArraySeq::of(2, 3, 5, 7, 11)->sumOf(fn (int $x): float => $x * 2.5);
+        expect($actual)->toBe(70.0);
+    });
+
+    it('should throw a LogicException if the callback does not return an integer or a float', function (): void {
+        // @phpstan-ignore argument.type
+        expect(fn () => ArraySeq::of(2, 3)->sumOf(fn (int $x): string => strval($x)))->toThrow(LogicException::class);
+    });
+});
+
 describe('->tail', function (): void {
     it('should return a new instance with the first element removed', function (): void {
         $actual = ArraySeq::of(2, 3, 5, 7, 11)->tail();

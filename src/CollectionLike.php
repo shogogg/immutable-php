@@ -303,6 +303,14 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function sum(): int|float;
 
     /**
+     * Sums the elements of this collection by the function `$f`.
+     *
+     * @param \Closure(T, K): (int|float) $f
+     * @return int|float
+     */
+    public function sumOf(\Closure $f): int|float;
+
+    /**
      * Selects all elements except the first.
      *
      * @throws \LogicException if this collection is empty.

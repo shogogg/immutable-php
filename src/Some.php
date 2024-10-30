@@ -297,6 +297,18 @@ final readonly class Some extends Option
     }
 
     #[\Override]
+    public function sumOf(\Closure $f): int|float
+    {
+        $result = $f($this->value, 0);
+        // @phpstan-ignore booleanOr.alwaysTrue
+        if (is_int($result) || is_float($result)) {
+            return $result;
+        } else {
+            throw new \LogicException("Sum of non-numeric value is not supported");
+        }
+    }
+
+    #[\Override]
     public function take(int $n): Seq
     {
         return $n <= 0 ? Seq::empty() : $this->toSeq();

@@ -427,6 +427,21 @@ final readonly class ArraySeq extends Seq
     }
 
     #[\Override]
+    public function sumOf(\Closure $f): int|float
+    {
+        $result = 0;
+        foreach ($this->elements as $index => $value) {
+            $value = $f($value, $index);
+            // @phpstan-ignore booleanAnd.alwaysFalse
+            if (!is_int($value) && !is_float($value)) {
+                throw new \LogicException("Sum of non-numeric value is not supported");
+            }
+            $result += $value;
+        }
+        return $result;
+    }
+
+    #[\Override]
     public function tail(): Seq
     {
         return count($this->elements) === 1 ? self::empty() : new self(array_slice($this->elements, 1));

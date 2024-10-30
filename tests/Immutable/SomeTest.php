@@ -599,6 +599,23 @@ describe('->sum', function (): void {
     ]);
 });
 
+describe('->sumOf', function (): void {
+    it('should return the result of the callback if it returns an integer', function (): void {
+        $actual = Some::of(17)->sumOf(fn (int $x): int => $x * 2);
+        expect($actual)->toBe(34);
+    });
+
+    it('should return the result of the callback if it returns a float', function (): void {
+        $actual = Some::of(3.14)->sumOf(fn (float $x): float => $x * 2);
+        expect($actual)->toBe(6.28);
+    });
+
+    it('should throw a LogicException if the result of the callback is not an integer or a float', function (): void {
+        // @phpstan-ignore argument.type
+        expect(fn () => Some::of(17)->sumOf(fn (int $x): string => strval($x)))->toThrow(LogicException::class);
+    });
+});
+
 describe('->tail', function (): void {
     it('should return an empty Seq', function (): void {
         $actual = Some::of(17)->tail();

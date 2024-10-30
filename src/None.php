@@ -276,6 +276,12 @@ final readonly class None extends Option
     }
 
     #[\Override]
+    public function sumOf(\Closure $f): int|float
+    {
+        return 0;
+    }
+
+    #[\Override]
     public function tail(): never
     {
         throw new \LogicException('tail of empty list');
