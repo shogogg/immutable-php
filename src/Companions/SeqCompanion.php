@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Immutable\Companions;
 
+use Immutable\EmptySeq;
 use Immutable\Seq;
 
 /**
@@ -24,14 +25,12 @@ final class SeqCompanion
     /**
      * Returns an empty sequence.
      *
-     * @return Seq<never>
+     * @return \Immutable\Seq<never>
      */
     public static function empty(): Seq
     {
         if (!isset(self::$empty)) {
-            /** @var never[] $elements */
-            $elements = [];
-            self::$empty = Seq::of(...$elements);
+            self::$empty = EmptySeq::instance();
         }
         return self::$empty;
     }

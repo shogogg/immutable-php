@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Immutable\EmptySeq;
 use Immutable\None;
 use Immutable\Seq;
 use Immutable\Some;
@@ -34,7 +35,7 @@ use Pest\Expectation;
 
 expect()->extend('toBeEmptySeq', function (): Expectation {
     // @phpstan-ignore variable.undefined
-    return $this->toBeInstanceOf(Seq::class)->toBeEmpty();
+    return $this->toBeInstanceOf(EmptySeq::class);
 });
 
 expect()->extend('toBeNone', function (): Expectation {
