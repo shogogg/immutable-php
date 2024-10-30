@@ -32,7 +32,7 @@ interface SeqLike extends CollectionLike
     /**
      * Selects all the elements of this sequence ignoring the duplicates.
      *
-     * @return \Immutable\Seq<T>
+     * @return \Immutable\Seq<T> a new sequence consisting of all the elements of this sequence without duplicates.
      */
     public function distinct(): Seq;
 
@@ -43,7 +43,7 @@ interface SeqLike extends CollectionLike
      *
      * @param \Closure(T, int): U $f the transforming function whose result is used to determine the uniqueness of each element.
      *
-     * @return \Immutable\Seq<T>
+     * @return \Immutable\Seq<T> a new sequence consisting of all the elements of this sequence without duplicates.
      */
     public function distinctBy(\Closure $f): Seq;
 
@@ -166,9 +166,16 @@ interface SeqLike extends CollectionLike
     /**
      * Returns a new sequence with the elements of this sequence in reverse order.
      *
-     * @return \Immutable\Seq<T>
+     * @return \Immutable\Seq<T> a new sequence with all elements of this sequence in reverse order.
      */
     public function reverse(): Seq;
+
+    /**
+     * Sorts this sequence according to the natural ordering of its elements.
+     *
+     * @return \Immutable\Seq<T> a sequence consisting of the elements of this sequence sorted according to their natural ordering.
+     */
+    public function sorted(): Seq;
 
     /**
      * {@inheritdoc}

@@ -585,6 +585,19 @@ describe('->size', function (): void {
     });
 });
 
+describe('->sorted', function (): void {
+    it('should return a new instance with the elements sorted in ascending order', function (): void {
+        $actual = ArraySeq::of(5, 3, 7, 2, 11)->sorted();
+        expect($actual)->toBeSeq(2, 3, 5, 7, 11);
+    });
+
+    it('should not mutate itself', function (): void {
+        $seq = ArraySeq::of(5, 3, 7, 2, 11);
+        $seq->sorted();
+        expect($seq)->toBeSeq(5, 3, 7, 2, 11);
+    });
+});
+
 describe('->sum', function (): void {
     it('should return the sum of the elements', function (array $elements, int|float $sum): void {
         $actual = ArraySeq::of(...$elements)->sum();

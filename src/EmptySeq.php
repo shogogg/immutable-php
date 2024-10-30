@@ -298,6 +298,12 @@ final readonly class EmptySeq extends Seq
     }
 
     #[\Override]
+    public function sorted(): Seq
+    {
+        return $this;
+    }
+
+    #[\Override]
     public function sum(): int|float
     {
         return 0;

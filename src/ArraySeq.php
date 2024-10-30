@@ -418,6 +418,15 @@ final readonly class ArraySeq extends Seq
     }
 
     #[\Override]
+    public function sorted(): Seq
+    {
+        // $xs is not a reference to $this->elements, so it's safe to sort it.
+        $xs = $this->elements;
+        sort($xs);
+        return new self($xs);
+    }
+
+    #[\Override]
     public function sum(): int|float
     {
         if ($this->exists(fn (mixed $x): bool => !is_int($x) && !is_float($x))) {
