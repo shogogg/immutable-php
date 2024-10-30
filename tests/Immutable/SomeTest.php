@@ -578,6 +578,27 @@ describe('->size', function (): void {
     ]);
 });
 
+describe('->sum', function (): void {
+    it('should return the value if it is an integer or a float', function (mixed $value): void {
+        $actual = Some::of($value)->sum();
+        expect($actual)->toBe($value);
+    })->with([
+        [0],
+        [0.0],
+        [17],
+        [3.14],
+    ]);
+
+    it('should throw a LogicException if the value is not an integer or a float', function (): void {
+        expect(fn () => Some::of('foo')->sum())->toThrow(LogicException::class);
+    })->with([
+        ['foo'],
+        [[]],
+        [new stdClass()],
+        [null],
+    ]);
+});
+
 describe('->tail', function (): void {
     it('should return an empty Seq', function (): void {
         $actual = Some::of(17)->tail();

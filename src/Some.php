@@ -287,6 +287,16 @@ final readonly class Some extends Option
     }
 
     #[\Override]
+    public function sum(): int|float
+    {
+        if (is_int($this->value) || is_float($this->value)) {
+            return $this->value;
+        } else {
+            throw new \LogicException("Sum of non-numeric value is not supported");
+        }
+    }
+
+    #[\Override]
     public function take(int $n): Seq
     {
         return $n <= 0 ? Seq::empty() : $this->toSeq();

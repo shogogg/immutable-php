@@ -298,6 +298,12 @@ final readonly class EmptySeq extends Seq
     }
 
     #[\Override]
+    public function sum(): int|float
+    {
+        return 0;
+    }
+
+    #[\Override]
     public function tail(): Seq
     {
         throw new \LogicException('tail of empty list');

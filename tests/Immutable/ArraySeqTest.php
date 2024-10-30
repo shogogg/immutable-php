@@ -585,6 +585,20 @@ describe('->size', function (): void {
     });
 });
 
+describe('->sum', function (): void {
+    it('should return the sum of the elements', function (array $elements, int|float $sum): void {
+        $actual = ArraySeq::of(...$elements)->sum();
+        expect($actual)->toBe($sum);
+    })->with([
+        [[2, 3, 5, 7, 11], 28],
+        [[1.1, 2.2, 3.3, 4.4, 5.5], 16.5],
+    ]);
+
+    it('should throw a LogicException if there is a non-numeric element', function (): void {
+        expect(fn () => ArraySeq::of(2, 3, 5, 7, '11', 13)->sum())->toThrow(LogicException::class);
+    });
+});
+
 describe('->tail', function (): void {
     it('should return a new instance with the first element removed', function (): void {
         $actual = ArraySeq::of(2, 3, 5, 7, 11)->tail();

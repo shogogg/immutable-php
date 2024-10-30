@@ -418,6 +418,15 @@ final readonly class ArraySeq extends Seq
     }
 
     #[\Override]
+    public function sum(): int|float
+    {
+        if ($this->exists(fn (mixed $x): bool => !is_int($x) && !is_float($x))) {
+            throw new \LogicException("Sum of non-numeric value is not supported");
+        }
+        return array_sum($this->elements);
+    }
+
+    #[\Override]
     public function tail(): Seq
     {
         return count($this->elements) === 1 ? self::empty() : new self(array_slice($this->elements, 1));

@@ -189,6 +189,7 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * Selects all elements except the last.
      *
+     * @throws \LogicException if this collection is empty.
      * @return self<K, T> a collection consisting of all elements of this collection except the last one.
      */
     public function init(): self;
@@ -294,8 +295,17 @@ interface CollectionLike extends \ArrayAccess, \Countable, \IteratorAggregate
     public function size(): int;
 
     /**
+     * Sums the elements of this collection.
+     *
+     * @throws \LogicException if there is a non-numeric element.
+     * @return int|float
+     */
+    public function sum(): int|float;
+
+    /**
      * Selects all elements except the first.
      *
+     * @throws \LogicException if this collection is empty.
      * @return self<K, T> a collection consisting of all elements of this collection except the first one.
      */
     public function tail(): self;

@@ -270,6 +270,12 @@ final readonly class None extends Option
     }
 
     #[\Override]
+    public function sum(): int|float
+    {
+        return 0;
+    }
+
+    #[\Override]
     public function tail(): never
     {
         throw new \LogicException('tail of empty list');
