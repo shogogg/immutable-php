@@ -617,6 +617,18 @@ describe('->offsetUnset', function (): void {
     });
 });
 
+describe('->reverse', function (): void {
+    it('should return a new instance with the elements reversed', function (): void {
+        $actual = Seq::of(2, 3, 5, 7, 11)->reverse();
+        expect($actual)->toBeSeq(11, 7, 5, 3, 2);
+    });
+
+    it('should return an empty instance if the sequence is empty', function (): void {
+        $actual = Seq::empty()->reverse();
+        expect($actual)->toBeEmptySeq();
+    });
+});
+
 describe('->size', function (): void {
     it('should return the number of elements', function (): void {
         $actual = Seq::of(2, 3, 5, 7, 11)->size();

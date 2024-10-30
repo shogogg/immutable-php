@@ -436,6 +436,12 @@ final readonly class Seq implements SeqLike
     }
 
     #[\Override]
+    public function reverse(): Seq
+    {
+        return new self(array_reverse($this->elements));
+    }
+
+    #[\Override]
     public function size(): int
     {
         return count($this->elements);

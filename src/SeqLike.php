@@ -164,6 +164,13 @@ interface SeqLike extends CollectionLike
     public function map(\Closure $f): Seq;
 
     /**
+     * Returns a new sequence with the elements of this sequence in reverse order.
+     *
+     * @return \Immutable\Seq<T>
+     */
+    public function reverse(): Seq;
+
+    /**
      * {@inheritdoc}
      * @return \Immutable\Seq<T>
      */
