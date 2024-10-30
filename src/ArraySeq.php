@@ -53,7 +53,7 @@ final readonly class ArraySeq extends Seq
      * @return \Immutable\Seq<U>
      */
     #[\Override]
-    protected static function fromIterable(iterable $it): Seq
+    public static function from(iterable $it): Seq
     {
         return self::of(...$it);
     }
@@ -179,13 +179,13 @@ final readonly class ArraySeq extends Seq
     #[\Override]
     public function flatMap(\Closure $f): Seq
     {
-        return self::fromIterable(SeqCompanion::flatMap($this->elements, $f));
+        return self::from(SeqCompanion::flatMap($this->elements, $f));
     }
 
     #[\Override]
     public function flatten(): Seq
     {
-        return self::fromIterable(SeqCompanion::flatten($this->elements));
+        return self::from(SeqCompanion::flatten($this->elements));
     }
 
     #[\Override]
@@ -320,7 +320,7 @@ final readonly class ArraySeq extends Seq
     #[\Override]
     public function map(\Closure $f): Seq
     {
-        return self::fromIterable(SeqCompanion::map($this->elements, $f));
+        return self::from(SeqCompanion::map($this->elements, $f));
     }
 
     #[\Override]

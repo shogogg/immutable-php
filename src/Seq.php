@@ -49,8 +49,8 @@ abstract readonly class Seq implements SeqLike
      * @param iterable<int, U> $it
      * @return self<U>
      */
-    protected static function fromIterable(iterable $it): self
+    public static function from(iterable $it): self
     {
-        return ArraySeq::fromIterable($it);
+        return ArraySeq::from($it);
     }
 }

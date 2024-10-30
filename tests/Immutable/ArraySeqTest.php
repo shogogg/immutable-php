@@ -19,12 +19,41 @@ describe('::of', function (): void {
 
     it('should return a new instance with the specified values', function (): void {
         $actual = ArraySeq::of(2, 3, 5, 7, 11);
-        expect($actual->toArray())->toBe([2, 3, 5, 7, 11]);
+        expect($actual)->toBeSeq(2, 3, 5, 7, 11);
     });
 
     it('should return an EmptySeq instance when no arguments are passed', function (): void {
         // @phpstan-ignore-next-line
         $actual = ArraySeq::of();
+        expect($actual)->toBeEmptySeq();
+    });
+});
+
+describe('::from', function (): void {
+    it('should return an ArraySeq instance', function (): void {
+        $actual = ArraySeq::from([2, 3, 5, 7, 11]);
+        expect($actual)->toBeInstanceOf(ArraySeq::class);
+    });
+
+    it('should return a new instance with the specified values', function (): void {
+        $actual = ArraySeq::from([2, 3, 5, 7, 11]);
+        expect($actual)->toBeSeq(2, 3, 5, 7, 11);
+    });
+
+    it('should return a new instance with values from a Traversable', function (): void {
+        $g = static function (): Traversable {
+            yield 2;
+            yield 3;
+            yield 5;
+            yield 7;
+            yield 11;
+        };
+        $actual = ArraySeq::from($g());
+        expect($actual)->toBeSeq(2, 3, 5, 7, 11);
+    });
+
+    it('should return an EmptySeq when the iterable is empty', function (): void {
+        $actual = ArraySeq::from([]);
         expect($actual)->toBeEmptySeq();
     });
 });

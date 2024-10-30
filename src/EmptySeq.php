@@ -34,7 +34,7 @@ final readonly class EmptySeq extends Seq
     }
 
     #[\Override]
-    public static function fromIterable(iterable $it): never
+    public static function from(iterable $it): never
     {
         throw new \BadMethodCallException('Cannot create an instance of EmptySeq using fromIterable() method.');
     }

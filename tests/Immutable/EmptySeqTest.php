@@ -22,6 +22,12 @@ describe('::of', function (): void {
     });
 });
 
+describe('::from', function (): void {
+    it('should throw a BadMethodCallException', function (): void {
+        expect(fn () => EmptySeq::from([1, 2, 3]))->toThrow(BadMethodCallException::class);
+    });
+});
+
 describe('->contains', function (): void {
     it('should return false', function (): void {
         $actual = EmptySeq::instance()->contains(2);
