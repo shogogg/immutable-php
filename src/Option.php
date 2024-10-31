@@ -45,6 +45,20 @@ abstract readonly class Option implements OptionLike
         return OptionCompanion::none();
     }
 
+    /**
+     * Returns a Some instance with the given value.
+     *
+     * @template U
+     *
+     * @param U $value
+     *
+     * @return \Immutable\Some<U>
+     */
+    final public static function some(mixed $value): Some
+    {
+        return OptionCompanion::some($value);
+    }
+
     #[\Override]
     public function offsetSet(mixed $offset, mixed $value): void
     {

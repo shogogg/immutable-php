@@ -33,3 +33,17 @@ describe('::none', function (): void {
         expect($actual)->toBeNone();
     });
 });
+
+describe('::some', function (): void {
+    it('should return a Some instance with the given value', function (mixed $value): void {
+        $actual = Option::some($value);
+        expect($actual)->toBeSome($value);
+    })->with([
+        [0],
+        [0.0],
+        ['foo'],
+        [[]],
+        [new stdClass()],
+        [null],
+    ]);
+});
