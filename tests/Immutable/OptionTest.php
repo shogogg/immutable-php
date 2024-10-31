@@ -7,19 +7,17 @@
  */
 declare(strict_types=1);
 
-use Immutable\None;
 use Immutable\Option;
-use Immutable\Some;
 
 describe('::of', function (): void {
     it('should return None when the value is null', function (): void {
         $actual = Option::of(null);
-        expect($actual)->toBeInstanceOf(None::class);
+        expect($actual)->toBeNone();
     });
 
     it('should return Some when the value is not null', function (mixed $value): void {
         $actual = Option::of($value);
-        expect($actual)->toBeInstanceOf(Some::class);
+        expect($actual)->toBeSome($value);
     })->with([
         [0],
         [0.0],
@@ -27,4 +25,11 @@ describe('::of', function (): void {
         [[]],
         [new stdClass()],
     ]);
+});
+
+describe('::none', function (): void {
+    it('should return the None instance', function (): void {
+        $actual = Option::none();
+        expect($actual)->toBeNone();
+    });
 });

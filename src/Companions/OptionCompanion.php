@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Immutable\Companions;
 
 use Immutable\None;
+use Immutable\Some;
 
 /**
  * Companion object for Option.
@@ -31,5 +32,19 @@ final class OptionCompanion
             self::$none = new None();
         }
         return self::$none;
+    }
+
+    /**
+     * Returns a Some instance with the given value.
+     *
+     * @template T
+     *
+     * @param T $value
+     *
+     * @return \Immutable\Some<T>
+     */
+    public static function some(mixed $value): Some
+    {
+        return Some::of($value);
     }
 }

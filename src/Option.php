@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace Immutable;
 
+use Immutable\Companions\OptionCompanion;
+
 /**
  * Option.
  *
@@ -28,9 +30,19 @@ abstract readonly class Option implements OptionLike
     public static function of(mixed $value): self
     {
         return match ($value) {
-            null => None::instance(),
-            default => Some::of($value),
+            null => OptionCompanion::none(),
+            default => OptionCompanion::some($value),
         };
+    }
+
+    /**
+     * Returns the None instance.
+     *
+     * @return \Immutable\None
+     */
+    final public static function none(): None
+    {
+        return OptionCompanion::none();
     }
 
     #[\Override]
