@@ -27,6 +27,24 @@ describe('::of', function (): void {
     ]);
 });
 
+describe('::fromArray', function (): void {
+    it('should return Some when the key exists in the array', function (array|\ArrayAccess $array): void {
+        $actual = Option::fromArray($array, 'age');
+        expect($actual)->toBeSome(43);
+    })->with([
+        [['name' => 'Fernando Alonso', 'age' => 43]],
+        [new ArrayObject(['name' => 'Fernando Alonso', 'age' => 43])],
+    ]);
+
+    it('should return None when the key does not exist in the array', function (array|\ArrayAccess $array): void {
+        $actual = Option::fromArray($array, 'nationality');
+        expect($actual)->toBeNone();
+    })->with([
+        [['name' => 'Fernando Alonso', 'age' => 43]],
+        [new ArrayObject(['name' => 'Fernando Alonso', 'age' => 43])],
+    ]);
+});
+
 describe('::none', function (): void {
     it('should return the None instance', function (): void {
         $actual = Option::none();

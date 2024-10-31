@@ -21,11 +21,13 @@ use Immutable\Companions\OptionCompanion;
 abstract readonly class Option implements OptionLike
 {
     /**
-     * Creates a new instance.
+     * Returns an Option instance from the given value.
      *
      * @template U
-     * @param U $value
-     * @return self<U>
+     *
+     * @param U $value a value
+     *
+     * @return self<U> Some of the value if it is not null, None otherwise.
      */
     public static function of(mixed $value): self
     {
@@ -33,6 +35,21 @@ abstract readonly class Option implements OptionLike
             null => OptionCompanion::none(),
             default => OptionCompanion::some($value),
         };
+    }
+
+    /**
+     * Returns a new instance from an array.
+     *
+     * @template U
+     *
+     * @param array<U>|\ArrayAccess<int|string, U> $array an array
+     * @param int|string $key key of the array
+     *
+     * @return self<U> Some of the value if given key exists in the array, None otherwise.
+     */
+    public static function fromArray(array|\ArrayAccess $array, int|string $key): self
+    {
+        return isset($array[$key]) ? OptionCompanion::some($array[$key]) : OptionCompanion::none();
     }
 
     /**
